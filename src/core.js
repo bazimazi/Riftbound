@@ -3,6 +3,7 @@ import {
   initArchetype,
   archetypeHit,
   archetypeKill,
+  companionImpact,
   companionTarget,
   hurtCompanion,
   ARCHETYPE_AWAKENINGS,
@@ -1317,7 +1318,7 @@ export class Game {
       }
     }
     if (source === "thorn" && this.rank("bramble")) e.slow = 1.1;
-    archetypeHit(this, e, source, damage);
+    archetypeHit(this, e, source);
     ascendedHit(this, e, weapon, source);
     talentHit(this, e, damage, crit, channel);
     if (e.hp <= 0) this.kill(e);
@@ -2770,6 +2771,7 @@ export class Game {
               b.channel,
               Math.atan2(b.vy, b.vx),
             );
+            companionImpact(this, b, e);
             if (b.blast) {
               if (b.spellId) {
                 for (const other of this.enemies

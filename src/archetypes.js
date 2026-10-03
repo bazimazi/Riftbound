@@ -62,7 +62,7 @@ export const ARCHETYPES = [
     "Demon pact",
     "Cursing bolts feed your demon retinue.",
     "Cursed kills harvest souls. Imp bolts burst in crowds; your guardian cleaves and intercepts lesser foes.",
-    "Spend souls to summon short-lived imps, mend your permanent demons and empower the retinue.",
+    "Spend souls: rupture nearby and distant prey, mend your demons and summon imps with explosive pact bolts.",
     ["Affliction", "Demonbinding", "Ruin"],
     ["hexcraft", "demonhide", "ruincraft"],
   ),
@@ -80,7 +80,7 @@ export const ARCHETYPES = [
     "Pack command",
     "Piercing bolts mark prey for your bonded wolf.",
     "Shared attacks build bond. Your wolf pursues marked prey and recovers eight seconds after falling.",
-    "Spend bond: mend or revive your wolf, then order an explosive pack pounce.",
+    "Spend bond: mend or revive your wolves, order area pounces at marked prey and empower wide pack cleaves.",
     ["Bond", "Tracking", "Traps"],
     ["wildbond", "trailcraft", "trapcraft"],
   ),
@@ -373,7 +373,7 @@ export const ARCHETYPE_TREES = {
       [
         "implosion",
         "Implosion",
-        "Temporary imps explode when their pact ends.",
+        "Temporary imps release a final area blast at nearby prey when their pact ends.",
       ],
     ),
   ],
@@ -385,7 +385,7 @@ export const ARCHETYPE_TREES = {
       [
         "beastcleave",
         "Beast cleave",
-        "Wolf strikes cleave a small circle during commands.",
+        "Commanded wolf cleaves reach farther and deal 90% damage to nearby foes.",
       ],
     ),
     branch(
@@ -700,6 +700,45 @@ const color = {
   crane: "#81dfd2",
   ghoul: "#9ac9f4",
 };
+function hex(g, e, scale = 1) {
+  if (e.reaper) return;
+  e.hexTime = Math.max(e.hexTime || 0, 3 + 0.5 * g.rank("longhex"));
+  e.hexDamage = Math.max(
+    e.hexDamage || 0,
+    (5 + g.rank("signature") * 1.5) * (1 + g.rank("hexcraft") * 0.14) * scale,
+  );
+}
+// Each imp bolt bursts once, including piercing bolts. Other imps never share its gate.
+export function companionImpact(g, bolt, enemy) {
+  if (bolt.source !== "demon" || !bolt.companionId || bolt.petSplashSpent)
+    return;
+  bolt.petSplashSpent = true;
+  const pact = g.classState.pact > 0,
+    empowered =
+      g.journey.stage > 0 ||
+      g.talentState?.ultimate?.petBurst ||
+      g.talentState?.ultimate?.kind === "retinue",
+    radius = (empowered || pact ? 135 : g.evolved() ? 105 : 85) * g.areaScale,
+    targets = g.enemies
+      .filter((e) => e !== enemy && e.hp > 0 && dist(e, enemy) < radius + e.r)
+      .sort((a, b) => dist(a, enemy) - dist(b, enemy))
+      .slice(0, empowered ? 7 : pact || g.evolved() ? 5 : 3);
+  for (const other of targets) {
+    hex(g, other, 0.6);
+    g.hit(
+      other,
+      bolt.damage * (empowered ? 0.7 : pact ? 0.45 : 0.4),
+      4,
+      "pet-splash",
+      "companions",
+    );
+  }
+  g.effect("burst", enemy.x, enemy.y, {
+    r: radius,
+    color: color.imp,
+    duration: 0.4,
+  });
+}
 export function summonCompanion(g, kind, life = Infinity, permanent = false) {
   if (
     g.companions.length >= 8 ||
@@ -752,7 +791,6 @@ export function initArchetype(g) {
     serenity: 0,
     resourceAt: 0,
     plagueAt: 0,
-    impBurstAt: 0,
   };
   if (
     isClass(g) &&
@@ -876,8 +914,26 @@ export function archetypeUpdate(g, dt) {
     c.engageCd = Math.max(0, c.engageCd - dt);
     c.lunge = Math.max(0, c.lunge - dt);
     if (c.life <= 0) {
-      if (c.kind === "imp" && c.hp > 0 && g.rank("implosion"))
-        g.area(c.x, c.y, 135, 60 * g.weaponPower("signature"), "pet");
+      if (c.kind === "imp" && c.hp > 0 && g.rank("implosion")) {
+        const target = g.nearest(c.x, c.y, 420) || c,
+          prey = { x: target.x, y: target.y },
+          radius = 160 * g.areaScale;
+        for (const e of g.enemies
+          .filter((e) => e.hp > 0 && dist(e, prey) < radius + e.r)
+          .sort((a, b) => dist(a, prey) - dist(b, prey))
+          .slice(0, 8))
+          g.hit(e, 60 * g.weaponPower("signature"), 8, "pet", "companions");
+        g.effect("arc", c.x, c.y, {
+          tx: prey.x,
+          ty: prey.y,
+          color: color.imp,
+        });
+        g.effect("burst", prey.x, prey.y, {
+          r: radius,
+          color: color.imp,
+          duration: 0.5,
+        });
+      }
       continue;
     }
     if (c.hp <= 0) {
@@ -979,6 +1035,7 @@ export function archetypeUpdate(g, dt) {
           {
             source: c.kind === "imp" ? "demon" : "pet",
             channel: "companions",
+            companionId: c.id,
             pierce: c.kind === "imp" && g.evolved() ? 1 : 0,
             elevation: 17,
           },
@@ -991,43 +1048,62 @@ export function archetypeUpdate(g, dt) {
           c.kind === "elemental" ||
           c.kind === "ghoul";
         if (cleave) {
-          const r = c.ultimate
-            ? 150
-            : c.kind === "guardian"
-              ? g.evolved()
-                ? 120
-                : 100
-              : c.kind === "wolf" && s.command > 0
-                ? 130
-                : 95;
+          const commanded = c.kind === "wolf" && s.command > 0,
+            pact = c.kind === "guardian" && s.pact > 0,
+            specialized = commanded && g.rank("beastcleave"),
+            empowered = c.ultimate || g.journey.stage > 0 || commanded || pact,
+            r =
+              (specialized
+                ? 195
+                : commanded
+                  ? 165
+                  : c.ultimate
+                    ? 150
+                    : c.kind === "guardian"
+                      ? pact
+                        ? 150
+                        : g.evolved()
+                          ? 120
+                          : 100
+                      : c.kind === "wolf" && g.evolved()
+                        ? 135
+                        : 95) * g.areaScale;
           const targets = g.enemies
             .filter((e) => e !== enemy && e.hp > 0 && dist(c, e) < r + e.r)
             .sort((a, b) => dist(c, a) - dist(c, b))
             .slice(
               0,
-              c.ultimate ||
-                g.journey.stage > 0 ||
-                (c.kind === "wolf" && s.command > 0 && g.rank("beastcleave"))
-                ? 6
-                : c.kind === "guardian" || (c.kind === "wolf" && g.evolved())
-                  ? 4
-                  : 2,
+              commanded
+                ? 7
+                : empowered
+                  ? 6
+                  : c.kind === "guardian" || (c.kind === "wolf" && g.evolved())
+                    ? 4
+                    : 2,
             );
           for (const other of targets)
             g.hit(
               other,
               damage *
-                (c.ultimate ||
-                g.journey.stage > 0 ||
-                (s.command > 0 && g.rank("beastcleave"))
-                  ? 0.75
-                  : c.kind === "guardian" || g.evolved()
-                    ? 0.6
-                    : 0.4),
+                (specialized
+                  ? 0.9
+                  : empowered
+                    ? 0.75
+                    : c.kind === "guardian" || g.evolved()
+                      ? 0.6
+                      : 0.4),
               6,
               "pet",
               "companions",
             );
+          g.effect("swing", c.x, c.y, {
+            r,
+            circular: true,
+            angle: Math.atan2(enemy.y - c.y, enemy.x - c.x),
+            empowered,
+            color: color[c.kind],
+            duration: 0.25,
+          });
         }
         if (
           c.kind === "guardian" &&
@@ -1047,12 +1123,13 @@ export function archetypeUpdate(g, dt) {
       if (g.hero.id === "fen") gain(g, 0.08);
       c.pose = 0.3;
       c.attack = kit.interval / Math.sqrt(g.attackSpeed);
-      g.effect("swing", c.x, c.y, {
-        r: ranged ? 25 : 40,
-        angle: Math.atan2(enemy.y - c.y, enemy.x - c.x),
-        color: color[c.kind],
-        duration: 0.22,
-      });
+      if (ranged)
+        g.effect("swing", c.x, c.y, {
+          r: 25,
+          angle: Math.atan2(enemy.y - c.y, enemy.x - c.x),
+          color: color[c.kind],
+          duration: 0.22,
+        });
     }
     for (const e of g.enemies)
       if (e.hp > 0 && dist(c, e) < e.r + 14 && (!e.reaper || e.grace <= 0))
@@ -1200,43 +1277,11 @@ export function archetypeAttack(g, target, angle) {
     }
   }
 }
-export function archetypeHit(g, e, source, damage = 0) {
+export function archetypeHit(g, e, source) {
   if (!g.classState || e.reaper) return;
   const s = g.classState;
   if (g.hero.id === "vesper" && (source === "hex" || source === "demon")) {
-    e.hexTime = 3 + 0.5 * g.rank("longhex");
-    e.hexDamage = Math.max(
-      e.hexDamage || 0,
-      (5 + g.rank("signature") * 1.5) *
-        (1 + g.rank("hexcraft") * 0.14) *
-        (source === "demon" ? 0.6 : 1),
-    );
-    if (source === "demon" && damage > 0 && g.time >= s.impBurstAt) {
-      s.impBurstAt = g.time + 0.4;
-      const empowered =
-        g.journey.stage > 0 ||
-        g.talentState?.ultimate?.petBurst ||
-        g.talentState?.ultimate?.kind === "retinue";
-      const radius = empowered ? 135 : g.evolved() ? 105 : 85;
-      const targets = g.enemies
-        .filter(
-          (o) => o !== e && o.hp > 0 && dist(o, e) < radius * g.areaScale + o.r,
-        )
-        .slice(0, empowered ? 6 : g.evolved() ? 5 : 3);
-      for (const other of targets)
-        g.hit(
-          other,
-          damage * (empowered ? 0.7 : 0.4),
-          4,
-          "pet-splash",
-          "companions",
-        );
-      g.effect("ring", e.x, e.y, {
-        r: radius,
-        color: "#acdf8d",
-        duration: 0.4,
-      });
-    }
+    hex(g, e, source === "demon" ? 0.6 : 1);
   }
   if (g.hero.id === "fen" && source === "huntarrow") {
     s.prey = e.id;
@@ -1335,29 +1380,74 @@ export function archetypeSkill(g) {
         c.hurtAt = g.time + 0.5;
       }
     for (let i = 0; i < count; i++) summonCompanion(g, "imp", s.pact);
-    g.area(p.x, p.y, 240, (34 + n * 6) * power, "hex");
+    const target = g.nearest(p.x, p.y, 650),
+      prey = target && { x: target.x, y: target.y },
+      radius = 210 * g.areaScale;
+    // The opening rupture clears close threats and reaches the retinue's prey once each.
+    for (const e of g.enemies)
+      if (
+        e.hp > 0 &&
+        (dist(e, p) < 240 * g.areaScale + e.r ||
+          (prey && dist(e, prey) < radius + e.r))
+      )
+        g.hit(e, (34 + n * 6) * power, 12, "hex");
+    if (prey)
+      g.effect("discharge", prey.x, prey.y, {
+        hero: id,
+        tier: 1,
+        motif: "rupture",
+        r: radius,
+        color: color.imp,
+        duration: 0.8,
+      });
   }
   if (id === "fen") {
     s.command = 6 + resource * 5 + (g.evolutions.active ? 4 : 0);
-    const wolf = g.companions.find((c) => c.kind === "wolf");
-    if (wolf) {
+    const prey = g.enemies
+        .filter((e) => e.hp > 0 && dist(e, p) < 600)
+        .sort(
+          (a, b) =>
+            Number(b.id === s.prey && b.markUntil > g.time) -
+              Number(a.id === s.prey && a.markUntil > g.time) ||
+            Number(b.markUntil > g.time) - Number(a.markUntil > g.time) ||
+            dist(a, p) - dist(b, p),
+        ),
+      struck = new Set(),
+      wolves = g.companions.filter((c) => c.kind === "wolf" && c.life > 0),
+      radius = 185 * g.areaScale;
+    for (const [i, wolf] of wolves.entries()) {
       wolf.hp = Math.min(
         wolf.maxHp,
         Math.max(wolf.hp, wolf.maxHp * 0.3) +
           wolf.maxHp * (0.3 + resource * 0.25),
       );
       wolf.down = 0;
-      const target = g.nearest(p.x, p.y, 600);
+      wolf.hurtAt = g.time + 0.5;
+      const target = prey.length ? prey[i % prey.length] : null;
       if (target) {
+        const point = { x: target.x, y: target.y };
         wolf.x = target.x - 25;
         wolf.y = target.y;
-        g.area(
-          target.x,
-          target.y,
-          145,
-          (45 + n * 8) * power * (1 + resource),
-          "pet",
-        );
+        bound(g, wolf);
+        wolf.pose = 0.4;
+        for (const e of g.enemies)
+          if (e.hp > 0 && !struck.has(e.id) && dist(e, point) < radius + e.r) {
+            struck.add(e.id);
+            if (!e.reaper)
+              e.markUntil = Math.max(
+                e.markUntil || 0,
+                g.time + 4 + g.rank("longmark"),
+              );
+            g.hit(e, (45 + n * 8) * power * (1 + resource), 12, "pet");
+          }
+        g.effect("discharge", point.x, point.y, {
+          hero: id,
+          tier: 1,
+          motif: "pounce",
+          r: radius,
+          color: color.wolf,
+          duration: 0.65,
+        });
       }
     }
     trap(g, p.x, p.y);

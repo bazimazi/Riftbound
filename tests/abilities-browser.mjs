@@ -251,6 +251,13 @@ try {
     }
   }
   // Rendering respects pause and reduced motion; it does not mutate combat.
+  // Wait for the last simulated cast to reach the canvas before taking the frozen frame.
+  await page.evaluate(
+    () =>
+      new Promise((resolve) =>
+        requestAnimationFrame(() => requestAnimationFrame(resolve)),
+      ),
+  );
   const frozen = await page.evaluate(() =>
     document.getElementById("arena").toDataURL(),
   );

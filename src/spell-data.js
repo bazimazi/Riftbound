@@ -288,14 +288,14 @@ const rows = {
     s(
       "Imp gate",
       "summon",
-      "Open a gate for two temporary imps; demons enter empowered.",
+      "Open a gate for two temporary imps; each empowered bolt bursts through crowds.",
       24,
       { pet: "imp", count: 2, pact: true },
     ),
     s(
       "Demon sentinel",
       "summon",
-      "Call an infernal guardian, mend your court and renew its pact.",
+      "Call a guardian with wide pact cleaves, mend your court and renew explosive imp bolts.",
       40,
       { pet: "guardian", count: 1, pact: true, petHeal: 0.3 },
     ),

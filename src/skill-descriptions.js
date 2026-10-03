@@ -56,21 +56,22 @@ const classes = {
   },
   vesper: {
     signature: [
-      "Hex bolts curse foes; cursed kills harvest souls for your demons.",
+      "Hex bolts and imp blasts curse foes; cursed kills harvest souls for your demons.",
       "Bolt hits periodically spread curses to two nearby foes.",
       "Spread curses to three foes; empowered hits can summon a temporary imp.",
     ],
-    active: "Spend souls: summon imps, mend demons and empower their attacks.",
+    active:
+      "Spend souls: rupture nearby and distant prey, summon imps, mend demons and empower their area attacks.",
     field: "slowing",
   },
   fen: {
     signature: [
-      "Piercing bolts mark prey for your wolf and build bond.",
+      "Piercing bolts mark prey for your cleaving wolf and build bond.",
       "Hits periodically mark prey, build bond and split into two piercing bolts.",
       "Empowered hits build more bond and split into three stronger bolts.",
     ],
     active:
-      "Spend bond: mend your wolf, command an area pounce and lay a snare.",
+      "Spend bond: mend or revive your wolves, pounce on marked packs, empower wide cleaves and lay a snare.",
     field: "slowing",
   },
   solace: {

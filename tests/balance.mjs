@@ -6,6 +6,53 @@ const rng = (seed) => () => {
   seed = (seed * 1664525 + 1013904223) >>> 0;
   return seed / 4294967296;
 };
+// Isolate kit coverage from XP rolls, survival, permanent progression and overkill.
+if (process.argv.includes("--pet-aoe")) {
+  for (const rank of [1, 5, 10])
+    for (const hero of HEROES) {
+      const results = {};
+      for (const count of [1, 16]) {
+        const g = new Game(hero.id, veteranSave(), () => 0.99);
+        g.save.memories = {};
+        g.legacy = { count: 0, weapon: 0, skill: 0, health: 0 };
+        g.ranks = { signature: rank, active: 1 };
+        g.recalculate();
+        g.enemies = [];
+        g.pickups = [];
+        g.spawnTimer = g.nextBoss = g.nextCache = g.nextBeacon = 1e8;
+        g.p.invuln = 1e8;
+        for (let i = 0; i < count; i++) {
+          g.spawnEnemy("crawler", 100);
+          Object.assign(g.enemies.at(-1), {
+            x: count === 1 ? 200 : 160 + (i % 4) * 45,
+            y: count === 1 ? 0 : -67.5 + Math.floor(i / 4) * 45,
+            hp: 1e8,
+            maxHp: 1e8,
+            speed: 0,
+            damage: 0,
+            attack: 1e8,
+            enemySkill: 1e8,
+          });
+        }
+        g.attackTimer = 0;
+        g.p.trait = 1;
+        g.skill();
+        for (let i = 0; i < 240; i++) {
+          g.update(0.05);
+          g.events = [];
+        }
+        results[count === 1 ? "single" : "crowd"] = {
+          dps: Math.round(
+            Object.values(g.damageSources).reduce((a, b) => a + b, 0) / 12,
+          ),
+          coverage: g.enemies.filter((e) => e.hp < e.maxHp).length,
+          companions: Math.round((g.damageSources.companions || 0) / 12),
+        };
+      }
+      console.log(JSON.stringify({ hero: hero.id, rank, ...results }));
+    }
+  process.exit(0);
+}
 const styles = process.argv.includes("--forged")
   ? ["forged-idle"]
   : ["idle", "scavenger"];

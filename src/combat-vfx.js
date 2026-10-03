@@ -492,7 +492,8 @@ export function drawCombatEffect(c, e, motion = true) {
       color,
       6 * (1 - q) + 1,
     );
-    slash(c, e.x, e.y, r, a, 1.45, color, 1);
+    if (e.circular) ring(c, e.x, e.y, r, color, 1);
+    else slash(c, e.x, e.y, r, a, 1.45, color, 1);
     if (e.empowered)
       for (let i = 0; i < 7; i++) {
         const angle = (i * TAU) / 7;

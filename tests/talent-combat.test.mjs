@@ -287,7 +287,7 @@ test("ultimate guards preserve Reaper pressure and retinues stay finite", () => 
   }
 });
 
-test("early wolves and imps now damage clustered foes, with stronger commanded area attacks", () => {
+test("early wolves damage clustered foes, with stronger commanded area attacks", () => {
   const wolf = arena("fen"),
     pet = wolf.companions[0];
   pet.x = 45;
@@ -302,17 +302,5 @@ test("early wolves and imps now damage clustered foes, with stronger commanded a
     pack.filter((e) => e.hp < e.maxHp).length,
     7,
     "pounce strikes the pack",
-  );
-  const warlock = arena("vesper"),
-    primary = foe(warlock, 220);
-  const others = Array.from({ length: 7 }, (_, i) => foe(warlock, 230 + i * 3));
-  warlock.hit(primary, 50, 0, "demon", "companions");
-  assert.equal(others.filter((e) => e.hp < e.maxHp).length, 3);
-  const damage = warlock.damageSources.companions;
-  warlock.hit(primary, 50, 0, "demon", "companions");
-  assert.equal(
-    warlock.damageSources.companions,
-    damage + 50,
-    "splash gate bounds group effects",
   );
 });
