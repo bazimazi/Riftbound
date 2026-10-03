@@ -1,0 +1,1090 @@
+/* The dialog is a game screen: fixed frame, paged choices, short contextual help. */
+:root.dialog-open,
+:root.dialog-open body {
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+.modal {
+  padding: 16px;
+  overflow: visible;
+}
+#modal-panel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  height: min(760px, calc(100dvh - 40px));
+  max-height: none;
+  overflow: visible;
+  padding: 20px;
+  min-width: 0;
+}
+#modal-panel .modal-head {
+  flex: none;
+  margin: 0;
+  padding-bottom: 12px;
+}
+#modal-panel .modal-head h2 {
+  font-size: 26px;
+}
+.panel-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1;
+  min-height: 0;
+}
+.panel-body > * {
+  flex: none;
+  margin: 0;
+  min-width: 0;
+  max-width: 100%;
+}
+.panel-body > p:empty,
+.progression-intro > p:empty {
+  display: none;
+}
+.panel-body .currency-pair {
+  flex-direction: row;
+  gap: 18px;
+}
+.panel-body h3,
+.panel-body .branch-heading h3,
+.panel-body .treasure-entry h3,
+.panel-body .craft-values,
+.panel-body .bestiary-entry h3,
+.panel-body .mastery-entry h3 {
+  font-family: inherit;
+}
+.kit-row summary {
+  border-radius: 0;
+}
+.panel-body
+  > :is(
+    .forge-grid,
+    .codex-grid,
+    .bestiary-grid,
+    .treasure-catalog,
+    .evolution-grid,
+    .legacy-grid,
+    .realm-grid,
+    .compact-guide,
+    .upgrade-grid,
+    .contract-grid,
+    .artifact-draft,
+    .talent-tree,
+    .artifact-loadout,
+    .damage-breakdown
+  ) {
+  display: grid;
+  grid-template-columns: repeat(var(--page-columns, 3), minmax(0, 1fr));
+  gap: 12px;
+  flex: 1;
+  min-height: 0;
+  align-content: center;
+}
+[hidden] {
+  display: none !important;
+}
+.panel-body .screen-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  overflow: visible;
+  margin: 0;
+  gap: 5px;
+}
+.panel-body .screen-tabs button {
+  padding: 8px 12px;
+  min-width: 0;
+  flex: 1;
+  white-space: nowrap;
+}
+.panel-category {
+  display: none;
+}
+.panel-pager {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  height: 36px;
+}
+.panel-pager button {
+  background: #2c3b24;
+  border: 2px solid #819263;
+  color: #e7d5a0;
+  width: 44px;
+  height: 34px;
+  font-size: 25px;
+  line-height: 1;
+}
+.panel-pager span {
+  font-size: 11px;
+  color: #ced6b9;
+  min-width: 60px;
+  text-align: center;
+}
+#modal-panel .modal-foot {
+  flex: none;
+  margin: 0;
+  padding-top: 12px;
+  min-height: 38px;
+  gap: 10px;
+}
+.panel-body .forge-craft,
+.panel-body .codex-card {
+  padding: 14px;
+}
+.panel-body .forge-craft p {
+  min-height: 0;
+}
+.panel-body .research-banner {
+  height: 52px;
+  padding: 5px 12px;
+}
+.panel-body .research-banner canvas {
+  height: 48px;
+  width: 48px;
+}
+.panel-body .research-banner h3 {
+  font-size: 13px;
+  margin: 4px 0;
+}
+.panel-body .research-banner small {
+  display: none;
+}
+.panel-body .inscription-loadout {
+  padding: 8px 12px;
+  gap: 8px;
+}
+.panel-body .inscription-loadout p {
+  margin: 4px 0;
+}
+.panel-body .equipped-list {
+  gap: 5px;
+}
+.panel-body .inscription-slot {
+  padding: 7px 9px;
+  font-size: 10px;
+}
+.panel-body .mastery-milestones {
+  gap: 10px;
+  font-size: 9px;
+  flex-wrap: wrap;
+}
+.panel-body .talent-tree {
+  align-content: stretch;
+}
+.panel-body .talent-branch {
+  min-height: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  padding: 12px;
+  background: #23331f;
+  border: 2px solid #596a46;
+  border-radius: 0;
+  align-content: center;
+}
+.panel-body
+  .talent-branch
+  > :is(.branch-heading, .branch-details, .affinity-choice) {
+  grid-column: 1 / -1;
+}
+.panel-body .branch-heading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.panel-body .branch-heading h3 {
+  margin: 0;
+}
+.panel-body .talent-node {
+  margin: 0;
+  padding: 10px;
+  min-height: 0;
+  flex: none;
+}
+.panel-body .talent-node p {
+  margin: 7px 0;
+  font-size: 10px !important;
+  line-height: 1.4 !important;
+}
+.panel-body .node-dots {
+  margin: 7px 0;
+}
+.panel-body .branch-heading {
+  padding-bottom: 6px;
+  margin: 0;
+}
+.panel-body .branch-details {
+  padding: 6px;
+}
+.panel-body .resonance-row {
+  padding: 8px;
+  gap: 10px;
+}
+.panel-body .resonance-row p {
+  margin: 4px 0;
+}
+.panel-body .progression-intro {
+  margin: 0;
+  gap: 10px;
+  min-height: 36px;
+}
+.panel-body .talent-budget {
+  padding: 7px 12px;
+}
+.panel-body .talent-budget strong {
+  font-size: 24px;
+}
+.panel-body .build-slot-row {
+  margin: 0;
+  gap: 12px;
+}
+.panel-body .upgrade-card {
+  min-height: 0;
+  padding: 15px;
+}
+/* Altar bargains have no rank column; keep their reward text across the card. */
+@media (max-width: 680px) {
+  #modal-panel[data-screen="shrine"] .upgrade-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 8px;
+  }
+  #modal-panel[data-screen="shrine"] .upgrade-card > p {
+    width: 100%;
+    max-width: 34ch;
+  }
+}
+.panel-body .upgrade-symbol {
+  height: 100px;
+  margin-bottom: 12px;
+}
+.panel-body .upgrade-symbol canvas {
+  height: 100px;
+  width: 100px;
+}
+.panel-body .artifact-card {
+  min-height: 0;
+  padding: 15px;
+}
+.panel-body .artifact-halo {
+  height: 120px;
+}
+.panel-body .artifact-art {
+  height: 110px;
+  width: 110px;
+}
+.panel-body .artifact-details {
+  display: flex;
+  gap: 8px;
+}
+.panel-body .artifact-details details {
+  flex: 1;
+  padding: 7px;
+}
+.panel-body .contract-card .artifact-art {
+  height: 110px;
+  width: 110px;
+}
+.panel-body .realm-landscape {
+  height: 170px;
+}
+.panel-body .realm-landscape canvas {
+  height: 155px;
+}
+.panel-body .recipe-card p {
+  min-height: 0;
+}
+.panel-body #world-map {
+  width: min(100%, calc(100dvh - 310px), 480px);
+  height: auto;
+}
+.panel-body .map-legend {
+  gap: 7px 12px;
+  font-size: 9px;
+}
+.panel-body .map-legend .sigil {
+  width: 16px;
+  height: 16px;
+}
+.section-switch {
+  display: flex;
+  gap: 8px;
+}
+.section-switch button {
+  background: #2e3c26;
+  color: #dce5c5;
+  border: 2px solid #697954;
+  padding: 9px 14px;
+  flex: 1;
+}
+.section-switch button[aria-pressed="true"] {
+  border-color: #ddc589;
+  color: #ffe2a0;
+}
+.panel-body .damage-breakdown {
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+.panel-body .build-overview {
+  margin: 0;
+}
+.panel-body .expedition-report {
+  gap: 8px;
+  padding: 12px;
+  font-size: 11px;
+}
+.panel-body .result-stats {
+  margin: 0;
+  gap: 8px;
+}
+.panel-body .result-stats > div {
+  padding: 12px;
+}
+.panel-body .result-stats strong {
+  font-size: 26px;
+}
+.panel-body .result-stats span {
+  font-size: 8px;
+}
+.panel-body .result-artifacts:empty {
+  display: none;
+}
+.panel-body .expedition-report {
+  display: flex;
+  flex-direction: column;
+}
+.result-rewards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  font-size: 11px;
+}
+.result-rewards span {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  min-width: 0;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+.result-rewards .sigil {
+  width: 20px;
+  height: 20px;
+  flex: none;
+}
+.panel-body .result-rewards.memory-banked {
+  display: grid;
+  margin: 0;
+  padding: 7px;
+  font-size: 11px;
+}
+.panel-body .contract-complete {
+  padding: 9px;
+  gap: 10px;
+  border-radius: 0;
+}
+.panel-body .result-artifacts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.panel-body .result-artifacts .artifact-art {
+  width: 50px;
+  height: 50px;
+}
+.panel-body .discovery-toast {
+  padding: 8px;
+  color: #d5c7e7;
+}
+.panel-body .hero-unlocked {
+  padding: 7px;
+}
+.panel-detail {
+  position: absolute;
+  inset: 12px;
+  z-index: 10;
+  background: #1d2b1c;
+  border: 3px solid #a5ac76;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  justify-content: center;
+}
+.panel-detail h3 {
+  font-size: 18px;
+  margin: 0;
+  color: #e5d091;
+}
+.detail-copy {
+  font-size: 12px;
+  line-height: 1.6;
+}
+.detail-copy p {
+  margin: 10px 0;
+}
+.panel-detail > button {
+  align-self: flex-end;
+}
+#modal-panel[data-screen="hero-info"] {
+  width: min(560px, 100%);
+  height: auto;
+  max-height: calc(100dvh - 40px);
+}
+.hero-info-copy {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 16px 0;
+}
+.hero-info-copy .kit-icon {
+  flex: none;
+}
+.hero-info-copy p {
+  margin: 0;
+}
+/* Fit the sanctuary to the available height, including all six outcasts. */
+@media (min-width: 1001px) and (min-height: 600px) {
+  #lobby {
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    padding: 0 3%;
+  }
+  #lobby > :not(.selection) {
+    flex: none;
+  }
+  #lobby .topbar {
+    height: clamp(48px, 6.5dvh, 70px);
+  }
+  #lobby .intro {
+    padding: clamp(8px, 1.5dvh, 20px) 0;
+  }
+  #lobby .hub-nav {
+    margin-bottom: 12px;
+    min-height: 40px;
+  }
+  #lobby .selection {
+    flex: 1;
+    min-height: 0;
+    grid-template-columns: minmax(180px, 0.8fr) minmax(250px, 1.6fr) minmax(
+        270px,
+        1fr
+      );
+    gap: 20px;
+  }
+  #lobby .selection > * {
+    min-height: 0;
+    min-width: 0;
+  }
+  #lobby .roster {
+    display: flex;
+    flex-direction: column;
+  }
+  #lobby .roster > .section-label {
+    flex: none;
+    margin-bottom: 8px;
+  }
+  #lobby #hero-list {
+    flex: 1;
+    min-height: 0;
+    grid-template-rows: repeat(6, minmax(0, 1fr));
+    gap: 6px;
+  }
+  #lobby #hero-list .hero-card {
+    height: auto;
+    min-height: 0;
+    padding: 4px 8px;
+    gap: 9px;
+  }
+  #lobby #hero-list .mini-portrait {
+    width: clamp(28px, 4dvh, 46px);
+    height: clamp(30px, 5dvh, 54px);
+  }
+  #lobby .forge-link {
+    flex: none;
+    margin-top: 8px;
+    padding: 8px;
+  }
+  #lobby .hero-stage {
+    height: 100%;
+    min-height: 0;
+  }
+  #lobby .hero-details {
+    padding-top: 0;
+  }
+  #lobby .hero-details:has(#hero-unlock:not([hidden])) .talent-preview {
+    display: none;
+  }
+  #lobby .hero-details h2 {
+    font-size: clamp(28px, 4dvh, 44px);
+    margin: 8px 0 12px;
+  }
+  #lobby .kit-row {
+    padding: clamp(6px, 1dvh, 12px) 0;
+  }
+  #lobby .kit-row summary {
+    gap: 10px;
+  }
+  #lobby .kit-row strong {
+    font-size: 12px;
+  }
+  #lobby .talent-preview {
+    padding-top: 8px;
+  }
+  #lobby .talent-chip {
+    padding: 5px 3px;
+  }
+  #lobby .talent-chip .sigil {
+    width: 20px;
+    height: 20px;
+  }
+  #lobby .talent-chip small {
+    margin-top: 3px;
+    font-size: 8px;
+  }
+  #lobby .expedition-settings {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    padding: 12px;
+    margin-top: 12px;
+    gap: 12px;
+  }
+  #lobby .expedition-settings > * {
+    min-width: 0;
+  }
+  #loadout-text,
+  #mastery-label {
+    display: block;
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  #lobby .loadout-preview,
+  #lobby .oath-setting {
+    padding-left: 12px;
+  }
+  #lobby .deploy-bar {
+    padding: 10px 12px;
+    margin-top: 0;
+  }
+  #lobby .deploy-bar .primary {
+    padding: 14px 24px;
+  }
+  #lobby footer {
+    padding: 10px 0;
+  }
+}
+@media (min-width: 1001px) and (min-height: 600px) and (max-height: 780px) {
+  #lobby .intro h1 {
+    font-size: 28px;
+    margin: 0;
+  }
+  #lobby #hero-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: repeat(3, minmax(0, 1fr));
+  }
+  #lobby #hero-list .hero-card {
+    padding: 4px;
+    gap: 5px;
+  }
+  #lobby #hero-list .mini-portrait {
+    width: 28px;
+    height: 36px;
+  }
+  #lobby .hero-card strong {
+    font-size: 14px;
+  }
+  #lobby .hero-card small {
+    font-size: 8px;
+  }
+  #lobby .hero-card .arrow {
+    display: none;
+  }
+  #lobby .kit-icon {
+    width: 32px;
+    height: 32px;
+    padding: 0;
+  }
+  #lobby .kit-icon .sigil {
+    width: 24px;
+    height: 24px;
+  }
+  #lobby .hero-details h2 {
+    margin: 6px 0 8px;
+  }
+  #lobby .kit-row {
+    padding: 5px 0;
+  }
+  #lobby #talent-names {
+    margin: 4px 0;
+  }
+  #lobby #hero-unlock {
+    padding: 6px 8px;
+    margin-top: 6px;
+    gap: 5px;
+  }
+  #lobby .unlock-goal {
+    gap: 4px;
+    font-size: 9px;
+  }
+  #lobby .expedition-settings {
+    padding: 8px 10px;
+    margin-top: 8px;
+  }
+  #lobby .deploy-bar {
+    padding: 8px 10px;
+  }
+  #lobby .deploy-bar .primary {
+    padding: 11px 20px;
+  }
+  #lobby footer {
+    padding: 8px 0;
+  }
+}
+.hero-card.locked {
+  border-style: dashed;
+  opacity: 0.8;
+}
+.hero-card.locked .arrow {
+  color: #c8bc94;
+  font-size: 14px;
+}
+#hero-unlock {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 10px 12px;
+  border: 2px solid #7c8357;
+  background: #303c25;
+  margin-top: 12px;
+  font-size: 10px;
+}
+.unlock-goal {
+  display: grid;
+  grid-template-columns: 22px 1fr auto;
+  align-items: center;
+  gap: 8px;
+}
+.unlock-goal .sigil {
+  width: 20px;
+  height: 20px;
+  color: #d9c788;
+}
+.unlock-goal progress {
+  grid-column: 2 / 4;
+  width: 100%;
+  height: 5px;
+  accent-color: #b9c890;
+}
+.hero-unlocked {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 2px solid #c6b475;
+  padding: 10px;
+  background: #3b472c;
+  color: #f1d99b;
+}
+.hero-unlocked .sigil {
+  width: 26px;
+  height: 26px;
+}
+#hero-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 7px;
+}
+#hero-list .hero-card {
+  margin: 0;
+  min-height: 62px;
+  padding: 6px 10px;
+}
+#hero-list .mini-portrait {
+  height: 54px;
+  width: 46px;
+}
+@media (max-height: 780px) and (min-width: 681px) {
+  #lobby .intro {
+    padding: 8px 0;
+  }
+  .hub-nav {
+    margin-bottom: 12px;
+  }
+  .hero-stage {
+    min-height: 360px;
+  }
+  .hero-details h2 {
+    margin: 8px 0 12px;
+    font-size: 36px;
+  }
+  .expedition-settings {
+    margin-top: 16px;
+    padding: 12px;
+  }
+  .deploy-bar {
+    padding: 12px;
+    margin-top: 12px;
+  }
+  .panel-body .upgrade-symbol {
+    height: 75px;
+  }
+  .panel-body .upgrade-symbol canvas {
+    height: 75px;
+  }
+}
+@media (max-width: 680px) {
+  #help-button {
+    display: block;
+    font-size: 0;
+    padding: 4px;
+    width: 28px;
+    border: 2px solid #71805b;
+    background: #2a3722;
+  }
+  #help-button::before {
+    content: "?";
+    font-size: 14px;
+    color: #e8d8a5;
+  }
+  #help-button > span {
+    display: none;
+  }
+  .modal {
+    padding: 10px;
+  }
+  #modal-panel {
+    height: calc(100dvh - 24px);
+    padding: 14px;
+    gap: 10px;
+  }
+  #modal-panel .modal-head h2 {
+    font-size: 22px;
+  }
+  .modal-eyebrow {
+    font-size: 7px;
+    letter-spacing: 0.6px;
+  }
+  .panel-body {
+    gap: 10px;
+  }
+  .panel-body .talent-branch {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    padding: 10px;
+  }
+  .panel-body .talent-node {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 5px;
+  }
+  .panel-body .talent-node > strong {
+    grid-column: 1;
+    grid-row: 1;
+    margin: 0;
+  }
+  .panel-body .talent-node .node-head {
+    grid-column: 2;
+    grid-row: 1;
+    margin: 0;
+  }
+  .panel-body .node-head :is(i, small) {
+    display: none;
+  }
+  .panel-body .talent-node p {
+    grid-column: 1 / -1;
+    margin: 2px 0;
+  }
+  .panel-body .node-dots {
+    margin: 2px 0;
+    align-self: center;
+  }
+  .panel-body .node-requirement {
+    font-size: 8px;
+    margin: 0;
+    max-width: 150px;
+    text-align: right;
+  }
+  .panel-body .screen-tabs {
+    display: none;
+  }
+  .panel-category {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 10px;
+    color: #b6c398;
+  }
+  .panel-category select {
+    flex: 1;
+    min-width: 0;
+    max-width: 100%;
+    border: 2px solid #76865a;
+    background: #2b3b24;
+    color: #eee2b8;
+    font-family: inherit;
+    font-size: 12px;
+    padding: 9px;
+  }
+  .panel-body .forge-craft,
+  .panel-body .codex-card {
+    padding: 18px;
+  }
+  .panel-body .forge-craft h3,
+  .panel-body .codex-card h3 {
+    font-size: 16px;
+  }
+  .panel-body .realm-card {
+    display: block;
+    padding: 0 0 12px;
+  }
+  .panel-body .realm-landscape {
+    height: 150px;
+    border-right: 0;
+  }
+  .panel-body .realm-landscape canvas {
+    height: 140px;
+  }
+  .panel-body .recipe-card {
+    display: block;
+    padding: 20px;
+  }
+  .panel-body .recipe-card h3 {
+    font-size: 16px;
+    margin: 18px 0 12px;
+  }
+  .panel-body .recipe-card p {
+    font-size: 12px !important;
+  }
+  .panel-body .recipe-card button {
+    margin-top: 12px;
+  }
+  .panel-body .recipe-icons .sigil {
+    width: 45px;
+    height: 45px;
+  }
+  .panel-body .mastery-milestones {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .panel-body .mastery-entry,
+  .panel-body .bestiary-entry {
+    padding: 16px;
+  }
+  .panel-body .artifact-loadout article {
+    padding: 20px;
+  }
+  .panel-body .artifact-details {
+    gap: 5px;
+  }
+  .panel-body .artifact-details summary {
+    font-size: 9px;
+  }
+  .panel-body .build-overview {
+    gap: 12px;
+  }
+  .panel-body .build-overview > canvas {
+    width: 65px;
+    height: 110px;
+  }
+  .panel-body .build-stat-grid {
+    gap: 9px;
+  }
+  .panel-body .build-stat-grid strong {
+    font-size: 15px;
+  }
+  .panel-body .build-stat-grid small {
+    font-size: 8px;
+  }
+  .panel-body .result-stats {
+    grid-template-columns: 1fr 1fr;
+  }
+  .panel-body .expedition-report small {
+    font-size: 9px;
+  }
+  #modal-panel .modal-foot > .muted {
+    max-width: 50%;
+    font-size: 9px;
+  }
+  #hero-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 7px;
+  }
+  #hero-list .hero-card {
+    padding: 6px;
+    display: flex;
+    gap: 7px;
+    text-align: left;
+  }
+  #hero-list .hero-card strong {
+    font-size: 13px;
+  }
+  #hero-list .hero-card small {
+    font-size: 7px;
+    line-height: 1.4;
+  }
+  #hero-list .hero-card .arrow {
+    display: none;
+  }
+  .panel-body .legacy-card > canvas {
+    width: 65px;
+  }
+  .panel-body .legacy-card {
+    padding: 12px;
+  }
+}
+@media (max-height: 700px) {
+  #modal-panel[data-screen="result"] .panel-body > p,
+  #modal-panel[data-screen="result"] .result-artifacts {
+    display: none;
+  }
+  .panel-body .expedition-report {
+    padding: 8px;
+  }
+  .panel-body .result-rewards.memory-banked {
+    padding: 4px;
+  }
+  .panel-body .research-banner {
+    height: 32px;
+    min-height: 0;
+    padding: 3px 8px;
+  }
+  .panel-body .research-banner .modal-eyebrow {
+    display: none;
+  }
+  .panel-body .forge-craft h3 {
+    margin: 8px 0;
+  }
+  .panel-body .craft-values {
+    margin: 8px 0;
+  }
+  .panel-body .research-banner canvas {
+    height: 28px;
+    width: 28px;
+  }
+  .panel-body .craft-icon {
+    width: 32px;
+    height: 32px;
+  }
+  .panel-body .craft-icon .sigil {
+    width: 22px;
+    height: 22px;
+  }
+  .panel-body .progression-intro {
+    min-height: 28px;
+  }
+  .panel-body .screen-tabs button {
+    padding: 6px;
+  }
+  #modal-panel {
+    gap: 6px;
+    padding: 10px;
+  }
+  #modal-panel .modal-head {
+    padding-bottom: 6px;
+  }
+  #modal-panel .modal-head h2 {
+    font-size: 18px;
+  }
+  .panel-body {
+    gap: 6px;
+  }
+  .panel-body .upgrade-symbol,
+  .panel-body .artifact-halo,
+  .panel-body .contract-card > .artifact-art {
+    display: none;
+  }
+  .panel-body .upgrade-card,
+  .panel-body .artifact-card,
+  .panel-body .contract-card,
+  .panel-body .forge-craft,
+  .panel-body .codex-card,
+  .panel-body .recipe-card {
+    padding: 9px;
+  }
+  .panel-body .realm-landscape {
+    height: 65px;
+  }
+  .panel-body .realm-landscape canvas {
+    height: 60px;
+  }
+  .panel-body .talent-node {
+    padding: 6px;
+  }
+  .panel-body .talent-node .node-dots {
+    display: none;
+  }
+  .panel-body .talent-node p {
+    margin: 4px 0;
+  }
+  .panel-body .talent-node .node-head {
+    margin-bottom: 4px;
+  }
+  .panel-body .talent-node .node-head i {
+    display: none;
+  }
+  .panel-body .build-slot-row {
+    gap: 6px;
+  }
+  .panel-body .upgrade-card strong {
+    font-size: 13px;
+  }
+  .panel-body .treasure-entry .artifact-art {
+    height: 65px;
+    width: 65px;
+  }
+  .panel-body .legacy-card > canvas {
+    display: none;
+  }
+  .panel-body .legacy-traits {
+    margin-top: 6px;
+    padding-top: 6px;
+    gap: 5px;
+  }
+  .panel-body .legacy-card {
+    padding: 8px;
+  }
+  .panel-body .legacy-realm .memory-pips {
+    margin: 5px 0;
+  }
+  .panel-body .resonance-row {
+    padding: 5px;
+  }
+  .panel-body .resonance-row .craft-icon {
+    display: none;
+  }
+}
+/* A six-outcast page keeps the sanctuary bounded as the roster grows. */
+.roster-pages {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex: 0 0 30px;
+  height: 30px;
+  margin: 4px 0;
+}
+.roster-pages button {
+  width: 38px;
+  height: 28px;
+  border: 1px solid #746442;
+  background: #182721;
+  color: #edd7a9;
+  font-size: 21px;
+  cursor: pointer;
+}
+.roster-pages button:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+.roster-pages span {
+  font: 11px monospace;
+  color: #b9b294;
+}

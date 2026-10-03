@@ -1,0 +1,651 @@
+/* Ascension: clear silhouettes, high resolution art, quiet visual hierarchy. */
+#arena,
+#portrait,
+.mini-portrait,
+[data-art] {
+  image-rendering: auto;
+}
+.sigil {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  display: inline-block;
+  vertical-align: middle;
+}
+body:before {
+  opacity: 0.055;
+}
+.topbar {
+  height: 70px;
+}
+.intro {
+  padding: 20px 0;
+}
+.intro h1 {
+  font-size: clamp(42px, 4vw, 60px);
+}
+.intro .eyebrow,
+.intro p {
+  display: none;
+}
+.hub-nav {
+  margin-bottom: 20px;
+}
+.hero-stage {
+  min-height: 410px;
+}
+.hero-details {
+  padding-top: 12px;
+}
+.hero-details h2 {
+  margin: 14px 0 4px;
+}
+.hero-desc {
+  margin-bottom: 18px;
+  font-size: 13px;
+  color: var(--hero);
+}
+.kit-row {
+  display: block;
+  padding: 12px 0;
+}
+.kit-row summary {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  cursor: pointer;
+  list-style: none;
+}
+.kit-row summary::-webkit-details-marker {
+  display: none;
+}
+.kit-row strong {
+  display: block;
+  font-size: 15px;
+  margin-top: 3px;
+  font-weight: 500;
+}
+.kit-row p {
+  margin: 10px 0 0 57px;
+  font-size: 12px;
+  line-height: 1.6;
+}
+.kit-icon {
+  width: 43px;
+  height: 43px;
+  border: 1px solid #698d7b44;
+  border-radius: 11px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(145deg, #aac6a917, #12242b);
+  color: var(--hero);
+}
+.detail-plus {
+  margin-left: auto;
+  color: #83958f;
+}
+.talent-preview {
+  padding-top: 18px;
+}
+#talent-names {
+  display: flex;
+  gap: 8px;
+  margin: 10px 0;
+}
+.talent-chip {
+  border: 1px solid #6d897638;
+  padding: 10px 6px;
+  flex: 1;
+  text-align: center;
+  background: #16262c;
+  border-radius: 8px;
+}
+.talent-chip .sigil {
+  width: 27px;
+  height: 27px;
+  color: var(--hero);
+}
+.talent-chip small {
+  display: block;
+  font-size: 10px;
+  margin-top: 7px;
+  color: #b7c4b8;
+}
+.expedition-settings {
+  padding: 16px 0;
+  margin-top: 20px;
+}
+.forge-icon .sigil {
+  width: 28px;
+}
+.edition-tag {
+  letter-spacing: 1px;
+}
+.modal-head {
+  margin-bottom: 20px;
+}
+.modal-head h2 {
+  font-size: 34px;
+}
+.progression-intro {
+  margin-bottom: 18px;
+}
+.progression-intro p {
+  font-size: 12px;
+}
+.screen-tabs button {
+  min-height: 48px;
+}
+.forge-craft {
+  padding: 18px;
+  border-radius: 12px;
+  background: linear-gradient(140deg, #23363caa, #13232bcc);
+}
+.craft-icon {
+  width: 49px;
+  height: 49px;
+  display: grid;
+  place-items: center;
+  border: 1px solid #b6a16c35;
+  border-radius: 12px;
+  background: #c4ac7420;
+}
+.craft-top small {
+  display: none;
+}
+.craft-top b {
+  margin-left: auto;
+  font-size: 11px;
+  color: #a7b6ac;
+}
+.forge-craft h3 {
+  margin: 12px 0 5px;
+}
+.forge-craft p {
+  min-height: 0;
+  font-size: 12px;
+}
+.craft-values {
+  margin: 16px 0;
+}
+.rank-segments {
+  margin-bottom: 16px;
+}
+.research-banner {
+  grid-column: 1/-1;
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  border: 1px solid #95784b55;
+  background:
+    radial-gradient(ellipse at 20% 60%, #68734a35, transparent), #13222a;
+  padding: 12px 20px;
+  border-radius: 12px;
+}
+.research-banner canvas {
+  width: 115px;
+  height: 125px;
+  object-fit: contain;
+}
+.research-banner h3 {
+  margin: 5px 0;
+  font:
+    30px Georgia,
+    serif;
+}
+.research-banner p {
+  margin: 5px 0;
+  font-size: 12px;
+}
+.research-banner > div {
+  flex: 1;
+}
+.research-craft button {
+  width: 100%;
+}
+.rank-road {
+  display: flex;
+  gap: 12px;
+  margin: 16px 0 4px;
+}
+.rank-road > span {
+  flex: 1;
+  position: relative;
+  border-top: 2px solid #40545a;
+  padding-top: 7px;
+  text-align: center;
+  color: #7a8e92;
+}
+.rank-road > span.lit {
+  color: #d6b479;
+  border-color: #bd985e;
+}
+.rank-road b {
+  display: block;
+  font-size: 18px;
+}
+.rank-road small {
+  font-size: 10px;
+}
+.branch-heading > span .sigil {
+  width: 25px;
+  height: 25px;
+}
+.talent-branch {
+  padding: 15px;
+  border-radius: 12px;
+  background: linear-gradient(#23343c, #11232b);
+}
+.talent-node {
+  min-height: 0;
+  padding: 13px;
+  border-radius: 9px;
+}
+.talent-node strong {
+  font-size: 15px;
+}
+.talent-node p {
+  min-height: 0;
+  font-size: 11px;
+  margin: 7px 0;
+}
+.node-head {
+  margin-bottom: 8px;
+}
+.node-head i .sigil {
+  width: 29px;
+  height: 29px;
+}
+.node-head small {
+  font-size: 8px;
+}
+.node-dots {
+  gap: 3px;
+}
+.node-dots i {
+  width: 8px;
+  height: 4px;
+  border-radius: 1px;
+}
+.node-requirement {
+  font-size: 10px;
+  min-height: 12px;
+}
+.branch-details,
+.power-details {
+  color: #95aaa9;
+  font-size: 11px;
+  padding: 10px 3px;
+}
+.branch-details summary,
+.power-details summary {
+  cursor: pointer;
+}
+.branch-details p,
+.power-details p {
+  font-size: 12px;
+  line-height: 1.6;
+}
+.branch-details b {
+  color: #d6dacb;
+}
+.codex-card {
+  border-radius: 12px;
+  padding: 18px;
+  background: linear-gradient(145deg, #213840, #15242c);
+}
+.codex-card-top > span {
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  background: #aa9c6b18;
+  border: 1px solid #aa9c6b40;
+  border-radius: 10px;
+}
+.codex-card-top small {
+  font-size: 8px;
+}
+.codex-card p {
+  min-height: 0;
+  font-size: 12px;
+}
+.codex-card h3 {
+  font-size: 18px;
+}
+.codex-card .secondary {
+  min-height: 36px;
+}
+.inscription-loadout p {
+  font-size: 11px;
+}
+.upgrade-card {
+  min-height: 300px;
+  border-radius: 14px;
+  padding: 20px;
+  background:
+    radial-gradient(ellipse at 50% 20%, #6b845a26, transparent 70%),
+    linear-gradient(145deg, #22343d, #14232d);
+  text-align: center;
+  align-items: center;
+}
+.upgrade-card:hover {
+  background-color: #284039;
+  border-color: #8dbca2;
+  transform: translateY(-4px);
+}
+.upgrade-symbol {
+  height: 116px;
+  display: grid;
+  place-items: center;
+  margin: 0 auto 12px;
+}
+.upgrade-symbol .sigil {
+  width: 76px;
+  height: 76px;
+  color: #cbb480;
+  stroke-width: 1.25;
+  filter: drop-shadow(0 0 14px #baa77533);
+}
+.upgrade-symbol canvas {
+  height: 125px;
+  width: 130px;
+}
+.upgrade-card strong {
+  font-size: 21px;
+  margin: 10px 0;
+}
+.upgrade-card small {
+  font-size: 9px;
+  letter-spacing: 1px;
+}
+.upgrade-card .power-summary {
+  font-size: 12px;
+  line-height: 1.5;
+  min-height: 30px;
+  color: #b2c6be;
+  margin: 2px 0 12px;
+}
+.rank-change {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  font-size: 18px;
+  color: #8ea49f;
+}
+.rank-change i {
+  font-size: 14px;
+  font-style: normal;
+}
+.rank-change b {
+  color: #e1c18d;
+}
+.upgrade-card .pick {
+  margin-top: 18px;
+  font-size: 9px;
+  border-top: 1px solid #5a716333;
+  padding-top: 12px;
+  width: 100%;
+}
+.power-details {
+  padding: 10px 7px;
+}
+.build-icon .sigil {
+  width: 23px;
+  height: 23px;
+}
+.build-icon {
+  background: #132730de;
+  border-color: #728c7b55;
+  border-radius: 7px;
+}
+#build-hud {
+  max-width: min(65vw, 650px);
+  flex-wrap: wrap;
+  max-height: 90px;
+  overflow: auto;
+}
+#hud-symbol .sigil {
+  width: 30px;
+  height: 30px;
+}
+#announcement {
+  top: 22%;
+  font-size: 15px;
+  letter-spacing: 1px;
+  padding: 10px 18px;
+  background: #0d202be6;
+  border: 1px solid #b3c4a53b;
+  border-radius: 30px;
+  width: max-content;
+  max-width: 80vw;
+}
+#threat-text {
+  display: none;
+}
+.game-footer {
+  font-size: 10px;
+}
+@media (min-width: 1100px) {
+  .selection {
+    grid-template-columns: 245px minmax(300px, 1fr) 300px;
+    gap: 28px;
+  }
+  .hero-stage {
+    height: 430px;
+  }
+  .hero-details h2 {
+    font-size: 51px;
+  }
+}
+@media (max-width: 700px) {
+  .topbar {
+    height: 60px;
+  }
+  .intro {
+    padding: 18px 0;
+  }
+  .hub-nav {
+    gap: 12px;
+  }
+  .hub-nav button {
+    gap: 5px;
+  }
+  .hub-nav button span {
+    font-size: 10px;
+  }
+  .hero-stage {
+    min-height: 320px;
+  }
+  .hero-details {
+    padding-top: 8px;
+  }
+  .hero-details h2 {
+    font-size: 38px;
+  }
+  #hero-kit {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 7px;
+  }
+  .kit-row {
+    border: 1px solid #3b5053;
+    padding: 10px 7px;
+    border-radius: 10px;
+  }
+  .kit-row summary {
+    flex-direction: column;
+    gap: 7px;
+    text-align: center;
+  }
+  .kit-row strong {
+    font-size: 11px;
+  }
+  .detail-plus {
+    display: none;
+  }
+  .kit-row p {
+    margin: 9px 0 0;
+    font-size: 11px;
+  }
+  .kit-row[open] {
+    grid-column: 1/-1;
+  }
+  .kit-row[open] summary {
+    flex-direction: row;
+    text-align: left;
+  }
+  .talent-preview {
+    padding-top: 12px;
+  }
+  .talent-preview > small {
+    display: none;
+  }
+  .talent-chip {
+    padding: 8px;
+  }
+  .modal-head h2 {
+    font-size: 27px;
+  }
+  .screen-tabs {
+    gap: 4px;
+  }
+  .screen-tabs button {
+    font-size: 10px;
+    padding: 8px 5px;
+  }
+  .screen-tabs small {
+    font-size: 9px;
+  }
+  .forge-craft {
+    padding: 13px;
+  }
+  .craft-values {
+    font-size: 18px;
+  }
+  .research-banner {
+    gap: 8px;
+    padding: 8px;
+  }
+  .research-banner canvas {
+    width: 90px;
+  }
+  .research-banner h3 {
+    font-size: 24px;
+  }
+  .upgrade-card {
+    min-height: 0;
+    display: grid;
+    grid-template-columns: 65px 1fr 45px;
+    padding: 13px;
+    text-align: left;
+    gap: 5px 10px;
+    align-items: center;
+  }
+  .upgrade-symbol {
+    grid-column: 1;
+    grid-row: 1/5;
+    height: 75px;
+    margin: 0;
+  }
+  .upgrade-symbol .sigil {
+    width: 46px;
+    height: 46px;
+  }
+  .upgrade-symbol canvas {
+    width: 70px;
+    height: 78px;
+  }
+  .upgrade-card > small,
+  .upgrade-card > strong,
+  .upgrade-card > .power-summary {
+    grid-column: 2;
+    margin: 0;
+  }
+  .upgrade-card strong {
+    font-size: 17px;
+  }
+  .upgrade-card .power-summary {
+    min-height: 0;
+    font-size: 10px;
+  }
+  .rank-change {
+    grid-column: 3;
+    grid-row: 1/4;
+    flex-direction: column;
+    gap: 0;
+    font-size: 15px;
+  }
+  .upgrade-card .pick {
+    grid-column: 2/4;
+    margin-top: 2px;
+    padding-top: 6px;
+    font-size: 8px;
+  }
+  .power-details {
+    padding: 6px;
+  }
+  #announcement {
+    font-size: 11px;
+    top: 23%;
+  }
+  #build-hud {
+    max-height: 70px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .upgrade-card:hover {
+    transform: none;
+  }
+}
+
+#announcement {
+  left: 50%;
+  right: auto;
+  transform: translateX(-50%);
+}
+.resonance-row {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  padding: 15px;
+  border: 1px solid #bfa36f55;
+  border-radius: 10px;
+  margin: 18px 0;
+  background: #a7905510;
+}
+.resonance-row > div {
+  flex: 1;
+}
+.resonance-row strong {
+  font-size: 14px;
+}
+.resonance-row small {
+  color: #d2b475;
+  margin-left: 8px;
+}
+.resonance-row p {
+  margin: 5px 0 0;
+  font-size: 11px;
+  color: #9eb4b0;
+}
+.resonance-row button {
+  font-size: 12px;
+  padding: 12px;
+}
+@media (max-width: 700px) {
+  .resonance-row {
+    padding: 10px;
+    gap: 8px;
+  }
+  .resonance-row .craft-icon {
+    display: none;
+  }
+  .upgrade-card .upgrade-symbol {
+    float: none;
+    margin: 0;
+  }
+  .upgrade-card .pick {
+    display: block;
+  }
+}

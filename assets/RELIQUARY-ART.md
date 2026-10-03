@@ -1,0 +1,9 @@
+# Reliquary treasure atlas
+
+`reliquary-atlas.png` was generated with the built-in imagegen tool for Riftbound v4. It contains nine transparent illustrated artifacts. The original was preserved in the Codex generated-images directory; the game serves only this locally bundled copy.
+
+The source rectangles in `src/pixel-art.js` deliberately exclude adjacent-cell fragments. Small gameplay sprites are cached as smoothly downsampled canvases at runtime; original PNG files are unchanged. Inventory paintings retain their original resolution for larger previews.
+
+## Generation prompt
+
+Use case: stylized-concept. Asset type: one game inventory sprite atlas for a polished dark fantasy survival RPG. Create a square 3 by 3 evenly spaced grid of nine isolated magical treasures on true transparent background. Each centered object occupies 68% of its equally sized cell with generous empty margins; no dividers, labels, text, UI frames, floor shadows or scenery. Painted high-definition pixel-art aesthetic, crisp legible silhouettes, elegant jewel-like material detail, restrained colored glow, sophisticated antique gold accents, readable at 90 pixels tall. Row 1 left to right: ornate gold hourglass containing flowing cyan sand; broken crimson glass crown with ruby centerpiece; silver winged greaves with pale turquoise ribbons. Row 2: black obsidian heart with warm lava cracks; enchanted open spellbook with orbiting gold stars and violet pages; emerald seed in a delicate living root cage. Row 3: pale violet mirror shard set in black silver filigree; miniature radiant golden sun encircled by a spiked bronze halo; azure lightning bottled inside an antique copper glass lantern. Maintain identical visual scale, camera angle and elegant fantasy hand-painted art style for all nine. Pure alpha background, no checkerboard. No cropped objects, no overlap between cells, no watermarks.

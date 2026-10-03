@@ -1,0 +1,67 @@
+# Riftbound: Communion class expansion
+
+Six original classes join the existing six outcasts. Class identity comes from a distinct combat loop, reinforced by specialization choices, limited companions, run recipes and permanent skill transformations. All names, art and combat implementations are original to Riftbound.
+
+## Research foundations
+
+The sources below are Blizzard's own class descriptions and design articles. The Legion and Dragonflight articles are historical design references, not claims about the current competitive meta. Their useful contribution is how a class resource, baseline kit and talent choices reinforce one another.
+
+| Reference                                                                                                                                                                                                                                                                                                                                             | Design finding                                                                                                                                              | Riftbound adaptation                                                                                                                                                                                  |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Warlock class preview, Legion, 2015](https://worldofwarcraft.blizzard.com/en-us/news/19955662/legion-class-preview-series-warlock)                                                                                                                                                                                                                   | Affliction emphasizes persistent curses; Demonology builds and empowers a demon retinue. A resource ties damage to summoning.                               | Vesper's hexes feed souls from cursed deaths. A ranged imp and a frontline guardian are present from the first second; Q spends the stored souls on temporary imps and empowerment.                   |
+| [Hunter class overview](https://worldofwarcraft.blizzard.com/en-gb/game/classes/hunter) and [Hunter talent preview, Dragonflight, 2022](https://worldofwarcraft.blizzard.com/en-gb/news/23818247/dragonflight-talent-previews-hunter-and-rogue)                                                                                                       | A bonded beast is part of the core combat identity. Command attacks, beast cleave, marks and traps make specialization change coordination with that beast. | Fen marks prey with crossbow shots. Owner and wolf attacks build bond; Q revives or mends the wolf, spends bond on a pounce and lays a snare. Bond, Tracking and Traps provide different investments. |
+| [Priest class overview](https://worldofwarcraft.blizzard.com/en-us/game/classes/priest) and [Priest talent preview, Dragonflight, 2022](https://worldofwarcraft.blizzard.com/en-us/news/23826541)                                                                                                                                                     | Discipline mixes offense, protection and healing; the tradeoff is more interesting than an unconditional regeneration aura.                                 | Solace is a fragile solo cleric. Landed dawn bolts generate faith and gated small heals. Q consumes faith for a capped heal, shield and area damage. No allies or multiplayer are implied.            |
+| [Shadowlands class updates, 2020](https://worldofwarcraft.blizzard.com/en-us/news/23310980)                                                                                                                                                                                                                                                           | Totems and elemental support anchor shaman identity; monks combine martial attacks, resource spending and celestial techniques.                             | Orin's fire, storm and tide totems are temporary, fixed-position zones. Kestrel's three-strike melee combo builds qi only on contact; the spender is a stronger sweeping kick.                        |
+| [Death Knight overview](https://worldofwarcraft.blizzard.com/en-us/game/classes/death-knight), [Wrath Classic introduction, 2022](https://worldofwarcraft.blizzard.com/en-us/news/23818249/become-a-death-knight-in-wrath-of-the-lich-king-classic) and [Legion Death Knight preview, 2015](https://worldofwarcraft.blizzard.com/en-us/news/19955663) | Rune-based pacing, grips, disease, minions and the choice between sustain and offense distinguish the class.                                                | Morrow charges runes with landed melee cleaves, chills and infects enemies, and spends runes on a grip, damage and measured healing. Wardens and Reapers resist displacement.                         |
+| [Legion class preview overview, 2015](https://worldofwarcraft.blizzard.com/en-gb/news/19941175)                                                                                                                                                                                                                                                       | A clear core fantasy makes talent depth legible.                                                                                                            | Each outcast has one main resource display, one Q skill, and three specialization trees. Existing R/F class transformations add depth later.                                                          |
+
+## Unlocks
+
+Only banked achievements count. Merely previewing a character, abandoning an expedition or modifying its temporary rank grants no unlock. Previous save totals count immediately.
+
+| Outcast | Both conditions required                        |
+| ------- | ----------------------------------------------- |
+| Vesper  | 1,500 lifetime kills and 2 Wardens              |
+| Fen     | Survive 3 minutes and recover 2 unique memories |
+| Solace  | Bank 6 expeditions and survive 3 minutes        |
+| Orin    | Bank 20 map finds and defeat 3 Wardens          |
+| Kestrel | Bank 100 dashes and survive 4 minutes           |
+| Morrow  | Defeat 8 Wardens and survive 6 minutes          |
+
+## Combat and specialization
+
+| Outcast | Starting identity                               | Three branches                   | Class forms at 100 / 200       |
+| ------- | ----------------------------------------------- | -------------------------------- | ------------------------------ |
+| Vesper  | Hex bolts, curses, souls, imp + guardian        | Affliction / Demonbinding / Ruin | Rift binder / Demon sovereign  |
+| Fen     | Mobile crossbow, marked prey, wolf, bond        | Bond / Tracking / Traps          | Pack leader / Wild sovereign   |
+| Solace  | Dawn bolts, faith, gated mending, mercy halo    | Grace / Discipline / Judgement   | Dawn prelate / Sun seraph      |
+| Orin    | Spirit bolts and cycling fire/storm/tide totems | Embers / Tempest / Tides         | Spirit speaker / Storm avatar  |
+| Kestrel | Palm → kick → circular sweep, qi, dragon kick   | Wind / Mist / Iron               | Wind master / Jade ascendant   |
+| Morrow  | Rime cleaves, plague, runes, grave grip         | Blood / Rime / Grave             | Grave marshal / Rime sovereign |
+
+Every class has 21 connected permanent talents, eight trainable skills, two signature/active run recipes, three exclusive Codex pages, independent research, and three memory milestones. The full roster now has 252 permanent talent nodes and 30 run recipes. Permanent talent budgets and prerequisites are unchanged: these classes do not get free specialization points.
+
+Skill training at 20 and 40 retains existing rare catalyst, spark and class-level requirements. Higher signature stages add class-specific mechanics: spreading hexes and imps, ricocheting marked shots, protective solar bursts, reinforced totems and elementals, qi-generating shockwaves, or plague and ghouls. These are separate from the run's build-dependent evolution recipes. Class forms retain the existing expensive 100/200 gates and long R/F cooldowns.
+
+Every class also awakens its signature at run rank five. Vesper gains piercing imp bolts and stronger guardian cleaves/wards; Fen gains marked-prey damage and wolf cleave; Solace gains bolt penetration and faith generation; Orin gains totem reach and bolt penetration; Kestrel gains stronger, wider third strikes; Morrow gains cleave reach and longer plague. These awakenings have complete names and descriptions in both the level-up screen and combat announcements.
+
+Companions now have species-specific damage, speed, attack intervals and toughness. Each signature rank after the first adds 9% base pet damage, alongside existing later-rank potency and class research. The imp applies a lesser curse that can harvest souls without replacing a stronger player curse. Guardians intercept nearby lesser foes, cleave two additional targets and grant four shield every six seconds when fighting near their owner (six after awakening), with a 25-shield ceiling. Wolves pursue the latest marked prey, rush distant marks on a five-second engagement cooldown and deal extra damage to marked targets. Pets inherit the owner's movement upgrades and catch up when separated.
+
+## Limits and difficulty
+
+- Eight companions maximum per player; five living imps maximum. Temporary creatures expire. Permanent imp, guardian and wolf return after eight seconds at 75% health. Demon pact and Pack command mend or revive permanent pets, spending their skill cooldowns.
+- Companion health grows modestly with signature ranks and relevant talents, with a ceiling on the rank-derived multiplier. Recalculating bonuses preserves the current health percentage instead of granting a free refill.
+- Injured pets near their owner recover 2% maximum health per second, capped at five health per second, only after three seconds without damage. Melee pets have species-specific resistance and inherit a limited share of owner armor; Reaper damage bypasses both.
+- Companions suffer enemy contact damage with a 0.7-second hit gate. Lesser melee enemies can be distracted by a nearby guardian or wolf. Wardens, Reapers and enemy casters remain focused on the player. Reapers can rapidly kill companions; striking them cannot generate guardian wards.
+- Cleric mending occurs at most once per 1.2 seconds and requires every third landed dawn hit. Q healing is at most 20% maximum health from its baseline resource formula; class talents can add the existing bounded bonuses. Faith does not passively regenerate.
+- Tide healing requires remaining within the totem's fixed circle. There is at most one totem of each element, so three tide totems cannot stack. Totems expire and require renewed placement.
+- Monk misses give no qi. Grave Knight healing requires stored runes; its baseline rune healing is capped at 17% maximum health. Grips cannot move Wardens or Reapers.
+- Existing exponential health/damage pressure, Reaper damage resistance, contact damage and arena boundaries remain active. Numerical tests establish bounds and progression behavior; extended human playtesting is still needed to tune comparative class strength.
+
+## Presentation and verification
+
+The roster is two pages of six portraits. Unlock goals stay next to the selected character; the three ability rows expose details on demand. New class resources occupy the existing trait meter; Fen's meter also shows beast health or recovery time. Companion health bars and totem circles convey the important state in the arena.
+
+The built-in ImageGen tool produced 36 original character poses and 18 companion poses. [Asset provenance and exact prompts](../assets/ARCHETYPE-ART.md) are recorded separately. Existing save format v7 is retained by release v8, with new hero profiles added safely by the sanitizer.
+
+`tests/archetypes.test.mjs` exercises unlocks, curses, soul spending, pet damage and early-rank growth, death/recovery, bounded cleaves/wards, pause behavior, aggro exceptions, wolf marks and pursuit, faith healing gates, totem cycling, melee misses/combos, grip immunity, recipes, forms and save persistence. It checks rank-five awakening acceptance for all twelve classes and the six new classes' distinct awakening mechanics. `tests/archetypes-browser.mjs` checks the new roster, locked and unlocked views, all three progression tabs, 36 character pose cells, six playable class skills and both form abilities. Awakening cards are rendered and selected for all twelve classes on desktop and the six new classes at four desktop/phone sizes, with layout and runtime-error checks. Existing regression suites continue to cover the original classes and systems.

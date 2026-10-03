@@ -1,0 +1,1372 @@
+/* Stone, brass and rune light: the sanctuary belongs to the same world as combat. */
+:root {
+  --paper: #191e19;
+  --ink: #e9e4cf;
+  --muted: #a5ac96;
+  --line: #5b604b;
+  --accent: #dec083;
+  --dark: #101610;
+  font-family: "Lucida Console", "Courier New", monospace;
+}
+body {
+  background: #111710;
+}
+body::before {
+  opacity: 0.19;
+}
+button,
+input,
+h1,
+h2,
+h3,
+strong,
+.modal-head h2 {
+  font-family: inherit;
+}
+.intro h1,
+.hero-details h2 {
+  font-family: "Lucida Console", "Courier New", monospace;
+}
+#hero-name {
+  font-family: "Lucida Console", "Courier New", monospace;
+}
+#game-talents,
+#inspect-build,
+#world-map-button,
+#evolve-button,
+#announcement,
+#hero-kit .kit-item {
+  border-radius: 0;
+}
+#announcement {
+  border: 2px solid #7a8759;
+  background: #182717ed;
+  padding: 12px 18px;
+  font-family: "Courier New", monospace;
+}
+.modal-close {
+  border-radius: 0;
+}
+button {
+  transition:
+    border-color 0.12s,
+    color 0.12s,
+    background 0.12s;
+}
+button:hover:not(:disabled) {
+  transform: none;
+}
+button:active:not(:disabled) {
+  transform: translateY(2px);
+}
+button:focus-visible,
+summary:focus-visible {
+  outline: 2px solid #f8dc96;
+  outline-offset: 3px;
+}
+.hero-card,
+.hero-stage,
+.primary,
+.secondary,
+#modal-panel,
+.expedition-settings,
+.contract-card,
+.artifact-card,
+.forge-craft,
+.talent-node,
+.codex-card,
+.bestiary-entry,
+.mastery-entry,
+.upgrade-card,
+.ability-button,
+.settings-list,
+.setting-toggle,
+.artifact-loadout article,
+.treasure-entry,
+.inscription-slot,
+.research-banner,
+.resonance-row,
+.talent-chip,
+.icon-button,
+kbd,
+.screen-tabs button {
+  border-radius: 0;
+}
+#lobby {
+  max-width: 1490px;
+  padding: 0 4%;
+}
+.topbar {
+  height: 70px;
+  border-bottom: 2px solid #535d46;
+}
+.brand {
+  font-size: 22px;
+  font-weight: 900;
+  letter-spacing: 3px;
+  text-shadow: 2px 2px #020800;
+}
+.brand small,
+.wallet span,
+.intro .eyebrow,
+.hero-desc,
+.portrait-caption,
+.edition-tag,
+.hero-kit .kit-label,
+.deploy-copy span,
+.arena-hint,
+.record small,
+.roster > .section-label span:last-child,
+.detail-heading .eyebrow {
+  display: none;
+}
+.intro {
+  padding: 20px 0;
+}
+.intro h1 {
+  font-size: clamp(26px, 3vw, 40px);
+  font-weight: 900;
+  letter-spacing: -1px;
+  text-shadow: 3px 3px #071007;
+}
+.intro h1 em {
+  font-family: inherit;
+  font-style: normal;
+  color: #dbbf86;
+}
+.record span {
+  font-size: 8px;
+  letter-spacing: 1px;
+}
+.record strong {
+  font-size: 30px;
+}
+.hub-nav {
+  border: 0;
+  gap: 8px;
+  margin-bottom: 20px;
+  min-height: 44px;
+}
+.hub-nav button {
+  border: 2px solid #535b45;
+  padding: 8px 16px;
+  background: #20291e;
+  box-shadow:
+    inset 0 2px #6c735038,
+    inset 0 -3px #0a120a;
+}
+.hub-nav button.active {
+  border: 2px solid #c8ad6c;
+  background: #343b23;
+}
+.hub-nav button span {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #d0d6bd;
+}
+.selection {
+  gap: 20px;
+}
+.hero-card {
+  border: 2px solid #4f5a40;
+  background: #1d291c;
+  margin-bottom: 10px;
+}
+.hero-card:hover {
+  border-color: #a89b62;
+  background: #29351f;
+}
+.hero-card.selected {
+  border: 2px solid var(--hero);
+  background: #2c3425;
+  box-shadow:
+    inset 4px 0 var(--hero),
+    inset 0 -3px #09140a;
+}
+.hero-card strong {
+  font-size: 18px;
+  text-shadow: 2px 2px #060e06;
+}
+.hero-card small {
+  font-size: 9px;
+}
+.hero-card .arrow {
+  font-size: 18px;
+}
+.hero-stage {
+  border: 4px solid #5e6748;
+  outline: 1px solid #a19a68;
+  outline-offset: 2px;
+  background: #15271c;
+  box-shadow: 0 5px #050b07;
+}
+.hero-stage::after {
+  border: 2px solid #1c2416;
+  box-shadow: inset 0 0 30px #06130b70;
+}
+.stage-top,
+.stage-bottom {
+  font-size: 9px;
+  letter-spacing: 1px;
+  color: #d5d3b6;
+  padding: 10px 12px;
+  background: #0b1a12ad;
+}
+.hero-details h2 {
+  font-size: 44px;
+  font-weight: 900;
+  margin: 10px 0 18px;
+  text-shadow: 3px 3px #020a07;
+}
+.difficulty {
+  font-size: 8px;
+  border: 1px solid #8d9159;
+  background: #29341d;
+}
+.kit-item {
+  padding: 11px 0;
+  border-color: #49563e;
+}
+.kit-icon {
+  background: #2d3b25;
+  border: 2px solid #596848;
+  border-radius: 0;
+  width: 44px;
+  height: 44px;
+  color: var(--hero);
+}
+.kit-item strong {
+  font-size: 12px;
+}
+.kit-item small {
+  font-size: 8px;
+}
+.kit-item details {
+  font-size: 10px;
+}
+.talent-preview > small {
+  display: none;
+}
+.talent-chip {
+  border: 1px solid #5b664c;
+  background: #25331f;
+  padding: 8px;
+}
+.talent-chip small {
+  font-size: 9px;
+}
+.forge-link {
+  border: 2px solid #7e7950;
+  background: #292d1a;
+  box-shadow:
+    inset 0 2px #cac16c19,
+    inset 0 -3px #0b1109;
+}
+.forge-link strong {
+  font-size: 12px;
+}
+.forge-link small {
+  display: none;
+}
+.expedition-settings {
+  grid-template-columns: 1.2fr 1fr 1fr 1fr 1.1fr;
+  gap: 14px;
+  padding: 16px;
+  background: #20281b;
+  border: 2px solid #5b6345;
+  box-shadow:
+    inset 0 2px #b6bd7730,
+    inset 0 -3px #0d160a;
+  margin-top: 22px;
+}
+.expedition-settings .section-label {
+  font-size: 8px;
+  letter-spacing: 1px;
+  color: #b1b895;
+}
+.expedition-settings strong,
+.contract-preview strong {
+  font-size: 11px;
+  color: #e0d4a1;
+}
+.expedition-settings small {
+  font-size: 8px;
+  line-height: 1.6;
+}
+.realm-preview {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  text-align: left;
+  border-right: 1px solid #525b3c;
+  color: #e2d9b6;
+}
+#realm-info {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+#realm-info .sigil {
+  width: 15px;
+  height: 15px;
+  color: #c3b393;
+}
+#oath-description,
+.loadout-preview > small {
+  display: none;
+}
+.deploy-bar {
+  border: 2px solid #6b704b;
+  background: #222b1b;
+  box-shadow:
+    inset 0 2px #e5dc9d19,
+    inset 0 -3px #10180d;
+  padding: 16px;
+}
+.deploy-copy strong {
+  font-size: 12px;
+}
+.primary {
+  background: #b6a467;
+  color: #161b10;
+  border: 2px solid #d6c78c;
+  box-shadow:
+    inset 0 2px #f8efb3,
+    inset 0 -4px #766b3e,
+    0 3px #081008;
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 1px;
+  font-weight: 900;
+}
+.primary:hover:not(:disabled) {
+  background: #d0bd7b;
+}
+.secondary {
+  background: #2f3825;
+  color: #e3ddc2;
+  border: 2px solid #758060;
+  box-shadow:
+    inset 0 2px #9ca37c29,
+    inset 0 -3px #151d11;
+  padding: 11px 15px;
+  font-size: 11px;
+}
+.secondary:hover:not(:disabled) {
+  background: #3c472e;
+  border-color: #b7b17d;
+}
+.icon-button {
+  border: 2px solid #596344;
+  background: #2b3524;
+  color: #dfd6b0;
+}
+kbd {
+  border: 1px solid #647353;
+  box-shadow: 0 2px #09100a;
+  background: #283722;
+  color: #dddabf;
+  font-size: 9px;
+}
+footer {
+  font-size: 8px;
+  letter-spacing: 1px;
+  color: #949c7e;
+}
+.modal {
+  backdrop-filter: none;
+  background: #050c08cf;
+}
+#modal-panel {
+  border: 4px solid #66714f;
+  outline: 2px solid #b5a96f;
+  outline-offset: -1px;
+  background: repeating-linear-gradient(
+    0deg,
+    #1d271c 0px,
+    #1d271c 4px,
+    #202a1e 4px,
+    #202a1e 8px
+  );
+  box-shadow:
+    inset 0 0 0 3px #111d12,
+    0 8px #070e09,
+    0 0 80px #0009;
+  padding: 28px;
+  max-width: 1060px;
+  animation: none;
+}
+.modal-head {
+  border-bottom: 2px solid #657250;
+  padding-bottom: 18px;
+  margin-bottom: 20px;
+}
+.modal-head h2,
+#modal-title {
+  font-size: 30px;
+  font-weight: 900;
+  text-shadow: 3px 3px #0a140a;
+  letter-spacing: -1px;
+}
+.modal-eyebrow {
+  font-size: 8px;
+  color: #bbc298;
+  letter-spacing: 1px;
+}
+.modal-close {
+  background: #343e29;
+  border: 2px solid #859069;
+  font-size: 26px;
+  width: 38px;
+  height: 38px;
+  color: #e3dbbe;
+}
+.modal-foot {
+  border-top: 2px solid #556342;
+  padding-top: 18px;
+  font-size: 10px;
+}
+#modal-panel p {
+  font-size: 11px;
+  line-height: 1.65;
+  color: #b3bea2;
+}
+.screen-tabs {
+  gap: 7px;
+  border: 0;
+  overflow-x: auto;
+}
+.screen-tabs button {
+  border: 2px solid #4f5e3f;
+  background: #263421;
+  padding: 10px 16px;
+  color: #afb998;
+  font-size: 10px;
+}
+.screen-tabs button.active {
+  border-color: #c1b479;
+  background: #41472c;
+  color: #f3e8b9;
+}
+.screen-tabs button small {
+  font-size: 8px;
+}
+.forge-craft,
+.codex-card,
+.upgrade-card,
+.talent-node,
+.artifact-card,
+.contract-card,
+.bestiary-entry,
+.mastery-entry,
+.treasure-entry,
+.artifact-loadout article {
+  background: #26321f;
+  border: 2px solid #596744;
+  box-shadow:
+    inset 0 2px #b1bd7626,
+    inset 0 -4px #121c0f;
+}
+.forge-craft,
+.codex-card {
+  padding: 17px;
+}
+.forge-craft h3,
+.codex-card h3 {
+  font-size: 13px;
+}
+.forge-craft .craft-icon {
+  background: #344529;
+  border: 2px solid #718052;
+  border-radius: 0;
+  color: #d8c98b;
+  width: 50px;
+  height: 50px;
+}
+.craft-top > small,
+.codex-card-top small {
+  display: none;
+}
+.craft-top > b {
+  font-size: 10px;
+}
+.craft-values strong {
+  color: #e3cd90;
+}
+.rank-segments i,
+.node-dots i {
+  border-radius: 0;
+  background: #111b10;
+  border: 1px solid #586b3f;
+}
+.rank-segments i.filled,
+.node-dots i.filled {
+  background: #b6c685;
+}
+.talent-budget {
+  border: 2px solid #8a976b;
+  background: #334728;
+}
+.talent-budget strong {
+  color: #e1d19b;
+}
+.branch-heading {
+  border-color: #63714b;
+}
+.branch-heading h3 {
+  font-size: 12px;
+}
+.node-head small {
+  font-size: 7px;
+}
+.talent-node {
+  margin-bottom: 18px;
+  padding: 14px;
+}
+.talent-node strong {
+  font-size: 12px;
+}
+.talent-node.available {
+  border: 2px solid #bcca86;
+  background: #34492b;
+}
+.talent-node.invested {
+  background: #35472b;
+  border-color: #96a36f;
+}
+.node-requirement {
+  font-size: 9px;
+}
+.branch-details,
+.power-details,
+.codex-effect {
+  border: 1px solid #4a5e3e;
+  background: #192819;
+  padding: 9px;
+  font-size: 10px;
+}
+.codex-effect {
+  margin: 12px 0;
+}
+.upgrade-card {
+  min-height: 270px;
+  padding: 18px;
+  border: 3px solid #7f8e5d;
+}
+.upgrade-card:hover {
+  background: #34462c;
+  border-color: #dec183;
+  box-shadow:
+    inset 0 2px #e5d39b,
+    inset 0 -4px #192413;
+}
+.upgrade-card .upgrade-symbol {
+  color: #d6cc9b;
+}
+.upgrade-symbol > .sigil {
+  width: 76px;
+  height: 76px;
+  filter: drop-shadow(4px 4px #0a160a);
+}
+.upgrade-card strong {
+  font-size: 15px;
+}
+.upgrade-card small {
+  font-size: 8px;
+}
+.upgrade-card .pick {
+  font-size: 12px;
+}
+.upgrade-card.evolution {
+  background: #43452a;
+  border-color: #d4bc72;
+}
+.artifact-card,
+.contract-card {
+  padding: 19px;
+  border-color: #81825b;
+}
+.artifact-card h3,
+.contract-card h3 {
+  font-size: 14px;
+}
+.artifact-halo {
+  background: transparent;
+}
+.artifact-card:hover {
+  background: #34412a;
+  border-color: #d7c083;
+}
+.contract-card.selected {
+  background: #3d4729;
+  border: 2px solid #cfbe78;
+}
+.artifact-loadout article p {
+  display: none;
+}
+.settings-list {
+  border: 2px solid #687450;
+}
+.setting-toggle {
+  background: #26351f;
+}
+.setting-toggle small {
+  font-size: 9px;
+}
+.sigil {
+  shape-rendering: crispEdges;
+}
+.build-slot-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  font-size: 11px;
+  margin: 16px 0;
+  color: #c4d49e;
+}
+.build-slot-row > span,
+.build-slot-row button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.build-slot-row .sigil {
+  width: 26px;
+  height: 26px;
+}
+.inline-talent {
+  background: #354c2a;
+  border: 2px solid #849e60;
+  padding: 7px 13px;
+  color: #e5d99b;
+}
+.realm-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+.realm-card {
+  border: 3px solid #5b6947;
+  padding: 0 0 18px;
+  background: #23321f;
+  color: #ded8b9;
+  box-shadow: inset 0 -4px #101a0e;
+  overflow: hidden;
+}
+.realm-card.selected {
+  border-color: var(--realm);
+  background: #34432b;
+}
+.realm-landscape {
+  position: relative;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 2px solid #6a7850;
+  background: linear-gradient(#1a2e24, #304932);
+}
+.realm-landscape::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("assets/forest-floor.png");
+  background-size: 400px;
+  opacity: 0.2;
+  pointer-events: none;
+}
+.realm-landscape canvas {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 175px;
+  object-fit: contain;
+}
+.realm-landscape > span {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  color: var(--realm);
+  z-index: 2;
+}
+.realm-landscape > span .sigil {
+  width: 30px;
+  height: 30px;
+}
+.realm-landscape.biome-1 {
+  background: linear-gradient(#2f2025, #553629);
+}
+.realm-landscape.biome-2 {
+  background: linear-gradient(#1c2035, #35324f);
+}
+.realm-card h3 {
+  font-size: 15px;
+  margin: 18px 0 12px;
+}
+.realm-metrics {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  font-size: 10px;
+}
+.realm-metrics span {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.realm-metrics .sigil {
+  width: 18px;
+  height: 18px;
+}
+.memory-pips {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin: 15px 0;
+}
+.memory-pips i {
+  color: #536449;
+}
+.memory-pips .sigil {
+  width: 20px;
+  height: 20px;
+}
+.memory-pips i.lit {
+  color: #d8c193;
+}
+.realm-card > small {
+  font-size: 9px;
+  color: var(--realm);
+}
+.map-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 20px;
+  margin: 18px 0;
+  font-size: 9px;
+}
+.map-legend > span {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  color: var(--find);
+}
+.map-legend .sigil {
+  width: 20px;
+  height: 20px;
+}
+#world-map {
+  width: min(100%, 77vh);
+  height: auto;
+  display: block;
+  margin: auto;
+  border: 3px solid #8a9367;
+  background: #101710;
+  cursor: crosshair;
+}
+#map-destination {
+  text-align: center;
+  font-size: 10px;
+  color: #e8d395;
+  margin-top: 10px;
+}
+.evolution-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+.recipe-card {
+  border: 2px solid #596e45;
+  background: #263720;
+  padding: 15px;
+}
+.recipe-card.ready {
+  border-color: #dfca85;
+  box-shadow: inset 0 0 0 2px #635c2c;
+}
+.recipe-card.evolved {
+  border-color: #b1c38c;
+  background: #3d4b2c;
+}
+.recipe-card h3 {
+  font-size: 12px;
+  margin: 15px 0 8px;
+}
+.recipe-card p {
+  min-height: 34px;
+}
+.recipe-card button {
+  width: 100%;
+  font-size: 10px;
+  padding: 9px;
+}
+.recipe-icons {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 7px;
+}
+.recipe-icons span {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+.recipe-icons .sigil {
+  width: 37px;
+  height: 37px;
+  color: #c8cfa2;
+}
+.recipe-icons b {
+  font-size: 9px;
+  color: #899c73;
+}
+.recipe-icons .met {
+  color: #f4db8d;
+}
+.compact-guide {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 15px;
+}
+.compact-guide > div {
+  border: 2px solid #61774d;
+  padding: 16px;
+  background: #2a3a21;
+}
+.compact-guide .sigil {
+  width: 42px;
+  height: 42px;
+  color: #dbc98b;
+  float: left;
+  margin-right: 15px;
+}
+.compact-guide strong {
+  display: block;
+  margin-bottom: 7px;
+  font-size: 14px;
+}
+.compact-guide p {
+  margin: 0;
+}
+.legacy-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+.legacy-card {
+  display: flex;
+  align-items: center;
+  border: 2px solid #64754b;
+  background: #26361f;
+  padding: 18px;
+  gap: 15px;
+}
+.legacy-card > div {
+  flex: 1;
+  min-width: 0;
+}
+.legacy-card > canvas {
+  width: 100px;
+  height: 140px;
+  object-fit: contain;
+}
+.legacy-card h3 {
+  font-size: 17px;
+  margin: 0 0 13px;
+}
+.legacy-stats {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 12px;
+}
+.legacy-stats > span {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  font-size: 11px;
+  color: #e6d092;
+}
+.legacy-stats .sigil {
+  width: 23px;
+  height: 23px;
+}
+.legacy-realm {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid #4c6137;
+  font-size: 9px;
+}
+.legacy-realm .memory-pips {
+  margin: 9px 0;
+  gap: 4px;
+}
+.legacy-traits {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  font-size: 9px;
+  margin-top: 12px;
+  border-top: 1px solid #718556;
+  padding-top: 12px;
+}
+.legacy-traits > span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #91a077;
+}
+.legacy-traits .sigil {
+  width: 19px;
+  height: 19px;
+}
+.legacy-traits .unlocked {
+  color: #e5d497;
+}
+.hud {
+  background: linear-gradient(#0f1a12ec, #0f1a1250);
+}
+.hud-hero,
+.hud-right {
+  font-size: 11px;
+}
+.hud-center strong {
+  font-family: inherit;
+  text-shadow: 2px 2px #050b06;
+}
+.xp-track {
+  background: #162515;
+  border-color: #617346;
+}
+.xp-track > i {
+  background: #bacb86;
+}
+.health-track {
+  border-radius: 0;
+  background: #182719;
+  border: 1px solid #68834f;
+}
+.health-track > i {
+  border-radius: 0;
+}
+.health-track #health-fill {
+  background: #9eae6e;
+}
+#boss-bar > div {
+  border-radius: 0;
+  border: 1px solid #b18c5a;
+}
+.ability-button {
+  border: 2px solid #89935f;
+  background: #25391e;
+  box-shadow:
+    inset 0 2px #acb68744,
+    inset 0 -4px #0f210f;
+}
+.ability-button.ready {
+  border-color: #c3ce91;
+}
+.ability-button b {
+  font-size: 11px;
+}
+.ability-button .sigil {
+  color: #d4dda6;
+}
+#build-hud .build-icon {
+  border: 1px solid #607649;
+  border-radius: 0;
+  background: #20301bed;
+  color: #d6d9ad;
+}
+#game-talents,
+#inspect-build,
+#evolve-button,
+#world-map-button {
+  border: 2px solid #738454;
+  background: #23351be8;
+  color: #d3dca7;
+  box-shadow: inset 0 -3px #0c1c0e;
+  padding: 8px 11px;
+  font:
+    10px "Courier New",
+    monospace;
+}
+#minimap {
+  width: 154px;
+  height: 154px;
+  right: 25px;
+  top: 110px;
+  border: 3px solid #7f8c5b;
+  border-radius: 0;
+  box-shadow: 0 3px #071209;
+  background: #152314;
+}
+#world-map-button {
+  position: absolute;
+  right: 25px;
+  top: 272px;
+  width: 154px;
+  z-index: 5;
+}
+#evolve-button {
+  position: absolute;
+  right: 25px;
+  top: 316px;
+  width: 154px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 7px;
+  z-index: 5;
+}
+#evolve-button .sigil {
+  width: 19px;
+  height: 19px;
+}
+#evolve-button.has-points {
+  border-color: #f4d88c;
+  color: #f8d78f;
+}
+#doom-clock {
+  position: absolute;
+  right: 30px;
+  top: 363px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font: 11px monospace;
+  color: #bcc598;
+}
+#doom-clock .sigil {
+  width: 22px;
+  height: 22px;
+}
+#doom-clock.hunting {
+  color: #ff8195;
+}
+#waypoint-hud {
+  position: absolute;
+  right: 30px;
+  top: 395px;
+  font: 10px monospace;
+  color: #f3d992;
+}
+#inspect-build {
+  top: 430px;
+  right: 25px;
+  width: 154px;
+}
+.memory-banked {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #dac4ee;
+  padding: 12px;
+  border: 2px solid #7d719a;
+  background: #34304b;
+  font-size: 12px;
+  margin: 10px 0;
+}
+.memory-banked .sigil {
+  width: 30px;
+  height: 30px;
+}
+#objective-hud {
+  top: 110px;
+  left: 25px;
+  max-width: 190px;
+}
+.contract-tracker,
+.vault-tracker {
+  border: 1px solid #536c45;
+  background: #152a18c9;
+  border-radius: 0;
+}
+.contract-tracker small,
+.vault-tracker small {
+  font-size: 8px;
+}
+.vault-tracker strong {
+  font-size: 10px;
+}
+.interact-prompt {
+  border: 2px solid #a696cf;
+  background: #322d47;
+  border-radius: 0;
+}
+#announcement {
+  font-family: inherit;
+  font-size: 16px;
+  text-shadow: 2px 2px #0a1209;
+}
+.result-stats strong {
+  font-family: inherit;
+}
+@media (max-width: 1000px) {
+  .expedition-settings {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .realm-preview {
+    border-right: 0;
+  }
+}
+@media (max-width: 680px) {
+  #lobby {
+    padding: 0 16px;
+  }
+  .topbar {
+    height: 62px;
+  }
+  .brand {
+    font-size: 16px;
+    letter-spacing: 2px;
+  }
+  .top-actions {
+    gap: 8px;
+  }
+  .wallet {
+    font-size: 12px;
+  }
+  .shard-wallet {
+    padding-left: 5px;
+  }
+  .intro {
+    padding: 17px 0;
+  }
+  .intro h1 {
+    font-size: 24px;
+    max-width: 240px;
+  }
+  .record strong {
+    font-size: 24px;
+  }
+  .record span {
+    font-size: 7px;
+  }
+  .hub-nav {
+    gap: 5px;
+    min-height: 41px;
+  }
+  .hub-nav button {
+    padding: 8px 7px;
+    gap: 4px;
+  }
+  .hub-nav button span {
+    font-size: 8px;
+  }
+  .hub-nav i {
+    display: none;
+  }
+  .hero-card strong {
+    font-size: 14px;
+  }
+  .selection {
+    gap: 18px;
+  }
+  .hero-stage {
+    min-height: 320px;
+  }
+  .hero-details h2 {
+    font-size: 34px;
+  }
+  .expedition-settings {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+    padding: 14px;
+  }
+  .realm-preview {
+    grid-column: span 2;
+    border-bottom: 1px solid #586c46;
+    padding-bottom: 12px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .realm-preview strong {
+    grid-column: 1;
+  }
+  #realm-info {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    justify-content: end;
+  }
+  #modal-panel {
+    padding: 18px;
+    max-height: 92dvh;
+  }
+  .modal-head h2,
+  #modal-title {
+    font-size: 23px;
+  }
+  .realm-grid,
+  .evolution-grid {
+    grid-template-columns: 1fr;
+  }
+  .realm-card {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    padding: 0 10px 0 0;
+    align-items: center;
+  }
+  .realm-landscape {
+    grid-column: 1;
+    grid-row: 1 / span 5;
+    height: 155px;
+    border-bottom: 0;
+    border-right: 2px solid #6d7850;
+  }
+  .realm-landscape canvas {
+    height: 140px;
+  }
+  .realm-landscape > span {
+    display: none;
+  }
+  .realm-card h3 {
+    font-size: 12px;
+    margin: 12px 0 6px;
+  }
+  .realm-metrics {
+    gap: 9px;
+    font-size: 9px;
+  }
+  .memory-pips {
+    margin: 9px 0;
+  }
+  .realm-card > small {
+    margin-bottom: 10px;
+  }
+  .recipe-card {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 13px;
+  }
+  .recipe-icons {
+    grid-row: 1 / span 3;
+  }
+  .recipe-card h3 {
+    margin: 3px 0 7px;
+    font-size: 11px;
+  }
+  .recipe-card p {
+    min-height: 0;
+    margin: 0 0 10px;
+    font-size: 10px !important;
+  }
+  .map-legend {
+    gap: 9px 12px;
+    font-size: 8px;
+  }
+  .map-legend .sigil {
+    width: 17px;
+    height: 17px;
+  }
+  .compact-guide {
+    grid-template-columns: 1fr;
+  }
+  .legacy-grid {
+    grid-template-columns: 1fr;
+  }
+  .legacy-card {
+    gap: 10px;
+    padding: 12px;
+  }
+  .legacy-card > canvas {
+    width: 65px;
+  }
+  .upgrade-card {
+    min-height: 0;
+  }
+  .upgrade-symbol > .sigil {
+    width: 42px;
+    height: 42px;
+  }
+  #minimap {
+    top: 103px;
+    right: 12px;
+    width: 103px;
+    height: 103px;
+  }
+  #world-map-button {
+    top: 212px;
+    right: 12px;
+    width: 103px;
+    font-size: 8px;
+    padding: 6px;
+  }
+  #evolve-button {
+    top: 247px;
+    right: 12px;
+    width: 103px;
+    padding: 5px;
+  }
+  #doom-clock {
+    top: 284px;
+    right: 16px;
+    font-size: 10px;
+  }
+  #waypoint-hud {
+    top: 313px;
+    right: 16px;
+  }
+  #inspect-build {
+    top: 340px;
+    right: 12px;
+    width: 103px;
+    font-size: 8px;
+    padding: 6px;
+  }
+  #objective-hud {
+    left: 10px;
+    max-width: 130px;
+    top: 108px;
+  }
+  .contract-tracker,
+  .vault-tracker {
+    padding: 7px;
+    gap: 6px;
+  }
+  .contract-tracker > span .sigil {
+    width: 22px;
+    height: 22px;
+  }
+  .contract-tracker small {
+    font-size: 6px;
+  }
+  #game-talents {
+    font-size: 8px;
+  }
+  .hud-center strong {
+    font-size: 27px;
+  }
+  #announcement {
+    font-size: 12px;
+    max-width: 240px;
+  }
+  #build-hud .build-icon {
+    width: 29px;
+    height: 29px;
+  }
+  #build-hud .sigil {
+    width: 20px;
+    height: 20px;
+  }
+  .forge-craft {
+    padding: 12px;
+  }
+  .forge-craft h3 {
+    font-size: 11px;
+  }
+  .screen-tabs button {
+    padding: 9px;
+    font-size: 9px;
+  }
+  .modal-foot {
+    font-size: 9px;
+    gap: 10px;
+  }
+}

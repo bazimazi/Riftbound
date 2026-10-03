@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <meta name="theme-color" content="#171d22" />
+    <meta
+      name="description"
+      content="Twelve unique outcasts. Bond with beasts, bind demons, wield dawnlight, and survive the Reaper hunt."
+    />
+    <title>Riftbound — One more night.</title>
+    <link rel="icon" href="icon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="reawakening.css" />
+    <link rel="stylesheet" href="ascension.css" />
+    <link rel="stylesheet" href="reliquary.css" />
+    <link rel="stylesheet" href="nocturne.css" />
+    <link rel="stylesheet" href="wayfarer.css" />
+    <link rel="stylesheet" href="journey.css" />
+  </head>
+  <body>
+    <main id="lobby">
+      <header class="topbar">
+        <a class="brand" href="./" aria-label="Riftbound home"
+          ><span class="brand-mark">✦</span> RIFTBOUND
+          <small>THE REAPER HUNT</small></a
+        >
+        <div class="top-actions">
+          <span class="wallet"
+            ><i>✧</i> <b id="ash-count">0</b> <span>embers</span></span
+          ><button class="icon-button sound-toggle" aria-label="Enable sound">
+            ♪</button
+          ><button class="text-button" id="help-button">
+            Field guide <span>↗</span>
+          </button>
+          <button
+            class="icon-button"
+            id="settings-button"
+            aria-label="Presentation settings"
+          >
+            ⚙</button
+          ><span class="shard-wallet">◈ <b id="shard-count">0</b></span>
+        </div>
+      </header>
+      <section class="intro">
+        <div>
+          <div class="eyebrow">
+            <span class="live-dot"></span> AN ENDLESS SURVIVAL ROGUELITE
+          </div>
+          <h1>Choose your <em>outcast.</em></h1>
+        </div>
+        <div class="record">
+          <span>YOUR LONGEST NIGHT</span><strong id="record-time">00:00</strong
+          ><small id="record-runs">Your story starts here</small>
+        </div>
+      </section>
+      <nav class="hub-nav" aria-label="Sanctuary">
+        <button class="active" id="outcasts-nav">
+          01 <span>Outcasts</span></button
+        ><button id="forge-nav">02 <span>Ember forge</span></button
+        ><button id="codex-button">
+          03 <span>The codex</span><i id="codex-count">1 / 20</i></button
+        ><button id="talents-button">04 <span>Progress</span></button
+        ><span class="edition-tag">COMMUNION / v8.0</span>
+      </nav>
+      <section class="selection">
+        <div class="roster">
+          <div class="section-label">
+            <span>01 / CHOOSE YOUR OUTCAST</span
+            ><span id="roster-count">4 / 6 UNLOCKED</span>
+          </div>
+          <div id="hero-list"></div>
+          <nav class="roster-pages" aria-label="Outcast pages">
+            <button id="roster-prev" aria-label="Previous outcasts">‹</button
+            ><span id="roster-page">1 / 2</span
+            ><button id="roster-next" aria-label="Next outcasts">›</button>
+          </nav>
+          <button id="forge-button" class="forge-link">
+            <span class="forge-icon">♜</span
+            ><span
+              ><strong>The ember forge</strong
+              ><small>Permanent power. Earned the hard way.</small></span
+            ><span>↗</span>
+          </button>
+        </div>
+        <div class="hero-stage">
+          <canvas
+            id="portrait"
+            aria-label="Selected character illustration"
+          ></canvas>
+          <div class="stage-top">
+            <span id="hero-class">THE PYROMANCER</span><span>✦</span>
+          </div>
+          <div class="stage-bottom">
+            <span id="stage-realm">HOLLOW WILDS</span><span>NIGHT I</span>
+          </div>
+          <div class="portrait-caption">
+            <span id="hero-quote">“Let the dark burn.”</span>
+          </div>
+        </div>
+        <article class="hero-details">
+          <div class="detail-heading">
+            <span class="eyebrow" id="hero-number">OUTCAST / 01</span
+            ><span class="difficulty" id="hero-difficulty">BALANCED</span>
+          </div>
+          <h2 id="hero-name">Cinder</h2>
+          <p class="hero-desc" id="hero-desc"></p>
+          <div id="hero-kit"></div>
+          <div id="hero-unlock" hidden></div>
+          <div class="talent-preview">
+            <span class="section-label">YOUR TALENT PATH</span>
+            <div id="talent-names"></div>
+            <small>3 paths · 63 ranks</small>
+          </div>
+        </article>
+      </section>
+      <section class="expedition-settings">
+        <button class="realm-preview" id="realm-button">
+          <span class="section-label">REALM</span
+          ><strong id="realm-name">Hollow Wilds</strong
+          ><small id="realm-info"></small>
+        </button>
+        <button class="contract-preview" id="contract-button">
+          <span class="section-label">EXPEDITION CONTRACT</span
+          ><strong id="contract-name"></strong
+          ><small id="contract-target"></small>
+        </button>
+        <div class="mastery-summary">
+          <span class="section-label" id="mastery-label"
+            >MASTERY I / WAYWARD</span
+          >
+          <div class="mastery-track"><i id="mastery-fill"></i></div>
+          <small id="mastery-progress">0 / 100 XP</small>
+        </div>
+        <button class="loadout-preview" id="loadout-button">
+          <span class="section-label">INSCRIPTIONS</span
+          ><strong id="loadout-text">Pilgrim’s compass</strong
+          ><small>Bind ↗</small>
+        </button>
+        <div class="oath-setting">
+          <div>
+            <span class="section-label">RIFT OATH</span
+            ><strong id="oath-value">Unbroken</strong
+            ><small id="oath-description"
+              >Defeat a Warden to unlock deeper oaths.</small
+            >
+          </div>
+          <button id="oath-down" aria-label="Lower rift oath">−</button
+          ><button id="oath-up" aria-label="Raise rift oath">+</button>
+        </div>
+      </section>
+      <section class="deploy-bar">
+        <div class="danger-icon">!</div>
+        <div class="deploy-copy">
+          <strong>Death is coming.</strong><span>Build. Explore. Survive.</span>
+        </div>
+        <div class="controls-teaser">
+          <kbd>W A S D</kbd><span>move</span><kbd>SPACE</kbd><span>dash</span
+          ><kbd>Q</kbd><span>skill</span>
+        </div>
+        <button class="primary" id="start-button">
+          Enter the rift <span>↗</span>
+        </button>
+      </section>
+      <footer>
+        <span>DEATH IS A BEGINNING. COMPLACENCY IS THE END.</span
+        ><span
+          >LOCAL SAVE <span class="live-dot"></span>
+          <span id="save-status">ACTIVE</span></span
+        >
+      </footer>
+    </main>
+    <section id="game" hidden aria-label="Survival arena">
+      <canvas
+        id="arena"
+        tabindex="0"
+        aria-label="Game arena. Move with WASD or arrow keys. Space to dash, Q for your skill, Escape to pause."
+      ></canvas>
+      <div class="hud">
+        <div class="hud-hero">
+          <span id="hud-symbol">✦</span>
+          <div>
+            <strong id="hud-name">CINDER</strong>
+            <div class="health-track">
+              <i id="health-fill"></i><i id="shield-fill"></i>
+            </div>
+            <small id="hp-text"></small>
+          </div>
+        </div>
+        <div class="hud-center">
+          <span id="wave-text">NIGHT 01</span><strong id="timer">00:00</strong
+          ><small id="threat-text">The hollow wakes</small>
+        </div>
+        <div class="hud-right">
+          <span id="kill-count">0 slain</span><span id="run-embers">✧ 0</span
+          ><button
+            class="icon-button"
+            id="pause-button"
+            aria-label="Pause game"
+          >
+            Ⅱ
+          </button>
+        </div>
+      </div>
+      <div class="xp-track">
+        <i id="xp-fill"></i><span id="level-text">LEVEL 1</span>
+      </div>
+      <div id="announcement" role="status"></div>
+      <div id="boss-bar" hidden>
+        <span id="boss-name"></span>
+        <div><i id="boss-fill"></i></div>
+      </div>
+      <div id="build-hud"></div>
+      <button id="inspect-build" aria-label="Inspect expedition build">
+        <kbd>B</kbd> BUILD
+      </button>
+      <canvas
+        id="minimap"
+        width="280"
+        height="280"
+        aria-label="Minimap. Shows world boundaries, treasures, nearby enemies and your waypoint."
+      ></canvas>
+      <button id="world-map-button" aria-label="Open world map">
+        <kbd>M</kbd> MAP
+      </button>
+      <button id="evolve-button" aria-label="Open permanent progression">
+        <kbd>V</kbd> 0
+      </button>
+      <div id="doom-clock" title="Time until the Reaper hunt"></div>
+      <div id="waypoint-hud" hidden></div>
+      <div id="objective-hud"></div>
+      <button id="game-talents" class="talent-hud" hidden>
+        <kbd>T</kbd> TALENTS <b id="talent-point-count">0</b>
+      </button>
+      <button id="interact-button" class="interact-prompt" hidden>
+        <kbd>E</kbd> Commune with the altar
+      </button>
+      <div id="biome-label">THE HOLLOW WILDS</div>
+      <div class="bottom-hud">
+        <div class="skill-button-wrap">
+          <button id="dash-button" class="ability-button">
+            <kbd>SPACE</kbd><b>Dash</b
+            ><span id="dash-cooldown">READY</span></button
+          ><button id="skill-button" class="ability-button">
+            <kbd>Q</kbd><b id="skill-name">Wildfire</b
+            ><span id="skill-cooldown">READY</span>
+          </button>
+        </div>
+        <div id="form-abilities" hidden>
+          <div class="form-ability">
+            <button id="form-0-button" class="ability-button">
+              <kbd>R</kbd><b>Ascend</b></button
+            ><small id="form-0-cooldown">READY</small>
+          </div>
+          <div class="form-ability" hidden>
+            <button id="form-1-button" class="ability-button">
+              <kbd>F</kbd><b>Ultimate</b></button
+            ><small id="form-1-cooldown">READY</small>
+          </div>
+        </div>
+        <div id="spell-abilities" hidden aria-label="Equipped spells">
+          <div class="form-ability">
+            <button id="spell-0-button" class="ability-button">
+              <kbd>1</kbd><i></i></button
+            ><small id="spell-0-cooldown">EMPTY</small>
+          </div>
+          <div class="form-ability">
+            <button id="spell-1-button" class="ability-button">
+              <kbd>2</kbd><i></i></button
+            ><small id="spell-1-cooldown">EMPTY</small>
+          </div>
+          <div class="form-ability">
+            <button id="spell-2-button" class="ability-button">
+              <kbd>3</kbd><i></i></button
+            ><small id="spell-2-cooldown">EMPTY</small>
+          </div>
+        </div>
+        <div id="trait-meter">
+          <span id="trait-text"></span>
+          <div><i id="trait-fill"></i></div>
+        </div>
+        <div class="arena-hint">
+          Weapons fire automatically<br /><span
+            >Draft upgrades · Bank to train</span
+          >
+          <div id="journey-hud"></div>
+        </div>
+      </div>
+      <div id="joystick"><i></i></div>
+    </section>
+    <div id="modal" class="modal" hidden>
+      <div
+        id="modal-panel"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="modal-title"
+        tabindex="-1"
+      ></div>
+    </div>
+    <script type="module" src="src/app.js"></script>
+  </body>
+</html>

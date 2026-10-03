@@ -1,0 +1,23 @@
+{
+  "name": "riftbound",
+  "version": "9.0.0",
+  "private": true,
+  "type": "module",
+  "description": "A survival roguelite with twelve asymmetric classes, companions and deep progression",
+  "scripts": {
+    "start": "node server.mjs",
+    "dev": "node server.mjs",
+    "test": "node --test tests/core.test.mjs tests/progression.test.mjs tests/ascension.test.mjs tests/reliquary.test.mjs tests/realms.test.mjs tests/champions.test.mjs tests/combat-motion.test.mjs tests/journey.test.mjs tests/archetypes.test.mjs tests/talent-combat.test.mjs tests/skill-recovery.test.mjs tests/spells.test.mjs",
+    "test:browser": "node tests/browser.mjs && node tests/reliquary-browser.mjs && node tests/realms-browser.mjs && node tests/panels-browser.mjs && node tests/combat-browser.mjs && node tests/journey-browser.mjs && node tests/archetypes-browser.mjs && node tests/forms-browser.mjs && node tests/abilities-browser.mjs && node tests/spells-browser.mjs",
+    "test:spells": "node tests/spells-browser.mjs",
+    "test:forms": "node tests/forms-browser.mjs",
+    "test:abilities": "node tests/abilities-browser.mjs",
+    "balance": "node tests/balance.mjs",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "devDependencies": {
+    "playwright": "^1.55.0",
+    "prettier": "^3.9.9"
+  }
+}

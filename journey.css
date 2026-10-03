@@ -1,0 +1,1519 @@
+/* Carved frames and icon trees keep permanent progression in one bounded view. */
+#modal-panel[data-screen="journey"] {
+  width: min(960px, calc(100vw - 24px));
+  height: min(760px, calc(100dvh - 24px));
+  --class-color: #e8bb78;
+}
+[data-screen="journey"] .panel-body {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  overflow: hidden;
+}
+[data-screen="journey"] .primary {
+  min-width: 0;
+}
+[data-screen="journey"] .modal-head h2 {
+  font-size: 25px;
+}
+[data-screen="journey"] .modal-head h2 small {
+  color: var(--class-color);
+  font-size: 15px;
+  margin-left: 12px;
+}
+.journey-summary {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 7px 12px;
+  background: #101714;
+  border: 1px solid #62563c;
+  box-shadow: inset 0 0 0 3px #1f2821;
+  flex-shrink: 0;
+}
+.journey-summary > span {
+  display: grid;
+  grid-template-columns: 20px auto;
+  align-items: center;
+  gap: 2px 6px;
+  font-size: 14px;
+}
+.journey-summary > span > small {
+  grid-column: 1 / -1;
+  font-size: 8px;
+  text-align: center;
+  color: #b5b8a2;
+}
+.journey-summary svg,
+.journey-cost svg {
+  width: 20px;
+  height: 20px;
+  color: #ddc291;
+}
+.journey-summary .talent-wallet {
+  margin-left: auto;
+  color: #f7dd8c;
+}
+.journey-tabs {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 7px;
+  flex-shrink: 0;
+}
+.journey-tabs button {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #6e6248;
+  background: linear-gradient(#33392c, #1b231c);
+  color: #c9c8ae;
+}
+.journey-tabs svg {
+  width: 21px;
+  height: 21px;
+}
+.journey-tabs button[aria-pressed="true"] {
+  color: #ffe9b6;
+  border-color: #d4ba7d;
+  box-shadow: inset 0 -3px #a18450;
+  background: linear-gradient(#5a5136, #2a3023);
+}
+.talent-pages {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
+}
+.talent-pages button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  flex: 1;
+  padding: 5px;
+  font-size: 11px;
+  background: #18221b;
+  border: 1px solid #67573e;
+  color: #c8cbb1;
+}
+.talent-pages button[aria-pressed="true"] {
+  border-color: #d5ba7b;
+  background: #393f2b;
+  color: #ffe3a1;
+}
+.talent-pages svg {
+  width: 16px;
+  height: 16px;
+}
+.spell-tree .class-node-field {
+  grid-template-rows: repeat(4, minmax(0, 1fr));
+}
+.spell-slots {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  flex-shrink: 0;
+}
+.spell-slot {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  min-width: 0;
+  padding: 9px;
+  background: #18231b;
+  border: 2px solid #6c5d40;
+  color: #c7c9b2;
+  text-align: left;
+}
+.spell-slot kbd {
+  flex-shrink: 0;
+  font-size: 10px;
+}
+.spell-slot i {
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  color: var(--class-color);
+}
+.spell-slot span {
+  font-size: 11px;
+  line-height: 1.2;
+}
+.spell-slot.locked {
+  color: #909a87;
+  border-color: #3f4738;
+}
+.spell-slot.selected {
+  border-color: #e3c680;
+}
+.spell-workshop {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  flex: 1;
+  min-height: 0;
+}
+.spell-library {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-rows: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  min-height: 0;
+}
+.spell-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-width: 0;
+  min-height: 0;
+  padding: 8px;
+  border: 2px solid #4c523c;
+  background: radial-gradient(ellipse, #354532, #141f18);
+  color: #d5d7bd;
+}
+.spell-card i {
+  width: 38px;
+  height: 38px;
+  color: var(--class-color);
+}
+.spell-card span {
+  font-size: 12px;
+  text-align: center;
+}
+.spell-card small {
+  font-size: 10px;
+  color: #c6b680;
+}
+.spell-card.locked i {
+  opacity: 0.55;
+}
+.spell-card.selected {
+  border-color: #e4c981;
+  box-shadow: inset 0 0 0 2px #6b623a;
+}
+.spell-inspector {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  padding: 18px;
+  min-width: 0;
+  min-height: 0;
+  border: 2px solid #736247;
+  background: radial-gradient(ellipse at 50% 20%, #46503a66, #111a15 70%);
+  text-align: center;
+}
+.spell-crest {
+  display: block;
+  width: 65px;
+  height: 65px;
+  padding: 9px;
+  color: var(--class-color);
+  border: 2px solid #bd9f67;
+  background: #293425;
+  box-shadow: inset 0 0 0 3px #142018;
+  flex-shrink: 0;
+}
+.spell-slot svg,
+.spell-card svg,
+.spell-crest svg {
+  width: 100%;
+  height: 100%;
+}
+.spell-inspector h3 {
+  font-size: 18px;
+  color: #f4dfad;
+  margin: 0;
+}
+.spell-inspector p {
+  font-size: 13px;
+  line-height: 1.4;
+  margin: 0;
+  color: #c5cbb7;
+}
+.spell-inspector > small {
+  font-size: 11px;
+  line-height: 1.35;
+  color: #b8be9f;
+}
+.spell-stats,
+.slot-milestones {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 18px;
+  font-size: 13px;
+  color: #e5d092;
+}
+.spell-stats span,
+.slot-milestones span {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.spell-stats svg,
+.slot-milestones svg {
+  width: 18px;
+  height: 18px;
+}
+.spell-equip {
+  display: flex;
+  gap: 5px;
+  width: 100%;
+}
+.spell-equip button {
+  flex: 1;
+  padding: 8px 4px;
+  font-size: 11px;
+  min-width: 0;
+  background: #283526;
+  color: #d1d9bd;
+  border: 1px solid #706649;
+}
+.spell-equip button[aria-pressed="true"] {
+  border-color: #d3bd80;
+  color: #ffe9af;
+}
+.spell-inspector > button {
+  padding: 8px 12px;
+  font-size: 12px;
+}
+.spell-inspector > .spell-tree-link {
+  padding: 2px;
+  border: 0;
+  background: none;
+  color: #dcc48b;
+  font-size: 10px;
+  text-decoration: underline;
+}
+#spell-abilities {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+#spell-abilities[hidden] {
+  display: none;
+}
+#spell-abilities .ability-button {
+  border-color: #857245;
+}
+#spell-abilities .ability-button i {
+  width: 26px;
+  height: 26px;
+  color: var(--hero);
+}
+#spell-abilities .ability-button i svg {
+  width: 100%;
+  height: 100%;
+}
+#spell-abilities .ability-button.advanced-spell {
+  box-shadow: inset 0 0 0 2px #a18b4640;
+}
+.bottom-hud:has(#spell-abilities:not([hidden])) {
+  justify-content: flex-start;
+  gap: 8px;
+}
+.bottom-hud:has(#spell-abilities:not([hidden])) #trait-meter {
+  left: auto;
+  right: 0;
+  bottom: 85px;
+  transform: none;
+}
+.bottom-hud:has(#spell-abilities:not([hidden])) .arena-hint {
+  margin-left: auto;
+}
+@media (max-width: 680px) {
+  .journey-tabs button {
+    gap: 3px;
+    font-size: 10px;
+    padding: 5px 3px;
+  }
+  .journey-tabs svg {
+    width: 12px;
+    height: 12px;
+    flex-shrink: 0;
+  }
+  .talent-pages {
+    gap: 4px;
+  }
+  .spell-slots {
+    gap: 4px;
+  }
+  .spell-slot {
+    padding: 6px;
+    gap: 4px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .spell-slot i {
+    width: 21px;
+    height: 21px;
+  }
+  .spell-slot span {
+    flex-basis: 100%;
+    text-align: center;
+    font-size: 9px;
+  }
+  .spell-workshop {
+    grid-template-columns: 1fr;
+    grid-template-rows: minmax(95px, 1fr) auto;
+    gap: 7px;
+  }
+  .spell-library {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-rows: repeat(2, minmax(0, 1fr));
+    gap: 4px;
+  }
+  .spell-card {
+    position: relative;
+    gap: 2px;
+    padding: 2px;
+  }
+  .spell-card i {
+    flex-shrink: 0;
+  }
+  .spell-card i {
+    width: 25px;
+    height: 25px;
+  }
+  .spell-card span {
+    font-size: 10px;
+    line-height: 1.15;
+  }
+  .spell-card small {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    font-size: 8px;
+    background: #142018dc;
+    padding: 1px;
+  }
+  .spell-inspector {
+    gap: 6px;
+    padding: 10px;
+  }
+  .spell-crest {
+    display: none;
+  }
+  .spell-inspector h3 {
+    font-size: 15px;
+  }
+  .spell-inspector p {
+    font-size: 11px;
+  }
+  .spell-inspector > small {
+    font-size: 10px;
+  }
+  .spell-equip button {
+    min-height: 36px;
+  }
+  #spell-abilities {
+    position: absolute;
+    bottom: 100px;
+    right: 0;
+    gap: 4px;
+  }
+  .bottom-hud:has(#spell-abilities:not([hidden])) #form-abilities {
+    bottom: 175px;
+  }
+  .bottom-hud:has(#spell-abilities:not([hidden])) #trait-meter {
+    right: 0;
+    bottom: 175px;
+  }
+  .bottom-hud:has(#spell-abilities:not([hidden])):has(
+      #form-abilities:not([hidden])
+    )
+    #trait-meter {
+    bottom: 248px;
+  }
+}
+@media (max-height: 650px) {
+  .talent-pages button {
+    padding: 3px;
+    font-size: 10px;
+  }
+  .talent-pages svg {
+    width: 13px;
+    height: 13px;
+  }
+  .spell-inspector {
+    gap: 5px;
+    padding: 7px;
+  }
+  .spell-crest {
+    width: 35px;
+    height: 35px;
+    padding: 4px;
+  }
+  .spell-inspector h3 {
+    font-size: 13px;
+  }
+  .spell-inspector p {
+    font-size: 11px;
+  }
+  .spell-inspector > small {
+    font-size: 10px;
+  }
+  .spell-inspector > button {
+    padding: 5px 8px;
+    font-size: 10px;
+  }
+  .spell-slot {
+    padding: 5px;
+  }
+  .spell-slot i {
+    width: 22px;
+    height: 22px;
+  }
+  .spell-card i {
+    width: 24px;
+    height: 24px;
+  }
+  .spell-card {
+    gap: 3px;
+  }
+  .spell-card span {
+    font-size: 10px;
+  }
+}
+.journey-content {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.skill-workshop {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 16px;
+  min-height: 0;
+  height: 100%;
+}
+.skill-library {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  min-height: 0;
+}
+.skill-library button {
+  padding: 10px 8px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  background: #16201b;
+  border: 1px solid #514e3c;
+  color: #cdd2bd;
+  min-width: 0;
+  min-height: 0;
+}
+.skill-library i {
+  display: block;
+  width: 37px;
+  height: 37px;
+  color: var(--class-color);
+}
+.skill-library i svg {
+  width: 100%;
+  height: 100%;
+}
+.skill-library span {
+  font-size: 12px;
+  line-height: 1.25;
+}
+.skill-library small {
+  display: block;
+  font-size: 10px;
+  margin-top: 3px;
+  color: #a9aa92;
+}
+.skill-library .selected {
+  border-color: var(--class-color);
+  background: #35372a;
+  box-shadow: inset 0 0 0 2px #5e5940;
+}
+.skill-training {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  border: 2px solid #736247;
+  padding: 18px;
+  background: radial-gradient(ellipse at 50% 20%, #46503a66, #111a15 70%);
+  box-shadow: inset 0 0 0 4px #1f2b22;
+  min-width: 0;
+}
+.skill-crest {
+  width: 76px;
+  height: 76px;
+  padding: 12px;
+  border: 2px solid #9f8960;
+  box-shadow:
+    0 0 0 4px #111a15,
+    0 0 0 5px #66573e;
+  color: var(--class-color);
+  background: #313626;
+}
+.skill-crest svg {
+  width: 100%;
+  height: 100%;
+}
+.skill-crest.stage-1 {
+  box-shadow:
+    0 0 0 4px #111a15,
+    0 0 0 5px #ccb778,
+    0 0 30px #d8bd582e;
+}
+.skill-crest.stage-2 {
+  border-color: #ecd68a;
+  box-shadow:
+    0 0 0 4px #111a15,
+    0 0 0 5px #ecd68a,
+    0 0 35px #d8bd584d;
+}
+.skill-training h3 {
+  font-size: 20px;
+  text-align: center;
+  margin: 0;
+  color: #f3dfb4;
+}
+.skill-training p {
+  font-size: 13px;
+  line-height: 1.5;
+  text-align: center;
+  margin: 0;
+  max-width: 330px;
+  color: #bec4b0;
+}
+.skill-ladder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  width: 100%;
+}
+.skill-ladder span {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #626c63;
+  gap: 5px;
+}
+.skill-ladder svg {
+  width: 26px;
+  height: 26px;
+}
+.skill-ladder .reached {
+  color: #dfc181;
+}
+.skill-ladder small {
+  font-size: 9px;
+  white-space: nowrap;
+}
+.skill-ladder > b {
+  color: #736549;
+  font-size: 20px;
+}
+.skill-training-stats {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  width: 100%;
+  font-size: 13px;
+}
+.skill-training-stats span {
+  color: #d1c58b;
+}
+.journey-track {
+  height: 7px;
+  background: #0b120f;
+  border: 1px solid #4e543b;
+  width: 100%;
+}
+.journey-track i {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, #7d9658, #e2ce8e);
+  max-width: 100%;
+}
+.training-actions {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+  justify-content: center;
+}
+.training-actions button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 12px;
+  flex: 1;
+  font-size: 13px;
+}
+.journey-cost {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 7px;
+  font-size: 12px;
+}
+.journey-cost > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 12px;
+}
+.journey-cost svg {
+  width: 16px;
+  height: 16px;
+}
+.journey-hint {
+  text-align: center;
+  font-size: 11px;
+  line-height: 1.35;
+  color: #bcbd9c;
+}
+.talent-path-tabs {
+  display: none;
+}
+.class-tree-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  flex: 1;
+  min-height: 190px;
+}
+.class-path {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  min-width: 0;
+  border: 2px solid #706044;
+  background: radial-gradient(ellipse at 50% 85%, #47583966, #101914 75%);
+  box-shadow: inset 0 0 0 3px #202b22;
+}
+.class-path:nth-child(2) {
+  background: radial-gradient(ellipse at 50% 85%, #56466466, #17171c 75%);
+}
+.class-path:nth-child(3) {
+  background: radial-gradient(ellipse at 50% 85%, #624a3266, #201b16 75%);
+}
+.class-path header {
+  display: flex;
+  align-items: center;
+  padding: 8px 10px;
+  gap: 7px;
+  background: #0d1514aa;
+  border-bottom: 1px solid #685b40;
+  font-size: 13px;
+}
+.class-path header svg {
+  width: 21px;
+  height: 21px;
+  color: var(--class-color);
+}
+.class-path header b {
+  margin-left: auto;
+  color: #d6c191;
+}
+.class-node-field {
+  display: grid;
+  position: relative;
+  grid-template: repeat(5, minmax(0, 1fr)) / repeat(3, 1fr);
+  flex: 1;
+  min-height: 0;
+  padding: 8px 5px;
+}
+.class-node-field > svg {
+  position: absolute;
+  inset: 8px 5px;
+  width: calc(100% - 10px);
+  height: calc(100% - 16px);
+  pointer-events: none;
+}
+.class-node-field > svg path {
+  stroke: #555b48;
+  stroke-width: 2;
+  fill: none;
+  vector-effect: non-scaling-stroke;
+}
+.class-node-field > svg .lit {
+  stroke: #d0b773;
+  filter: drop-shadow(0 0 2px #d0b77366);
+}
+.class-talent {
+  display: grid;
+  place-items: center;
+  line-height: 1;
+  align-self: center;
+  justify-self: center;
+  width: 43px;
+  height: 43px;
+  max-height: 100%;
+  position: relative;
+  padding: 6px;
+  z-index: 1;
+  color: #79867b;
+  border: 2px solid #5b5e4e;
+  box-shadow:
+    0 0 0 2px #101814,
+    inset 0 0 0 2px #1c2720;
+  background: linear-gradient(135deg, #313d32, #111b15);
+}
+.class-talent > svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+@media (min-width: 681px) and (max-height: 600px) {
+  [data-screen="journey"] .modal-head {
+    padding-bottom: 5px;
+    margin-bottom: 3px;
+  }
+  [data-screen="journey"] .modal-eyebrow {
+    display: none;
+  }
+  [data-screen="journey"] .modal-foot {
+    padding-top: 5px;
+  }
+}
+.class-talent > b {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background: #101712;
+  border: 1px solid #5f654d;
+  font-size: 10px;
+  padding: 1px 3px;
+  color: #c7c8b2;
+}
+.class-talent.available {
+  color: var(--class-color);
+  border-color: #bfb079;
+}
+.class-talent.invested {
+  color: #ecd89c;
+  background: linear-gradient(135deg, #695b36, #223625);
+  border-color: #c1a969;
+}
+.class-talent.selected {
+  outline: 2px solid #f8eab3;
+  outline-offset: 4px;
+}
+.talent-inspector {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid #756348;
+  background: #1d281f;
+  padding: 10px;
+  flex-shrink: 0;
+  min-width: 0;
+}
+.talent-inspector > i {
+  width: 37px;
+  height: 37px;
+  flex-shrink: 0;
+  color: var(--class-color);
+}
+.talent-inspector > i svg {
+  width: 100%;
+  height: 100%;
+}
+.talent-inspector > div {
+  min-width: 0;
+  flex: 1;
+}
+.talent-inspector h3 {
+  margin: 0 0 4px;
+  font-size: 15px;
+  color: #eee0b9;
+}
+.talent-inspector h3 small {
+  color: #beb28b;
+}
+.talent-inspector p {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.3;
+  color: #c4c8b7;
+}
+#modal-panel .talent-inspector .talent-effect {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  line-height: 1.3;
+  text-align: left;
+}
+.talent-inspector .talent-effect > small {
+  flex: 0 0 auto;
+  color: #d7c493;
+}
+.talent-effect > span {
+  min-width: 0;
+}
+#modal-panel .talent-inspector .talent-effect.next {
+  margin-top: 3px;
+  color: #aecd9b;
+}
+.talent-inspector small,
+.talent-earning {
+  color: #b3b69e;
+  font-size: 10px;
+}
+.talent-inspector button {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 8px 13px;
+  font-size: 12px;
+}
+.talent-inspector > .talent-actions {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-width: 95px;
+}
+.talent-actions button {
+  font-size: 10px;
+  padding: 6px 8px;
+}
+.run-resonance {
+  font-size: 10px;
+  padding: 5px 8px;
+  flex-shrink: 0;
+}
+.class-talent.ultimate {
+  border-color: #c3a457;
+}
+.class-talent.armed {
+  box-shadow:
+    0 0 0 2px #ebd992,
+    inset 0 0 12px #c79a3455;
+}
+.ability-button.ultimate-ready {
+  border-color: #f4db88;
+  box-shadow:
+    0 0 0 2px #b98d39,
+    inset 0 0 18px #dfb74055;
+}
+.skill-training:has(.run-resonance) {
+  gap: 10px;
+}
+#modal-panel .skill-training:has(.run-resonance) p {
+  line-height: 1.35;
+}
+.run-resonance:disabled {
+  opacity: 1;
+  color: #bcbda8;
+  border-color: #514e3c;
+  background: #172018;
+}
+@media (max-width: 680px) and (min-height: 651px) {
+  .skill-training:has(.run-resonance) {
+    gap: 4px;
+    padding: 8px;
+  }
+  .skill-training:has(.run-resonance) .skill-crest {
+    width: 44px;
+    height: 44px;
+    padding: 6px;
+  }
+}
+@media (max-height: 650px) {
+  .skill-training:has(.run-resonance) {
+    gap: 2px;
+    padding: 6px;
+  }
+  .skill-training:has(.run-resonance) .skill-crest {
+    width: 28px;
+    height: 28px;
+    padding: 4px;
+  }
+}
+.talent-earning {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.talent-earning button {
+  padding: 4px 7px;
+  font-size: 9px;
+  flex-shrink: 0;
+}
+.class-form-road {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  flex: 1;
+  min-height: 135px;
+}
+.class-form {
+  border: 2px solid #5d5b47;
+  background: radial-gradient(ellipse at 50% 30%, #48523b66, #151e18 70%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  min-width: 0;
+  opacity: 0.65;
+}
+.class-form.current {
+  border-color: #d6b979;
+  opacity: 1;
+}
+.class-form h3 {
+  font-size: 15px;
+  text-align: center;
+  margin: 5px 0;
+  color: #ecd8a7;
+}
+.class-form small {
+  font-size: 10px;
+  color: #bec3ad;
+}
+.class-form small svg {
+  width: 11px;
+  height: 11px;
+  vertical-align: middle;
+}
+.class-form:focus-visible {
+  outline: 2px solid #e6cd87;
+  outline-offset: 2px;
+}
+.ability-button.form-surge {
+  border-color: #edcc78;
+  box-shadow: inset 0 0 12px #e9c37644;
+}
+.class-form > b {
+  font-size: 9px;
+  margin-top: 5px;
+  color: #d6c091;
+}
+.form-portrait {
+  position: relative;
+  width: 110px;
+  height: 114px;
+  display: grid;
+  place-items: center;
+}
+.form-portrait canvas {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  z-index: 1;
+}
+.form-portrait > i {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  color: var(--class-color);
+  opacity: 0.55;
+}
+.form-portrait > i svg {
+  width: 100%;
+  height: 100%;
+}
+.form-1:before,
+.form-2:before {
+  content: "";
+  position: absolute;
+  width: 85px;
+  height: 85px;
+  border: 2px solid var(--class-color);
+  transform: rotate(45deg);
+  background: #ebcf5d0d;
+}
+.form-2:before {
+  width: 100px;
+  height: 100px;
+  border: 4px double #e9d58c;
+  box-shadow: 0 0 24px #dfc77355;
+}
+.form-unlocks {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  flex-shrink: 0;
+}
+.form-unlocks > span {
+  display: grid;
+  grid-template-columns: 23px 18px 1fr;
+  gap: 4px;
+  font-size: 12px;
+  padding: 7px;
+  border: 1px solid #665b41;
+  background: #18211c;
+  align-items: center;
+}
+.form-unlocks svg {
+  width: 22px;
+  height: 22px;
+  color: var(--class-color);
+}
+.form-unlocks small {
+  grid-column: 3;
+  font-size: 9px;
+  color: #acae96;
+}
+.class-goals {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px 15px;
+  flex-shrink: 0;
+}
+.class-goal {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 5px;
+  font-size: 12px;
+  color: #c4c6ac;
+}
+.class-goal b {
+  font-size: 11px;
+  color: #d8c69c;
+}
+.class-goal.complete {
+  color: #abc48b;
+}
+.form-action {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-shrink: 0;
+}
+.form-action > small {
+  color: #c6c5a9;
+  font-size: 11px;
+}
+.form-action button {
+  display: flex;
+  gap: 9px;
+  align-items: center;
+  padding: 10px 15px;
+  font-size: 13px;
+}
+.final-form-note {
+  text-align: center;
+  padding: 14px;
+  color: #e4cc97;
+}
+.journey-footer {
+  font-size: 11px;
+  color: #b8baa2;
+}
+#form-abilities {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.bottom-hud:has(#form-abilities:not([hidden])) {
+  justify-content: flex-start;
+  gap: 8px;
+}
+#hud-name {
+  font-size: 12px;
+  letter-spacing: 0.5px;
+}
+.form-ability {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  pointer-events: auto;
+}
+.form-ability .ability-button {
+  width: 56px;
+  min-width: 56px;
+  height: 56px;
+  padding: 8px;
+  display: grid;
+  place-items: center;
+}
+.form-ability .ability-button b {
+  display: none;
+}
+.form-ability .ability-button > .sigil {
+  margin: 0;
+  width: 25px;
+  height: 25px;
+}
+.skill-button-wrap #skill-name {
+  max-width: 100%;
+  line-height: 1.1;
+}
+.form-ability small {
+  color: #e1d1a6;
+  font: 9px monospace;
+  margin-top: 5px;
+}
+#form-abilities[hidden],
+.form-ability[hidden] {
+  display: none;
+}
+#journey-hud {
+  color: #d6c295;
+  font-size: 10px;
+  text-align: center;
+}
+.catalyst-tracker {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+.catalyst-tracker button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 8px;
+  color: var(--find);
+  border: 1px solid #6d6247;
+  background: #18231c;
+  font-size: 10px;
+}
+.catalyst-tracker svg {
+  width: 19px;
+  height: 19px;
+}
+@media (max-width: 680px) {
+  #modal-panel[data-screen="journey"] {
+    padding: 14px;
+  }
+  .journey-summary {
+    gap: 13px;
+    padding: 6px 9px;
+  }
+  .journey-summary > span {
+    font-size: 12px;
+    gap: 3px;
+  }
+  .journey-summary svg {
+    width: 17px;
+    height: 17px;
+  }
+  .skill-workshop {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+  }
+  .skill-library {
+    grid-template: repeat(2, 56px) / repeat(4, 1fr);
+    flex-shrink: 0;
+    gap: 5px;
+  }
+  .skill-library button {
+    padding: 4px;
+    gap: 2px;
+  }
+  .skill-library i {
+    width: 25px;
+    height: 25px;
+  }
+  .skill-library span {
+    font-size: 0;
+  }
+  .skill-library small {
+    font-size: 9px;
+    margin: 0;
+  }
+  .skill-training {
+    flex: 1;
+    min-height: 0;
+    padding: 13px;
+    gap: 9px;
+  }
+  .skill-crest {
+    width: 56px;
+    height: 56px;
+    padding: 8px;
+  }
+  .skill-training h3 {
+    font-size: 18px;
+  }
+  .talent-path-tabs {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4px;
+    flex-shrink: 0;
+  }
+  .talent-path-tabs button {
+    background: #223023;
+    padding: 5px 3px;
+    font-size: 10px;
+    color: #c7c6ac;
+    border: 1px solid #615a43;
+  }
+  .talent-path-tabs button[aria-pressed="true"] {
+    border-color: #d3bb7c;
+    color: #f4e0b0;
+  }
+  .talent-path-tabs b {
+    margin-left: 4px;
+    color: #d8c289;
+  }
+  .class-tree-grid {
+    grid-template-columns: 1fr;
+  }
+  .class-path:not(.mobile-selected) {
+    display: none;
+  }
+  .class-path header {
+    display: none;
+  }
+  .talent-inspector {
+    padding: 8px;
+    gap: 7px;
+  }
+  .talent-inspector > i {
+    display: none;
+  }
+  .talent-inspector h3 {
+    font-size: 13px;
+  }
+  .talent-inspector p {
+    font-size: 11px;
+  }
+  .talent-inspector button {
+    padding: 8px;
+  }
+  .class-form-road {
+    gap: 5px;
+  }
+  .class-form {
+    padding: 5px;
+  }
+  .form-portrait {
+    width: 70px;
+    height: 80px;
+  }
+  .form-1:before {
+    width: 50px;
+    height: 50px;
+  }
+  .form-2:before {
+    width: 62px;
+    height: 62px;
+  }
+  .class-form h3 {
+    font-size: 12px;
+  }
+  .form-unlocks > span {
+    font-size: 10px;
+    grid-template-columns: 18px 16px 1fr;
+    padding: 5px;
+  }
+  .form-unlocks svg {
+    width: 17px;
+    height: 17px;
+  }
+  .class-goal {
+    font-size: 10px;
+  }
+  .class-goal b {
+    font-size: 10px;
+  }
+  .form-action {
+    flex-direction: column;
+    gap: 7px;
+  }
+  .form-action button {
+    width: 100%;
+    justify-content: center;
+    padding: 9px;
+  }
+  .journey-footer {
+    font-size: 9px;
+    max-width: 135px;
+  }
+  #form-abilities {
+    gap: 4px;
+    position: absolute;
+    right: 0;
+    bottom: 100px;
+  }
+  .bottom-hud:has(#form-abilities:not([hidden])) #trait-meter {
+    bottom: 174px;
+  }
+  #hud-name {
+    font-size: 9px;
+  }
+  .form-ability .ability-button {
+    width: 48px;
+    min-width: 48px;
+    height: 48px;
+    padding: 5px;
+  }
+  #journey-hud {
+    display: none;
+  }
+}
+@media (max-height: 650px) {
+  [data-screen="journey"] .panel-body {
+    gap: 6px;
+  }
+  [data-screen="journey"] .modal-head {
+    margin-bottom: 7px;
+  }
+  [data-screen="journey"] .modal-head h2 {
+    font-size: 21px;
+  }
+  .journey-summary {
+    padding: 4px 9px;
+  }
+  .journey-tabs button {
+    padding: 5px;
+  }
+  .journey-content {
+    gap: 6px;
+  }
+  .skill-training {
+    gap: 4px;
+    padding: 8px;
+  }
+  .skill-crest {
+    width: 36px;
+    height: 36px;
+    padding: 5px;
+  }
+  .skill-training h3 {
+    font-size: 16px;
+  }
+  .skill-training p {
+    font-size: 11px;
+  }
+  .skill-library button {
+    gap: 2px;
+    padding: 3px;
+  }
+  .skill-library i {
+    width: 25px;
+    height: 25px;
+  }
+  .skill-library span {
+    font-size: 0;
+  }
+  .skill-library small {
+    font-size: 9px;
+    margin-top: 1px;
+    line-height: 1.1;
+  }
+  .skill-ladder svg {
+    width: 20px;
+    height: 20px;
+  }
+  .skill-ladder small {
+    font-size: 8px;
+  }
+  .training-actions button {
+    padding: 6px;
+    font-size: 11px;
+  }
+  .journey-hint {
+    font-size: 9px;
+  }
+  .class-tree-grid {
+    min-height: 140px;
+  }
+  .class-path header {
+    padding: 5px 7px;
+    font-size: 11px;
+  }
+  .class-talent {
+    width: 29px;
+    height: 29px;
+    padding: 3px;
+  }
+  .class-talent > b {
+    font-size: 8px;
+  }
+  .talent-inspector {
+    padding: 6px;
+  }
+  .talent-inspector p {
+    font-size: 10px;
+  }
+  .talent-inspector h3 {
+    font-size: 12px;
+  }
+  .talent-inspector button {
+    padding: 6px 9px;
+  }
+  .talent-earning {
+    font-size: 9px;
+  }
+  .class-form-road {
+    min-height: 110px;
+  }
+  .form-portrait {
+    width: 58px;
+    height: 60px;
+  }
+  .form-1:before {
+    width: 40px;
+    height: 40px;
+  }
+  .form-2:before {
+    width: 45px;
+    height: 45px;
+  }
+  .class-form h3 {
+    font-size: 12px;
+    margin: 3px 0;
+  }
+  .class-form small,
+  .class-form > b {
+    font-size: 8px;
+  }
+  .class-form > b {
+    margin-top: 2px;
+  }
+  .form-unlocks > span {
+    padding: 4px;
+    font-size: 10px;
+  }
+  .class-goals {
+    gap: 5px 10px;
+  }
+  .class-goal {
+    font-size: 10px;
+  }
+  .class-goal b {
+    font-size: 10px;
+  }
+  .form-action button {
+    padding: 6px 10px;
+    font-size: 11px;
+  }
+}
+@media (max-height: 650px) and (max-width: 680px) {
+  .skill-library {
+    grid-template-rows: repeat(2, 46px);
+  }
+  .skill-crest {
+    display: none;
+  }
+  .panel-body:has(.catalyst-tracker) #world-map {
+    width: min(100%, calc(100dvh - 380px));
+  }
+}
