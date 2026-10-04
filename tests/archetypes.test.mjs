@@ -7,19 +7,23 @@ import {
   freshSave,
   sanitizeSave,
   bankRun,
-} from "../src/core.js";
-import { heroUnlocked, heroGoals } from "../src/champions.js";
+} from "../src/game/index.ts";
+import { heroUnlocked, heroGoals } from "../src/game/combat/champions.ts";
 import {
   ARCHETYPE_IDS,
   companionTarget,
   hurtCompanion,
   summonCompanion,
   archetypeUpdate,
-} from "../src/archetypes.js";
-import { CLASS_TREES } from "../src/class-talents.js";
-import { CODEX } from "../src/progression.js";
-import { recipesFor, evolve } from "../src/evolutions.js";
-import { profile, heroThreshold, releaseFormSkill } from "../src/journey.js";
+} from "../src/game/combat/archetypes.ts";
+import { CLASS_TREES } from "../src/game/progression/class-talents.ts";
+import { CODEX } from "../src/game/progression/progression.ts";
+import { recipesFor, evolve } from "../src/game/progression/evolutions.ts";
+import {
+  profile,
+  heroThreshold,
+  releaseFormSkill,
+} from "../src/game/progression/journey.ts";
 import { veteranSave } from "./helpers.mjs";
 function arena(id) {
   const g = new Game(id, veteranSave(), () => 0.99);

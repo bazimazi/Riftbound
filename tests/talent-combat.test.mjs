@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { Game, HEROES, freshSave, sanitizeSave } from "../src/core.js";
-import { profile, heroThreshold } from "../src/journey.js";
+import { Game, HEROES, freshSave, sanitizeSave } from "../src/game/index.ts";
+import { profile, heroThreshold } from "../src/game/progression/journey.ts";
 import {
   CLASS_TREES,
   CLASS_NODES,
@@ -9,16 +9,16 @@ import {
   equipUltimate,
   respecTalents,
   selectedUltimate,
-} from "../src/class-talents.js";
-import { ULTIMATES } from "../src/specializations.js";
+} from "../src/game/progression/class-talents.ts";
+import { ULTIMATES } from "../src/game/data/specializations.ts";
 import {
   talentHit,
   talentDash,
   talentHurt,
   talentSkill,
   updateTalentCombat,
-} from "../src/talent-combat.js";
-import { archetypeUpdate } from "../src/archetypes.js";
+} from "../src/game/combat/talent-combat.ts";
+import { archetypeUpdate } from "../src/game/combat/archetypes.ts";
 import { veteranSave } from "./helpers.mjs";
 
 function arena(hero, talents = {}) {

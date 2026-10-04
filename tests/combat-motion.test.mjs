@@ -1,7 +1,11 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { Game, HEROES } from "../src/core.js";
-import { MOTION, actionFrame, projectileHeight } from "../src/combat-motion.js";
+import { Game, HEROES } from "../src/game/index.ts";
+import {
+  MOTION,
+  actionFrame,
+  projectileHeight,
+} from "../src/game/combat/combat-motion.ts";
 import { veteranSave } from "./helpers.mjs";
 function arena(id) {
   const g = new Game(id, veteranSave(), () => 0.99);

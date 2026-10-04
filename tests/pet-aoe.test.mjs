@@ -1,8 +1,11 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { Game } from "../src/core.js";
-import { archetypeUpdate, summonCompanion } from "../src/archetypes.js";
-import { releaseSpell } from "../src/spell-combat.js";
+import { Game } from "../src/game/index.ts";
+import {
+  archetypeUpdate,
+  summonCompanion,
+} from "../src/game/combat/archetypes.ts";
+import { releaseSpell } from "../src/game/combat/spell-combat.ts";
 import { veteranSave } from "./helpers.mjs";
 
 function arena(hero) {

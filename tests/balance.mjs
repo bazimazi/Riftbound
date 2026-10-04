@@ -1,7 +1,10 @@
 // Repeatable balance probes, not a substitute for human playtesting.
-import { Game, HEROES, freshSave } from "../src/core.js";
+import { Game, HEROES, freshSave } from "../src/game/index.ts";
 import { veteranSave } from "./helpers.mjs";
-import { TALENT_TREES, talentLock } from "../src/progression.js";
+import {
+  TALENT_TREES,
+  talentLock,
+} from "../src/game/progression/progression.ts";
 const rng = (seed) => () => {
   seed = (seed * 1664525 + 1013904223) >>> 0;
   return seed / 4294967296;

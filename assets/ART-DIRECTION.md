@@ -1,6 +1,6 @@
 # Riftbound pixel-art assets
 
-Generated with the built-in `image_gen` tool for this project, then copied into this directory. No external asset service or runtime image URL is used. Originals remain in the Codex generated-images directory. Ascension renders these original assets at full screen resolution with smooth downsampling. Sprite source regions are in `src/pixel-art.js`; scalable UI emblems are authored in `src/icons.js`.
+Generated with the built-in `image_gen` tool for this project, then copied into this directory. No external asset service or runtime image URL is used. Originals remain in the Codex generated-images directory. Ascension renders these original assets at full screen resolution with smooth downsampling. Sprite source regions are in `src/client/rendering/pixel-art.ts`; scalable UI emblems are authored in `src/client/ui/icons.ts`.
 
 | Asset                 | Use                                                                    | Transparency |
 | --------------------- | ---------------------------------------------------------------------- | ------------ |

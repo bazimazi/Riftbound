@@ -8,15 +8,15 @@ import {
   sanitizeSave,
   UPGRADES,
   pressure,
-} from "../src/core.js";
+} from "../src/game/index.ts";
 import {
   RESEARCH,
   buyResearch,
   researchCost,
   researchRank,
   RELICS,
-} from "../src/ascension.js";
-import { talentLock } from "../src/progression.js";
+} from "../src/game/progression/ascension.ts";
+import { talentLock } from "../src/game/progression/progression.ts";
 const make = (hero = "cinder") => new Game(hero, veteranSave(), () => 0.99);
 function target(g) {
   g.enemies = [];

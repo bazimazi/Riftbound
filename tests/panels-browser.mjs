@@ -4,7 +4,7 @@ import { fileURLToPath } from "node:url";
 import assert from "node:assert/strict";
 import { mkdir } from "node:fs/promises";
 const root = fileURLToPath(new URL("../", import.meta.url));
-const server = spawn(process.execPath, ["server.mjs"], {
+const server = spawn(process.execPath, ["--import", "tsx", "tests/server.ts"], {
   cwd: root,
   env: { ...process.env, PORT: "4190" },
   stdio: "pipe",
@@ -278,7 +278,7 @@ try {
     await page.getByRole("button", { name: "Damage", exact: true }).click();
     await audit("build damage");
     await page.evaluate(async () => {
-      const { ARTIFACTS } = await import("/src/reliquary.js");
+      const { ARTIFACTS } = await import("/src/game/world/reliquary.ts");
       __rift.game.artifactChoices = ARTIFACTS.slice(0, 3);
       __rift.game.state = "artifact";
       __rift.expeditionUI.showArtifacts();
@@ -353,7 +353,7 @@ try {
     await page.evaluate(() => __rift.returnLobby());
     await page.reload();
     await page.evaluate(
-      async () => (await import("/src/pixel-art.js")).artReady,
+      async () => (await import("/src/client/rendering/pixel-art.ts")).artReady,
     );
     for (const id of ["rook", "lumen"]) {
       await page.locator(`[data-hero="${id}"]`).click();

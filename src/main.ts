@@ -1,0 +1,8 @@
+import "./client/styles/style.css";
+import "./client/styles/reawakening.css";
+import "./client/styles/ascension.css";
+import "./client/styles/reliquary.css";
+import "./client/styles/nocturne.css";
+import "./client/styles/wayfarer.css";
+import "./client/styles/journey.css";
+import "./client/app.ts";

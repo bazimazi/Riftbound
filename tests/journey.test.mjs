@@ -9,7 +9,7 @@ import {
   pressure,
   UPGRADES,
   EVOLUTIONS,
-} from "../src/core.js";
+} from "../src/game/index.ts";
 import { veteranSave } from "./helpers.mjs";
 import {
   SKILLS,
@@ -30,14 +30,14 @@ import {
   skillName,
   SKILL_FORMS,
   FORMS,
-} from "../src/journey.js";
+} from "../src/game/progression/journey.ts";
 import {
   CLASS_SKILL_DESCRIPTIONS,
   RELIC_SKILL_DESCRIPTIONS,
   skillDescription,
-} from "../src/skill-descriptions.js";
-import { RECIPES, PASSIVES } from "../src/evolutions.js";
-import { upgradeSummary } from "../src/power-preview.js";
+} from "../src/game/data/skill-descriptions.ts";
+import { RECIPES, PASSIVES } from "../src/game/progression/evolutions.ts";
+import { upgradeSummary } from "../src/client/ui/power-preview.ts";
 import {
   CLASS_TREES,
   CLASS_NODES,
@@ -47,21 +47,24 @@ import {
   respecTalents,
   respecCost,
   classTalentPreview,
-} from "../src/class-talents.js";
-import { TALENT_EFFECTS, talentPreview } from "../src/talent-effects.js";
+} from "../src/game/progression/class-talents.ts";
+import {
+  TALENT_EFFECTS,
+  talentPreview,
+} from "../src/game/data/talent-effects.ts";
 import {
   summonCompanion,
   placeTotem,
   archetypeForm,
   archetypeUpdate,
-} from "../src/archetypes.js";
+} from "../src/game/combat/archetypes.ts";
 import {
   CLASS_FORMS,
   formDescription,
   refreshClassForm,
   updateClassForm,
   empowerForm,
-} from "../src/class-forms.js";
+} from "../src/game/combat/class-forms.ts";
 const rich = (hero = "cinder", level = 200) => {
   const save = veteranSave(),
     p = profile(save, hero);

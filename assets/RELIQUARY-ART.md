@@ -2,7 +2,7 @@
 
 `reliquary-atlas.png` was generated with the built-in imagegen tool for Riftbound v4. It contains nine transparent illustrated artifacts. The original was preserved in the Codex generated-images directory; the game serves only this locally bundled copy.
 
-The source rectangles in `src/pixel-art.js` deliberately exclude adjacent-cell fragments. Small gameplay sprites are cached as smoothly downsampled canvases at runtime; original PNG files are unchanged. Inventory paintings retain their original resolution for larger previews.
+The source rectangles in `src/client/rendering/pixel-art.ts` deliberately exclude adjacent-cell fragments. Small gameplay sprites are cached as smoothly downsampled canvases at runtime; original PNG files are unchanged. Inventory paintings retain their original resolution for larger previews.
 
 ## Generation prompt
 

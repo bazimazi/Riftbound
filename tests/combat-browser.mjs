@@ -5,7 +5,7 @@ import { fileURLToPath } from "node:url";
 import assert from "node:assert/strict";
 import { veteranSave } from "./helpers.mjs";
 const root = fileURLToPath(new URL("../", import.meta.url));
-const server = spawn(process.execPath, ["server.mjs"], {
+const server = spawn(process.execPath, ["--import", "tsx", "tests/server.ts"], {
   cwd: root,
   env: { ...process.env, PORT: "4191" },
   stdio: "pipe",
@@ -42,7 +42,7 @@ try {
   );
   const assets = await page.evaluate(async () => {
     const { art, artReady, actionSprite, drawActionSprite, drawSprite } =
-      await import("/src/pixel-art.js");
+      await import("/src/client/rendering/pixel-art.ts");
     await artReady;
     const heroes = ["cinder", "briar", "nyx", "volta", "rook", "lumen"],
       audit = [],
@@ -278,7 +278,7 @@ try {
   await shot("combat-mobile");
   assert.deepEqual(errors, []);
   const sound = await page.evaluate(async () => {
-    const { AudioEngine } = await import("/src/audio.js"),
+    const { AudioEngine } = await import("/src/client/audio/AudioEngine.ts"),
       engine = new AudioEngine(true);
     engine.unlock();
     await engine.ctx.resume();
@@ -309,8 +309,8 @@ try {
       haste: 20,
     };
     const { CLASS_TREES, buyClassTalent } =
-      await import("/src/class-talents.js");
-    const { heroThreshold } = await import("/src/journey.js");
+      await import("/src/game/progression/class-talents.ts");
+    const { heroThreshold } = await import("/src/game/progression/journey.ts");
     g.journey.xp = heroThreshold(500);
     for (const branch of CLASS_TREES.cinder)
       for (const n of branch.nodes)

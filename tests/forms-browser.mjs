@@ -5,7 +5,7 @@ import { mkdir, writeFile } from "node:fs/promises";
 import assert from "node:assert/strict";
 import { veteranSave } from "./helpers.mjs";
 const root = fileURLToPath(new URL("../", import.meta.url));
-const server = spawn(process.execPath, ["server.mjs"], {
+const server = spawn(process.execPath, ["--import", "tsx", "tests/server.ts"], {
   cwd: root,
   env: { ...process.env, PORT: "4195" },
   stdio: "pipe",
@@ -22,10 +22,10 @@ try {
   page.on("pageerror", (e) => errors.push(e.message));
   await page.goto("http://localhost:4195/?test=1");
   const visual = await page.evaluate(async () => {
-    const { HEROES } = await import("/src/core.js"),
-      { FORMS } = await import("/src/journey.js"),
+    const { HEROES } = await import("/src/game/index.ts"),
+      { FORMS } = await import("/src/game/progression/journey.ts"),
       { artReady, drawSprite, drawActionSprite } =
-        await import("/src/pixel-art.js");
+        await import("/src/client/rendering/pixel-art.ts");
     await artReady;
     const gallery = document.createElement("canvas");
     gallery.width = 1440;
@@ -110,8 +110,9 @@ try {
     Buffer.from(visual.gallery.split(",")[1], "base64"),
   );
   await page.evaluate(async (save) => {
-    const { HEROES } = await import("/src/core.js"),
-      { profile, heroThreshold } = await import("/src/journey.js");
+    const { HEROES } = await import("/src/game/index.ts"),
+      { profile, heroThreshold } =
+        await import("/src/game/progression/journey.ts");
     Object.assign(__rift.save, save);
     for (const h of HEROES) {
       const p = profile(__rift.save, h.id);
@@ -123,7 +124,7 @@ try {
     }
   }, veteranSave());
   const heroes = await page.evaluate(async () =>
-    (await import("/src/core.js")).HEROES.map((h) => h.id),
+    (await import("/src/game/index.ts")).HEROES.map((h) => h.id),
   );
   let layouts = 0;
   for (const viewport of [

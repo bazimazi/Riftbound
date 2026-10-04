@@ -4,7 +4,7 @@ import { fileURLToPath } from "node:url";
 import { mkdir, writeFile } from "node:fs/promises";
 import assert from "node:assert/strict";
 const root = fileURLToPath(new URL("../", import.meta.url));
-const server = spawn(process.execPath, ["server.mjs"], {
+const server = spawn(process.execPath, ["--import", "tsx", "tests/server.ts"], {
   cwd: root,
   env: { ...process.env, PORT: "4192" },
   stdio: "pipe",
@@ -138,7 +138,8 @@ try {
     await page.locator('[data-journey-skill="signature"]').click();
     await page.keyboard.press("Escape");
     await page.evaluate(async () => {
-      const { SHRINE_BOONS } = await import("/src/progression.js");
+      const { SHRINE_BOONS } =
+        await import("/src/game/progression/progression.ts");
       const g = __rift.game;
       g.state = "playing";
       g.p.invuln = 1e5;
@@ -184,7 +185,8 @@ try {
     );
     await page.evaluate(() => __rift.returnLobby());
     await page.evaluate(async () => {
-      const { profile, heroThreshold } = await import("/src/journey.js");
+      const { profile, heroThreshold } =
+        await import("/src/game/progression/journey.ts");
       const p = profile(__rift.save, "cinder");
       p.xp = heroThreshold(100);
       p.sparks = 1000;
@@ -312,7 +314,8 @@ try {
     );
     await page.locator("[data-upgrade]").first().click();
     await page.evaluate(async () => {
-      const { spawnCatalyst } = await import("/src/journey.js");
+      const { spawnCatalyst } =
+        await import("/src/game/progression/journey.ts");
       const item = spawnCatalyst(__rift.game, "sigil");
       for (const kind of ["core", "rune", "core"])
         spawnCatalyst(__rift.game, kind);
@@ -329,7 +332,8 @@ try {
     await audit("rare-map");
     await page.keyboard.press("Escape");
     await page.evaluate(async () => {
-      const { heroThreshold } = await import("/src/journey.js");
+      const { heroThreshold } =
+        await import("/src/game/progression/journey.ts");
       const p = __rift.game.journey;
       p.xp = heroThreshold(200);
       p.skills.signature = { level: 40, stage: 2 };
@@ -412,10 +416,11 @@ try {
     // Check long rank-aware descriptions in every class without touching the user's save.
     const treeCases = await page.evaluate(async () => {
       __rift.returnLobby();
-      const { HEROES } = await import("/src/core.js");
-      const { profile, heroThreshold } = await import("/src/journey.js");
+      const { HEROES } = await import("/src/game/index.ts");
+      const { profile, heroThreshold } =
+        await import("/src/game/progression/journey.ts");
       const { CLASS_NODES, classTalentPreview } =
-        await import("/src/class-talents.js");
+        await import("/src/game/progression/class-talents.ts");
       return HEROES.map((h) => {
         const p = profile(__rift.save, h.id),
           nodes = Object.values(CLASS_NODES).filter((n) => n.hero === h.id);
@@ -471,10 +476,11 @@ try {
     }
     // Own all final nodes legitimately, equip exactly one, and keep the inspector bounded.
     const ultimateCases = await page.evaluate(async () => {
-      const { HEROES } = await import("/src/core.js");
-      const { profile, heroThreshold } = await import("/src/journey.js");
+      const { HEROES } = await import("/src/game/index.ts");
+      const { profile, heroThreshold } =
+        await import("/src/game/progression/journey.ts");
       const { CLASS_TREES, buyClassTalent } =
-        await import("/src/class-talents.js");
+        await import("/src/game/progression/class-talents.ts");
       Object.assign(__rift.save, {
         kills: 2000,
         bosses: 20,
@@ -549,7 +555,8 @@ try {
     ]) {
       await page.evaluate(
         async ({ hero, ultimate }) => {
-          const { equipUltimate } = await import("/src/class-talents.js");
+          const { equipUltimate } =
+            await import("/src/game/progression/class-talents.ts");
           __rift.selectHero(hero);
           equipUltimate(__rift.save, hero, ultimate);
           __rift.start();
@@ -662,9 +669,11 @@ try {
     await audit("talent-mastered");
     // Exercise all 288 class/skill/stage combinations through the actual UI.
     const skillCases = await page.evaluate(async () => {
-      const { HEROES, UPGRADES } = await import("/src/core.js");
-      const { SKILLS, skillName } = await import("/src/journey.js");
-      const { skillDescription } = await import("/src/skill-descriptions.js");
+      const { HEROES, UPGRADES } = await import("/src/game/index.ts");
+      const { SKILLS, skillName } =
+        await import("/src/game/progression/journey.ts");
+      const { skillDescription } =
+        await import("/src/game/data/skill-descriptions.ts");
       return HEROES.flatMap((h) =>
         [0, 1, 2].map((stage) => ({
           hero: h.id,
@@ -690,7 +699,7 @@ try {
       await page.evaluate(
         async ({ hero, stage }) => {
           const { profile, heroThreshold, SKILLS } =
-            await import("/src/journey.js");
+            await import("/src/game/progression/journey.ts");
           const p = profile(__rift.save, hero);
           p.xp = heroThreshold(200);
           p.skills = Object.fromEntries(
@@ -717,7 +726,7 @@ try {
             await page.evaluate(
               async ({ hero, id, stage }) => {
                 const { skillDescription } =
-                  await import("/src/skill-descriptions.js");
+                  await import("/src/game/data/skill-descriptions.ts");
                 return skillDescription(hero, id, stage + 1);
               },
               { hero, id: s.id, stage },

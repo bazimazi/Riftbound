@@ -12,7 +12,7 @@ import {
   forgeBonus,
   buyForge,
   bankRun,
-} from "../src/core.js";
+} from "../src/game/index.ts";
 import {
   TALENT_TREES,
   TALENT_NODES,
@@ -23,7 +23,7 @@ import {
   equippedPages,
   forgeLock,
   activeSynergies,
-} from "../src/progression.js";
+} from "../src/game/progression/progression.ts";
 const rng = (seed) => () => {
   seed = (seed * 1664525 + 1013904223) >>> 0;
   return seed / 4294967296;

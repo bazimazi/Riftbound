@@ -1,6 +1,6 @@
 # Wayfarer characters
 
-`wayfarer-champions.png` supplies Rook and Lumen's transparent full-body art for the roster, portraits and menus. Generated with the built-in imagegen tool and copied locally; the original remains in the Codex generated-images folder. The atlas uses two equal cells, registered in `src/pixel-art.js`. Version 6.1 adds separate six-frame walk, attack and casting sequences, documented in [COMBAT-ART.md](COMBAT-ART.md).
+`wayfarer-champions.png` supplies Rook and Lumen's transparent full-body art for the roster, portraits and menus. Generated with the built-in imagegen tool and copied locally; the original remains in the Codex generated-images folder. The atlas uses two equal cells, registered in `src/client/rendering/pixel-art.ts`. Version 6.1 adds separate six-frame walk, attack and casting sequences, documented in [COMBAT-ART.md](COMBAT-ART.md).
 
 ## Final prompt
 

@@ -5,7 +5,7 @@ import { mkdir, writeFile } from "node:fs/promises";
 import assert from "node:assert/strict";
 import { veteranSave } from "./helpers.mjs";
 const root = fileURLToPath(new URL("../", import.meta.url));
-const server = spawn(process.execPath, ["server.mjs"], {
+const server = spawn(process.execPath, ["--import", "tsx", "tests/server.ts"], {
   cwd: root,
   env: { ...process.env, PORT: "4196" },
   stdio: "pipe",
@@ -28,10 +28,11 @@ try {
     () => !document.getElementById("start-button").disabled,
   );
   const art = await page.evaluate(async () => {
-    const { HEROES } = await import("/src/core.js"),
-      { drawSprite, artReady } = await import("/src/pixel-art.js"),
+    const { HEROES } = await import("/src/game/index.ts"),
+      { drawSprite, artReady } =
+        await import("/src/client/rendering/pixel-art.ts"),
       { drawAbilityGround, drawAbilityCrown } =
-        await import("/src/ability-vfx.js");
+        await import("/src/client/rendering/ability-vfx.ts");
     await artReady;
     const gallery = document.createElement("canvas");
     gallery.width = 1440;
@@ -135,12 +136,12 @@ try {
     veteranSave(),
   );
   const heroes = await page.evaluate(async () =>
-    (await import("/src/core.js")).HEROES.map((h) => h.id),
+    (await import("/src/game/index.ts")).HEROES.map((h) => h.id),
   );
   async function setup(id, branch = -1) {
     await page.evaluate(
       async ({ id, branch }) => {
-        const { profile } = await import("/src/journey.js");
+        const { profile } = await import("/src/game/progression/journey.ts");
         __rift.returnLobby();
         const p = profile(__rift.save, id);
         p.stage = 2;
@@ -280,8 +281,8 @@ try {
   await page.waitForTimeout(50);
   await shot("ability-mobile-reduced-motion");
   const sound = await page.evaluate(async () => {
-    const { AudioEngine } = await import("/src/audio.js"),
-      { HEROES } = await import("/src/core.js"),
+    const { AudioEngine } = await import("/src/client/audio/AudioEngine.ts"),
+      { HEROES } = await import("/src/game/index.ts"),
       engine = new AudioEngine(true);
     engine.unlock();
     await engine.ctx.resume();

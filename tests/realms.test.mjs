@@ -7,23 +7,26 @@ import {
   sanitizeSave,
   bankRun,
   pressure,
-} from "../src/core.js";
+} from "../src/game/index.ts";
 import {
   REALMS,
   collectFind,
   updateRealm,
   legacyBonus,
   FINDS,
-} from "../src/realms.js";
+} from "../src/game/world/realms.ts";
 import {
   RECIPES,
   evolutionLock,
   upgradeFits,
   buildSlots,
   updateEvolutions,
-} from "../src/evolutions.js";
-import { researchBonus, researchCost } from "../src/ascension.js";
-import { updateExpedition } from "../src/reliquary.js";
+} from "../src/game/progression/evolutions.ts";
+import {
+  researchBonus,
+  researchCost,
+} from "../src/game/progression/ascension.ts";
+import { updateExpedition } from "../src/game/world/reliquary.ts";
 const make = (hero = "cinder", realm = "hollow") => {
   const s = ["cinder", "briar", "nyx", "volta"].includes(hero)
     ? freshSave()

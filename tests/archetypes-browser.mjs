@@ -5,7 +5,7 @@ import { fileURLToPath } from "node:url";
 import assert from "node:assert/strict";
 import { veteranSave } from "./helpers.mjs";
 const root = fileURLToPath(new URL("../", import.meta.url));
-const server = spawn(process.execPath, ["server.mjs"], {
+const server = spawn(process.execPath, ["--import", "tsx", "tests/server.ts"], {
   cwd: root,
   env: { ...process.env, PORT: "4193" },
   stdio: "pipe",
@@ -117,7 +117,7 @@ try {
         __rift.showLevel();
       }, id);
       const expected = await page.evaluate(async (id) => {
-        const { EVOLUTIONS } = await import("/src/core.js");
+        const { EVOLUTIONS } = await import("/src/game/index.ts");
         return EVOLUTIONS[id].name;
       }, id);
       const card = page.locator('[data-upgrade="signature"]');
@@ -175,7 +175,7 @@ try {
     if (viewport.width === 1920) {
       const idleAudit = await page.evaluate(async () => {
         const { artReady, actionSprite, drawSprite } =
-          await import("/src/pixel-art.js");
+          await import("/src/client/rendering/pixel-art.ts");
         await artReady;
         const bounds = (image) => {
           const c = document.createElement("canvas");
@@ -237,7 +237,7 @@ try {
       }
       const artAudit = await page.evaluate(async () => {
         const { art, artReady, actionSprite, drawSprite } =
-          await import("/src/pixel-art.js");
+          await import("/src/client/rendering/pixel-art.ts");
         await artReady;
         const c = document.createElement("canvas");
         c.width = 1120;
@@ -359,7 +359,8 @@ try {
         });
         await page.evaluate(async () => {
           const g = __rift.game;
-          const { heroThreshold } = await import("/src/journey.js");
+          const { heroThreshold } =
+            await import("/src/game/progression/journey.ts");
           g.journey.xp = heroThreshold(200);
           g.journey.stage = 2;
           g.journey.skills.signature = g.journey.skills.active = {

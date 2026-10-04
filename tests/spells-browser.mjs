@@ -4,7 +4,7 @@ import { fileURLToPath } from "node:url";
 import { mkdir, writeFile } from "node:fs/promises";
 import assert from "node:assert/strict";
 const root = fileURLToPath(new URL("../", import.meta.url));
-const server = spawn(process.execPath, ["server.mjs"], {
+const server = spawn(process.execPath, ["--import", "tsx", "tests/server.ts"], {
   cwd: root,
   env: { ...process.env, PORT: "4197" },
   stdio: "pipe",
@@ -104,8 +104,9 @@ try {
     assert.ok(await page.locator("#unlock-spell-slot").isDisabled());
     await audit("fresh-slot");
     await page.evaluate(async () => {
-      const { HEROES } = await import("/src/core.js"),
-        { profile, heroThreshold } = await import("/src/journey.js");
+      const { HEROES } = await import("/src/game/index.ts"),
+        { profile, heroThreshold } =
+          await import("/src/game/progression/journey.ts");
       Object.assign(__rift.save, {
         bosses: 8,
         best: 500,
@@ -154,10 +155,12 @@ try {
       await page.locator('[data-class-talent="cinder_spell0"]').isVisible(),
     );
     const heroes = await page.evaluate(async () => {
-      const { HEROES } = await import("/src/core.js"),
-        { CLASS_TREES, buyClassTalent } = await import("/src/class-talents.js"),
-        { unlockSpellSlot } = await import("/src/spell-progression.js"),
-        { spellsFor } = await import("/src/spell-data.js");
+      const { HEROES } = await import("/src/game/index.ts"),
+        { CLASS_TREES, buyClassTalent } =
+          await import("/src/game/progression/class-talents.ts"),
+        { unlockSpellSlot } =
+          await import("/src/game/progression/spell-progression.ts"),
+        { spellsFor } = await import("/src/game/data/spell-data.ts");
       for (const h of HEROES) {
         for (const b of CLASS_TREES[h.id])
           for (const n of b.nodes)

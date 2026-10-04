@@ -1,23 +1,35 @@
 {
   "name": "riftbound",
-  "version": "9.0.0",
+  "version": "0.1.0",
   "private": true,
   "type": "module",
   "description": "A survival roguelite with twelve asymmetric classes, companions and deep progression",
   "scripts": {
-    "start": "node server.mjs",
-    "dev": "node server.mjs",
-    "test": "node --test tests/core.test.mjs tests/progression.test.mjs tests/ascension.test.mjs tests/reliquary.test.mjs tests/realms.test.mjs tests/champions.test.mjs tests/combat-motion.test.mjs tests/journey.test.mjs tests/archetypes.test.mjs tests/talent-combat.test.mjs tests/skill-recovery.test.mjs tests/spells.test.mjs tests/pet-aoe.test.mjs",
-    "test:browser": "node tests/browser.mjs && node tests/reliquary-browser.mjs && node tests/realms-browser.mjs && node tests/panels-browser.mjs && node tests/combat-browser.mjs && node tests/journey-browser.mjs && node tests/archetypes-browser.mjs && node tests/forms-browser.mjs && node tests/abilities-browser.mjs && node tests/spells-browser.mjs",
-    "test:spells": "node tests/spells-browser.mjs",
-    "test:forms": "node tests/forms-browser.mjs",
-    "test:abilities": "node tests/abilities-browser.mjs",
-    "balance": "node tests/balance.mjs",
+    "start": "vite",
+    "dev": "vite",
+    "test": "node --import tsx --test --test-concurrency=1 tests/*.test.mjs",
+    "test:browser": "node --import tsx tests/browser.mjs && node --import tsx tests/reliquary-browser.mjs && node --import tsx tests/realms-browser.mjs && node --import tsx tests/panels-browser.mjs && node --import tsx tests/combat-browser.mjs && node --import tsx tests/journey-browser.mjs && node --import tsx tests/archetypes-browser.mjs && node --import tsx tests/forms-browser.mjs && node --import tsx tests/abilities-browser.mjs && node --import tsx tests/spells-browser.mjs",
+    "test:spells": "node --import tsx tests/spells-browser.mjs",
+    "test:forms": "node --import tsx tests/forms-browser.mjs",
+    "test:abilities": "node --import tsx tests/abilities-browser.mjs",
+    "balance": "node --import tsx tests/balance.mjs",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "typecheck": "tsc --noEmit && tsc --project tsconfig.game.json --noEmit",
+    "build": "npm run typecheck && vite build",
+    "preview": "vite preview",
+    "test:client": "npm run build && node --import tsx tests/client-browser.mjs",
+    "check": "npm run typecheck && npm test && npm run test:client"
   },
   "devDependencies": {
+    "@types/node": "^22.20.5",
     "playwright": "^1.55.0",
-    "prettier": "^3.9.9"
+    "prettier": "^3.9.9",
+    "tsx": "^4.23.15",
+    "typescript": "^5.9.3",
+    "vite": "^8.3.2"
+  },
+  "engines": {
+    "node": "^20.19.0 || >=22.12.0"
   }
 }

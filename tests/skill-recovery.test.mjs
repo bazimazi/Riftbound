@@ -1,15 +1,18 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { Game, HEROES } from "../src/core.js";
-import { profile, formCooldown } from "../src/journey.js";
-import { CLASS_FORMS, updateClassForm } from "../src/class-forms.js";
-import { ULTIMATES } from "../src/specializations.js";
+import { Game, HEROES } from "../src/game/index.ts";
+import { profile, formCooldown } from "../src/game/progression/journey.ts";
+import {
+  CLASS_FORMS,
+  updateClassForm,
+} from "../src/game/combat/class-forms.ts";
+import { ULTIMATES } from "../src/game/data/specializations.ts";
 import {
   talentHit,
   talentHurt,
   updateTalentCombat,
-} from "../src/talent-combat.js";
-import { recoveredCooldown } from "../src/skill-recovery.js";
+} from "../src/game/combat/talent-combat.ts";
+import { recoveredCooldown } from "../src/game/combat/skill-recovery.ts";
 import { veteranSave } from "./helpers.mjs";
 
 function arena(hero = "cinder") {

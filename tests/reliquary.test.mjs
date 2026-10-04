@@ -1,12 +1,12 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { Game, freshSave, sanitizeSave, bankRun } from "../src/core.js";
+import { Game, freshSave, sanitizeSave, bankRun } from "../src/game/index.ts";
 import {
   ARTIFACTS,
   updateExpedition,
   beginVault,
   contractFor,
-} from "../src/reliquary.js";
+} from "../src/game/world/reliquary.ts";
 const make = () => new Game("cinder", freshSave(), () => 0.5);
 function offer(g, ids) {
   g.state = "reliquary";

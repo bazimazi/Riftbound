@@ -1,7 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { Game, HEROES, freshSave, sanitizeSave } from "../src/core.js";
-import { profile, heroThreshold } from "../src/journey.js";
+import { Game, HEROES, freshSave, sanitizeSave } from "../src/game/index.ts";
+import { profile, heroThreshold } from "../src/game/progression/journey.ts";
 import {
   CLASS_TREES,
   CLASS_NODES,
@@ -10,24 +10,24 @@ import {
   respecTalents,
   talentAvailable,
   sanitizeClassTalents,
-} from "../src/class-talents.js";
+} from "../src/game/progression/class-talents.ts";
 import {
   SPELLS,
   SPELL_SLOTS,
   spellsFor,
   spellMasteryText,
-} from "../src/spell-data.js";
+} from "../src/game/data/spell-data.ts";
 import {
   spellSlotLock,
   unlockSpellSlot,
   equipSpell,
-} from "../src/spell-progression.js";
+} from "../src/game/progression/spell-progression.ts";
 import {
   releaseSpell,
   updateSpellCombat,
   spellCooldown,
-} from "../src/spell-combat.js";
-import { recoverSkills } from "../src/skill-recovery.js";
+} from "../src/game/combat/spell-combat.ts";
+import { recoverSkills } from "../src/game/combat/skill-recovery.ts";
 import { veteranSave } from "./helpers.mjs";
 
 function rich(hero = "cinder", learn = true) {

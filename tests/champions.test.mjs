@@ -1,10 +1,18 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { Game, freshSave, sanitizeSave, bankRun } from "../src/core.js";
-import { heroUnlocked, heroGoals, EXTRA_HEROES } from "../src/champions.js";
-import { collectFind } from "../src/realms.js";
-import { buyResearch } from "../src/ascension.js";
-import { CODEX, codexUnlocked, equippedPages } from "../src/progression.js";
+import { Game, freshSave, sanitizeSave, bankRun } from "../src/game/index.ts";
+import {
+  heroUnlocked,
+  heroGoals,
+  EXTRA_HEROES,
+} from "../src/game/combat/champions.ts";
+import { collectFind } from "../src/game/world/realms.ts";
+import { buyResearch } from "../src/game/progression/ascension.ts";
+import {
+  CODEX,
+  codexUnlocked,
+  equippedPages,
+} from "../src/game/progression/progression.ts";
 import { veteranSave } from "./helpers.mjs";
 const make = (id) => new Game(id, veteranSave(), () => 0.99);
 function foe(g, x = 80, hp = 1e7) {

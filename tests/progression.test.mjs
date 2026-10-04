@@ -11,7 +11,7 @@ import {
   buyForge,
   forgeBonus,
   forgeCost,
-} from "../src/core.js";
+} from "../src/game/index.ts";
 import {
   TALENT_TREES,
   TALENT_NODES,
@@ -24,8 +24,8 @@ import {
   activeSynergies,
   masteryLevel,
   SHRINE_BOONS,
-} from "../src/progression.js";
-import { talentAvailable } from "../src/class-talents.js";
+} from "../src/game/progression/progression.ts";
+import { talentAvailable } from "../src/game/progression/class-talents.ts";
 const random = () => 0.5;
 function enemy(g, type = "brute", hp = 1000) {
   g.enemies = [];

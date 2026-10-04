@@ -20,14 +20,18 @@ Dialogs use page arrows for collections, a mobile section selector, and a help o
 
 ## Play
 
-Requires Node.js 20 or newer. No installation or build step is needed to play.
+The game runs entirely on the client. Build it once with Node.js 20.19+ or 22.12+, then play without Node.js, an internet connection, or a dedicated server.
 
 ```powershell
-cd C:\dev\games\riftbound
-npm start
+npm install
+npm run build
 ```
 
-Open **http://localhost:4186**. If the previous game is already running, **refresh the browser** to load the update. The existing local save is migrated automatically. Do not open index.html through `file:`; ES modules require HTTP. The server binds only to the local machine. Set `PORT` to use another port.
+Open **dist/index.html** directly in a modern browser. Distribute the entire `dist` folder; its relative paths also work inside a future desktop wrapper. Artwork, fonts, and synthesized sound are available offline.
+
+For development, run **npm run dev** and open **http://127.0.0.1:4186** (or `http://localhost:4186` to keep using saves created at that address). Vite handles TypeScript and live updates. Use `npm run dev -- --port 4200` for another port, or `npm run preview` to inspect the production build over HTTP. The root `index.html` is a source entry; open `dist/index.html` for standalone play.
+
+Save migration keeps the existing `riftbound.save.v1` key and format. Browser storage belongs to the address/profile used to play: switching from localhost to a disk build or another host does not transfer saves automatically. [Architecture and desktop integration](docs/ARCHITECTURE.md) explain the client boundaries and storage adapter.
 
 | Action                    | Controls                        |
 | ------------------------- | ------------------------------- |
@@ -173,41 +177,43 @@ Health grows as 1.34^minutes × 1.72^max(0, minutes − 6). Damage grows as 1.12
 
 Seven locally bundled art images supply actor sprites, six-frame walk cycles for the original four heroes, movement sway for the new two heroes, environment props, terrain, sanctuary scenery, and the illustrated treasure atlas. The Canvas renderer uses full screen resolution (up to 1.5× on high-density displays) with smooth asset downsampling; portraits use up to 2× density. Quieter terrain, larger player sprites, a mint player marker, red hostile projectile outlines, and restrained friendly ground effects improve readability. Pixel emblems and illustrated cards replace dense text; expandable details keep mechanics accessible. Enemies sway, react to hits, turn toward their target and wind up before charging. Dash echoes, casting seals, brief death silhouettes, drifting beacon lights, animated artifact reveals, smooth health/shield bars, and ability recharge bars add feedback. Small sprite rasters are cached to avoid repeatedly resampling large atlases. Ambient particles, lighting, critical-hit numbers, ground telegraphs, and hit effects remain. Generated art, source prompts, and asset paths are documented in **assets/ART-DIRECTION.md**, **assets/RELIQUARY-ART.md**, **assets/WAYFARER-ART.md**, and **assets/ARCHETYPE-ART.md**. The local Outfit font uses the SIL Open Font License in **assets/OFL.txt**. Sound effects are synthesized with Web Audio.
 
-- `src/reliquary.js`: contracts, beacon defense, artifact choices and effects.
-- `src/expedition-ui.js`: contract, artifact, inspector, and presentation screens.
-- `src/atmosphere.js`: animated beacons and minimap integration.
-- `src/combat-motion.js`: aimed action phases and skill-release timing.
-- `src/combat-vfx.js`: weapon trails, airborne projectiles, impacts and hero-specific skill effects.
-- `src/ability-vfx.js`: layered class spell releases, ultimate fields and cached pixel seals/lights.
-- `src/skill-recovery.js`: shared cast cooldown scaling and global combat refunds.
-- `src/realms.js`: realm boundaries, exploration loot, permanent memories and Reaper scheduling.
-- `src/class-forms.js`: all 24 class forms, recurring combat traits, permanent companion teams and temporary surges.
-- `src/form-art.js`: cached outfit recoloring and class regalia shared by portraits and every animated pose.
-- `src/cartography.js`, `src/realm-ui.js`: minimap, full map, waypoints, realm selection and evolution menus.
-- `src/evolutions.js`: build slots, recipes and distinct evolved combat effects.
-- `nocturne.css`, `wayfarer.css`: stone-and-brass game interface and bounded panels.
-- `src/champions.js`: achievement unlocks, new hero data and combat mechanics.
-- `src/panel-layout.js`: adaptive collection pages, build sections and contextual help.
-- `src/ascension.js`: unlimited rank potency and hero research economy.
-- `src/icons.js`, `src/power-preview.js`: scalable emblems and concise upgrade previews.
-- `src/core.js`: simulation, combat, encounters, migration, and banking.
-- `src/progression.js`: authored talent trees, forge definitions, codex unlocks, mastery, synergies.
-- `src/specializations.js`, `src/talent-combat.js`: equipped specialization ultimates and reactive talent combat effects.
-- `src/skill-descriptions.js`: complete stage-specific skill descriptions for every class and shared relic.
-- `src/progression-ui.js`: forge, talent, codex, bestiary, and mastery screens.
-- `src/pixel-art.js`: image loading and sprite atlas regions.
-- `src/render.js`: pixel renderer, environment, effects, and animation.
-- `src/app.js`: menus, input, HUD, local persistence, and game loop.
+- `src/game/world/reliquary.ts`: contracts, beacon defense, artifact choices and effects.
+- `src/client/ui/expedition-ui.ts`: contract, artifact, inspector, and presentation screens.
+- `src/client/rendering/atmosphere.ts`: animated beacons and minimap integration.
+- `src/game/combat/combat-motion.ts`: aimed action phases and skill-release timing.
+- `src/client/rendering/combat-vfx.ts`: weapon trails, airborne projectiles, impacts and hero-specific skill effects.
+- `src/client/rendering/ability-vfx.ts`: layered class spell releases, ultimate fields and cached pixel seals/lights.
+- `src/game/combat/skill-recovery.ts`: shared cast cooldown scaling and global combat refunds.
+- `src/game/world/realms.ts`: realm boundaries, exploration loot, permanent memories and Reaper scheduling.
+- `src/game/combat/class-forms.ts`: all 24 class forms, recurring combat traits, permanent companion teams and temporary surges.
+- `src/client/rendering/form-art.ts`: cached outfit recoloring and class regalia shared by portraits and every animated pose.
+- `src/client/rendering/cartography.ts`, `src/client/ui/realm-ui.ts`: minimap, full map, waypoints, realm selection and evolution menus.
+- `src/game/progression/evolutions.ts`: build slots, recipes and distinct evolved combat effects.
+- `src/client/styles/nocturne.css`, `src/client/styles/wayfarer.css`: stone-and-brass game interface and bounded panels.
+- `src/game/combat/champions.ts`: achievement unlocks, new hero data and combat mechanics.
+- `src/client/ui/panel-layout.ts`: adaptive collection pages, build sections and contextual help.
+- `src/game/progression/ascension.ts`: unlimited rank potency and hero research economy.
+- `src/client/ui/icons.ts`, `src/client/ui/power-preview.ts`: scalable emblems and concise upgrade previews.
+- `src/game/Game.ts`: simulation and combat orchestration.
+- `src/game/save.ts`: save migration and run banking.
+- `src/client/platform/save-repository.ts`, `src/client/runtime/game-loop.ts`: host storage and timing.
+- `src/game/progression/progression.ts`: authored talent trees, forge definitions, codex unlocks, mastery, synergies.
+- `src/game/data/specializations.ts`, `src/game/combat/talent-combat.ts`: equipped specialization ultimates and reactive talent combat effects.
+- `src/game/data/skill-descriptions.ts`: complete stage-specific skill descriptions for every class and shared relic.
+- `src/client/ui/progression-ui.ts`: forge, talent, codex, bestiary, and mastery screens.
+- `src/client/rendering/pixel-art.ts`: image loading and sprite atlas regions.
+- `src/client/rendering/Renderer.ts`: pixel renderer, environment, effects, and animation.
+- `src/client/app.ts`: menus, input, HUD, and client composition.
 
 ## Verification
 
 ```powershell
 npm install
-npm test
+npm run check
 npm run test:browser
 npm run balance
 npm run balance -- --pet-aoe
 npm run format:check
 ```
 
-Browser checks start their own servers on ports 4187–4193 and 4195–4196 and require Playwright Chromium (`npx playwright install chromium` if needed). 161 unit tests plus ten desktop/touch browser suites cover progression, encounters, saves, bounded panels and combat, including every class's rank-five awakening, pet area damage/support, all 36 talent ultimates, equipped-choice persistence, reactive talents and the separate run-resonance/permanent-talent rewards. Pet AoE regression tests exercise real projectile collisions, simultaneous imp blasts, piercing limits, area upgrades, entire-pack commands, overlapping casts, summon spells, expiration damage and Reaper immunity. Treasure generation checks sample 600 seeded expeditions across all three realms for varied item mixes, spacing, boundaries, travel distance and preserved memory identities; browser checks verify new-run rolls and exact map waypoints. The progression suite audits 1,915 desktop/phone layouts, including all 288 class/skill/training-stage descriptions, every equipped ultimate and keyboard/touch casts. The class-form suite adds 180 layouts with real transformation purchases and 648 sprite samples across all classes, tiers and walk/attack/cast poses, checking distinct appearance and clipping. Unit checks exercise all 24 combat traits and crowded transformed fights, permanent teams, save/reload, surge expiry, active summon protection and Reaper immunity. Skill-data checks also cover base descriptions, run awakenings, class forms, upgrade summaries, evolution recipes and safe missing-data fallbacks. Animation checks include all 72 action poses and 36 stride poses, single skill releases, frozen visual state, sound, reduced motion and a 270-enemy high-rank crowd scene with all Cinder talents and an active ultimate. Screenshots and frame measurements are written to `tests/screenshots/`. `?test=1` explicitly enables the browser test interface; normal play has no debug controls. `npm run test:forms` runs the dedicated form audit and writes `tests/screenshots/class-form-gallery.png`. `npm run test:abilities` audits 216 class/tier/motion spell samples and 72 real Q/R/F/talent casts, including buffed recovery, frozen pause, touch, reduced motion and all class cast sounds; it writes `tests/screenshots/ability-effects-gallery.png` and gameplay captures. Recovery unit checks exercise every class against each modifier, late floors, global refunds, anti-recursion and cooldown penalties.
+Browser checks start their own servers on ports 4187–4193 and 4195–4197 and require Playwright Chromium (`npx playwright install chromium` if needed). 164 unit tests plus ten desktop/touch browser suites cover progression, encounters, saves, bounded panels and combat, including every class's rank-five awakening, pet area damage/support, all 36 talent ultimates, equipped-choice persistence, reactive talents and the separate run-resonance/permanent-talent rewards. Pet AoE regression tests exercise real projectile collisions, simultaneous imp blasts, piercing limits, area upgrades, entire-pack commands, overlapping casts, summon spells, expiration damage and Reaper immunity. Treasure generation checks sample 600 seeded expeditions across all three realms for varied item mixes, spacing, boundaries, travel distance and preserved memory identities; browser checks verify new-run rolls and exact map waypoints. The progression suite audits 1,915 desktop/phone layouts, including all 288 class/skill/training-stage descriptions, every equipped ultimate and keyboard/touch casts. The class-form suite adds 180 layouts with real transformation purchases and 648 sprite samples across all classes, tiers and walk/attack/cast poses, checking distinct appearance and clipping. Unit checks exercise all 24 combat traits and crowded transformed fights, permanent teams, save/reload, surge expiry, active summon protection and Reaper immunity. Skill-data checks also cover base descriptions, run awakenings, class forms, upgrade summaries, evolution recipes and safe missing-data fallbacks. Animation checks include all 72 action poses and 36 stride poses, single skill releases, frozen visual state, sound, reduced motion and a 270-enemy high-rank crowd scene with all Cinder talents and an active ultimate. Screenshots and frame measurements are written to `tests/screenshots/`. `?test=1` explicitly enables the browser test interface; normal play has no debug controls. `npm run test:forms` runs the dedicated form audit and writes `tests/screenshots/class-form-gallery.png`. `npm run test:abilities` audits 216 class/tier/motion spell samples and 72 real Q/R/F/talent casts, including buffed recovery, frozen pause, touch, reduced motion and all class cast sounds; it writes `tests/screenshots/ability-effects-gallery.png` and gameplay captures. Recovery unit checks exercise every class against each modifier, late floors, global refunds, anti-recursion and cooldown penalties.

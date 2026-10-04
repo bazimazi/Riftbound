@@ -1,4 +1,4 @@
-import { freshSave } from "../src/core.js";
+import { freshSave } from "../src/game/index.ts";
 // A veteran fixture exercises every hero; fresh saves still have explicit lock tests.
 export function veteranSave() {
   const save = freshSave();
