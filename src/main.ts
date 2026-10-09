@@ -5,4 +5,5 @@ import "./client/styles/reliquary.css";
 import "./client/styles/nocturne.css";
 import "./client/styles/wayfarer.css";
 import "./client/styles/journey.css";
+import "./client/styles/eclipse.css";
 import "./client/app.ts";

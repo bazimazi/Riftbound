@@ -10,6 +10,7 @@
     "test": "node --import tsx --test --test-concurrency=1 tests/*.test.mjs",
     "test:browser": "node --import tsx tests/browser.mjs && node --import tsx tests/reliquary-browser.mjs && node --import tsx tests/realms-browser.mjs && node --import tsx tests/panels-browser.mjs && node --import tsx tests/combat-browser.mjs && node --import tsx tests/journey-browser.mjs && node --import tsx tests/archetypes-browser.mjs && node --import tsx tests/forms-browser.mjs && node --import tsx tests/abilities-browser.mjs && node --import tsx tests/spells-browser.mjs",
     "test:spells": "node --import tsx tests/spells-browser.mjs",
+    "test:ui": "node --import tsx tests/eclipse-browser.mjs && node --import tsx tests/panels-browser.mjs",
     "test:forms": "node --import tsx tests/forms-browser.mjs",
     "test:abilities": "node --import tsx tests/abilities-browser.mjs",
     "balance": "node --import tsx tests/balance.mjs",

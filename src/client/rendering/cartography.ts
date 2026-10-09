@@ -15,7 +15,7 @@ export function drawMap(canvas: HTMLCanvasElement, g: Game, full = false) {
   const cx = full ? 0 : g.p.x,
     cy = full ? 0 : g.p.y;
   c!.clearRect(0, 0, w, h);
-  c!.fillStyle = "#111817";
+  c!.fillStyle = "#120d1b";
   c!.fillRect(0, 0, w, h);
   c!.save();
   c!.translate(w / 2, h / 2);
@@ -23,7 +23,7 @@ export function drawMap(canvas: HTMLCanvasElement, g: Game, full = false) {
   c!.translate(-cx, -cy);
   const left = -m.width / 2,
     top = -m.height / 2;
-  c!.fillStyle = ["#273329", "#372b28", "#2c2c3e"][m.biome];
+  c!.fillStyle = ["#251e31", "#33232d", "#27223c"][m.biome];
   c!.fillRect(left, top, m.width, m.height);
   c!.strokeStyle = m.color + "32";
   c!.lineWidth = 1 / scale;
@@ -67,7 +67,7 @@ export function drawMap(canvas: HTMLCanvasElement, g: Game, full = false) {
     c!.translate(x, y);
     c!.scale(1 / scale, 1 / scale);
     if (full && shape !== "enemy" && shape !== "player") c!.scale(1.8, 1.8);
-    c!.fillStyle = "#101512";
+    c!.fillStyle = "#120e1a";
     c!.fillRect(-size / 2 - 2, -size / 2 - 2, size + 4, size + 4);
     c!.fillStyle = color;
     if (shape === "memory") {
@@ -135,7 +135,7 @@ export function drawMap(canvas: HTMLCanvasElement, g: Game, full = false) {
   mark(g.p, "#e8ffe1", "player", 7);
   c!.restore();
   if (!full) {
-    c!.fillStyle = "#151c18";
+    c!.fillStyle = "#1b1326";
     c!.fillRect(6, h - 23, w - 12, 17);
     c!.fillStyle = "#dccda6";
     c!.font = "14px monospace";

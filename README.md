@@ -2,6 +2,8 @@
 
 Version 9 adds three progression-gated spell slots, 72 class spells and 72 mechanical mastery talents. All twelve outcasts now have 396 connected permanent talents (33 per class), alongside 30 run evolution recipes and 44 Codex pages. Each specialty gains two spells: a utility technique and an advanced battlefield tool. Talent pages switch between Roots and Spells; the new spellbook lets players build a three-spell loadout with keys 1–3. Existing purchases and saves are preserved.
 
+The Eclipse interface brings an illustrated rift observatory to the sanctuary, with indigo frames, violet rune light, antique gold actions, character-colored roster cards, hero stories and base stats. The same visual language carries through progression, collections, map and combat controls. Desktop selection fits the screen; phones use a single scrolling page. Arsenal icons and expedition objectives flow together to avoid overlaps as a build grows. [Artwork, generation prompt and presentation notes](assets/ECLIPSE-ART.md) document the locally bundled scene.
+
 Version 8 introduced Vesper the warlock, Fen the beastwarden, Solace the cleric, Orin the totemcaller, Kestrel the wind monk, and Morrow the grave knight. [Class research, mechanics and unlocks](docs/CLASS-DESIGN.md) document those original classes, based on Blizzard's primary class-design sources. [Sprite assets and exact ImageGen prompts](assets/ARCHETYPE-ART.md) document the locally bundled artwork.
 
 Warlocks start with an imp and guardian and harvest souls for temporary demon pacts. Beastwardens coordinate crossbow marks with a bonded wolf. Clerics convert landed radiant attacks into faith and gated healing. Totemcallers place short-lived fire, storm and tide circles. Monks build qi through a three-strike melee combo; grave knights spend combat-earned runes on a grip and sustain. Companions have health, recovery time and population limits. Late pressure and Reaper immunities remain active. Each new class also has independent research, exclusive Codex pages, legacy milestones, 20/40 skill transformations and 100/200 class forms with R/F abilities.
@@ -190,6 +192,7 @@ Seven locally bundled art images supply actor sprites, six-frame walk cycles for
 - `src/client/rendering/cartography.ts`, `src/client/ui/realm-ui.ts`: minimap, full map, waypoints, realm selection and evolution menus.
 - `src/game/progression/evolutions.ts`: build slots, recipes and distinct evolved combat effects.
 - `src/client/styles/nocturne.css`, `src/client/styles/wayfarer.css`: stone-and-brass game interface and bounded panels.
+- `src/client/styles/eclipse.css`: the Eclipse visual theme, responsive sanctuary and combat sidebar.
 - `src/game/combat/champions.ts`: achievement unlocks, new hero data and combat mechanics.
 - `src/client/ui/panel-layout.ts`: adaptive collection pages, build sections and contextual help.
 - `src/game/progression/ascension.ts`: unlimited rank potency and hero research economy.
@@ -211,6 +214,7 @@ Seven locally bundled art images supply actor sprites, six-frame walk cycles for
 npm install
 npm run check
 npm run test:browser
+npm run test:ui
 npm run balance
 npm run balance -- --pet-aoe
 npm run format:check

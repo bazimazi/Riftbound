@@ -10,7 +10,7 @@ export default defineConfig({
     modulePreload: false,
     // file:// images taint canvases. Embedded art keeps sprite pixel reads and
     // the local font available in browsers and desktop webviews without HTTP.
-    assetsInlineLimit: (file) => /\.(png|woff2)$/.test(file),
+    assetsInlineLimit: (file) => /\.(png|webp|woff2)$/.test(file),
     cssCodeSplit: false,
     // One offline script intentionally contains the sprite atlases.
     chunkSizeWarningLimit: 50000,

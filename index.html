@@ -6,7 +6,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1, viewport-fit=cover"
     />
-    <meta name="theme-color" content="#171d22" />
+    <meta name="theme-color" content="#0d0b18" />
     <meta
       name="description"
       content="Twelve unique outcasts. Bond with beasts, bind demons, wield dawnlight, and survive the Reaper hunt."
@@ -41,9 +41,10 @@
       <section class="intro">
         <div>
           <div class="eyebrow">
-            <span class="live-dot"></span> AN ENDLESS SURVIVAL ROGUELITE
+            <span class="live-dot"></span> THE SANCTUARY · BETWEEN WORLDS
           </div>
-          <h1>Choose your <em>outcast.</em></h1>
+          <h1>The dark is <em>calling.</em></h1>
+          <p>Choose an outcast. Carve a legend. Survive one more night.</p>
         </div>
         <div class="record">
           <span>YOUR LONGEST NIGHT</span><strong id="record-time">00:00</strong
@@ -52,17 +53,25 @@
       </section>
       <nav class="hub-nav" aria-label="Sanctuary">
         <button class="active" id="outcasts-nav">
-          01 <span>Outcasts</span></button
-        ><button id="forge-nav">02 <span>Ember forge</span></button
+          <span class="nav-emblem" aria-hidden="true">✦</span>
+          <span>Outcasts</span></button
+        ><button id="forge-nav">
+          <span class="nav-emblem" aria-hidden="true">♜</span>
+          <span>Ember forge</span></button
         ><button id="codex-button">
-          03 <span>The codex</span><i id="codex-count">1 / 20</i></button
-        ><button id="talents-button">04 <span>Progress</span></button
-        ><span class="edition-tag">COMMUNION / v8.0</span>
+          <span class="nav-emblem" aria-hidden="true">◈</span>
+          <span>The codex</span><i id="codex-count">1 / 44</i></button
+        ><button id="talents-button">
+          <span class="nav-emblem" aria-hidden="true">⌘</span>
+          <span>Progress</span></button
+        ><span class="edition-tag"
+          ><span class="live-dot"></span> YOUR LEGEND AWAITS</span
+        >
       </nav>
       <section class="selection">
         <div class="roster">
           <div class="section-label">
-            <span>01 / CHOOSE YOUR OUTCAST</span
+            <span>CHOOSE YOUR OUTCAST</span
             ><span id="roster-count">4 / 6 UNLOCKED</span>
           </div>
           <div id="hero-list"></div>
@@ -85,7 +94,8 @@
             aria-label="Selected character illustration"
           ></canvas>
           <div class="stage-top">
-            <span id="hero-class">THE PYROMANCER</span><span>✦</span>
+            <span id="hero-class">THE PYROMANCER</span
+            ><span aria-hidden="true">✦</span>
           </div>
           <div class="stage-bottom">
             <span id="stage-realm">HOLLOW WILDS</span><span>NIGHT I</span>
@@ -101,6 +111,12 @@
           </div>
           <h2 id="hero-name">Cinder</h2>
           <p class="hero-desc" id="hero-desc"></p>
+          <div
+            id="hero-stats"
+            class="hero-stats"
+            aria-label="Base character stats"
+            title="Base stats before forge, talents and class-form bonuses"
+          ></div>
           <div id="hero-kit"></div>
           <div id="hero-unlock" hidden></div>
           <div class="talent-preview">
@@ -148,7 +164,8 @@
       <section class="deploy-bar">
         <div class="danger-icon">!</div>
         <div class="deploy-copy">
-          <strong>Death is coming.</strong><span>Build. Explore. Survive.</span>
+          <strong>One more night. One more legend.</strong
+          ><span>Your weapons strike automatically. You choose your fate.</span>
         </div>
         <div class="controls-teaser">
           <kbd>W A S D</kbd><span>move</span><kbd>SPACE</kbd><span>dash</span
@@ -206,7 +223,10 @@
         <span id="boss-name"></span>
         <div><i id="boss-fill"></i></div>
       </div>
-      <div id="build-hud"></div>
+      <div class="expedition-sidebar">
+        <div id="build-hud"></div>
+        <div id="objective-hud"></div>
+      </div>
       <button id="inspect-build" aria-label="Inspect expedition build">
         <kbd>B</kbd> BUILD
       </button>
@@ -224,7 +244,6 @@
       </button>
       <div id="doom-clock" title="Time until the Reaper hunt"></div>
       <div id="waypoint-hud" hidden></div>
-      <div id="objective-hud"></div>
       <button id="game-talents" class="talent-hud" hidden>
         <kbd>T</kbd> TALENTS <b id="talent-point-count">0</b>
       </button>

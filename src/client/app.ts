@@ -232,7 +232,7 @@ function setupRoster() {
     .slice(rosterPage * 6, rosterPage * 6 + 6)
     .map(
       (h, i) =>
-        `<button class="hero-card ${h.id === selected.id ? "selected" : ""} ${heroUnlocked(save, h.id) ? "" : "locked"}" data-hero="${h.id}" aria-pressed="${h.id === selected.id}" aria-label="${heroUnlocked(save, h.id) ? "Choose" : "Preview locked outcast"} ${h.name}, ${h.title}"><canvas class="mini-portrait" data-portrait="${h.id}" data-form="${save.journeys[h.id]?.stage || 0}" aria-hidden="true"></canvas><span><strong>${h.name}</strong><small>${h.role}</small></span><span class="arrow">${heroUnlocked(save, h.id) ? "↗" : "◇"}</span></button>`,
+        `<button class="hero-card ${h.id === selected.id ? "selected" : ""} ${heroUnlocked(save, h.id) ? "" : "locked"}" style="--outcast: ${h.color}" data-hero="${h.id}" aria-pressed="${h.id === selected.id}" aria-label="${heroUnlocked(save, h.id) ? "Choose" : "Preview locked outcast"} ${h.name}, ${h.title}"><canvas class="mini-portrait" data-portrait="${h.id}" data-form="${save.journeys[h.id]?.stage || 0}" aria-hidden="true"></canvas><span><strong>${h.name}</strong><small>${h.role}</small></span><span class="arrow">${heroUnlocked(save, h.id) ? "✦" : "◇"}</span></button>`,
     )
     .join("");
   for (const button of document.querySelectorAll<HTMLElement>("[data-hero]"))
@@ -264,7 +264,17 @@ function selectHero(id: string) {
     `OUTCAST / ${String(HEROES.indexOf(selected) + 1).padStart(2, "0")}`;
   $("hero-difficulty").textContent = selected.difficulty;
   $("hero-name").textContent = selected.name;
-  $("hero-desc").textContent = selected.role;
+  $("hero-desc").textContent = selected.desc;
+  $("hero-stats").innerHTML = [
+    ["heart", selected.hp, "Health"],
+    ["wings", selected.speed, "Speed"],
+    ["active", `${selected.cooldown}s`, "Recovery"],
+  ]
+    .map(
+      ([symbol, value, label]) =>
+        `<span>${icon(String(symbol))}<b>${value}</b><small>${label}</small></span>`,
+    )
+    .join("");
   $("hero-kit").innerHTML = [
     [selected.id, "AUTO", selected.weapon, selected.weaponDesc],
     ["star", "TRAIT", selected.trait, selected.traitDesc],

@@ -597,7 +597,7 @@ export function drawPortrait(
   c!.imageSmoothingEnabled = true;
   c!.clearRect(0, 0, w, h);
   if (mini) {
-    c!.fillStyle = "#172529";
+    c!.fillStyle = "#141221";
     c!.fillRect(0, 0, w, h);
     drawSprite(c, hero.id, w / 2, h - 2, h * 0.9, { stage, maxWidth: w - 8 });
     return;
@@ -612,9 +612,9 @@ export function drawPortrait(
     c!.fillRect(0, 0, w, h);
   }
   const shade = c!.createLinearGradient(0, 0, 0, h);
-  shade.addColorStop(0, "#08152030");
-  shade.addColorStop(0.6, "#08152000");
-  shade.addColorStop(1, "#06151bd9");
+  shade.addColorStop(0, "#0d091d50");
+  shade.addColorStop(0.55, "#0d091d00");
+  shade.addColorStop(1, "#0b091be8");
   c!.fillStyle = shade;
   c!.fillRect(0, 0, w, h);
   c!.fillStyle = "#050a1670";
@@ -629,7 +629,7 @@ export function drawPortrait(
   for (let i = 0; i < 17; i++) {
     const x = (i * 83.7 + Math.sin(time * 0.3 + i) * 8) % w,
       y = (i * 49.3 - time * (1 + (i % 3))) % h;
-    c!.fillStyle = i % 3 ? "#99c8af77" : hero.color;
+    c!.fillStyle = i % 3 ? "#c4b1ff88" : hero.color;
     c!.fillRect(Math.round(x), Math.round((y + h) % h), 1, 1);
   }
 }
