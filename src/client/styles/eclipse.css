@@ -1000,6 +1000,22 @@ footer {
   }
 }
 @media (min-width: 1001px) and (min-height: 600px) {
+  /* Let real content set the minimum height. A fixed viewport frame can shrink
+     the grid beneath its hero details when zoom or browser chrome changes. */
+  #lobby {
+    height: auto;
+    min-height: 100dvh;
+  }
+  #lobby .selection {
+    flex: 1 0 auto;
+    min-height: min-content;
+  }
+  #lobby .hero-stage {
+    height: auto;
+  }
+  #lobby #hero-list .hero-card {
+    padding: 2px 8px;
+  }
   #lobby .kit-icon {
     width: 34px;
     height: 34px;
@@ -1043,7 +1059,7 @@ footer {
     padding: 8px 0;
   }
   #lobby .hero-details {
-    padding-top: 8px;
+    padding-top: 6px;
   }
   #lobby .hero-details #hero-name {
     font-size: 38px;
@@ -1103,7 +1119,7 @@ footer {
     height: 21px;
   }
   #lobby .talent-preview {
-    padding-top: 6px;
+    padding-top: 4px;
   }
   #lobby .talent-chip {
     padding: 3px;

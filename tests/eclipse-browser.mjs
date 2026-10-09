@@ -25,8 +25,17 @@ try {
     [844, 540],
     [1000, 768],
     [1024, 600],
+    // CSS viewport sizes for a 1536 × 864 window at 125% and 150% zoom.
+    [1229, 691],
+    [1024, 576],
     [1280, 600],
     [1366, 768],
+    [1280, 780],
+    [1280, 781],
+    [1280, 800],
+    [1536, 820],
+    [1536, 850],
+    [1536, 864],
     [1440, 900],
     [1920, 1080],
   ]) {
@@ -77,8 +86,13 @@ try {
             );
         }
         if (innerWidth > 1000 && innerHeight >= 600) {
-          if (root.scrollHeight > innerHeight + 1)
-            issues.push("desktop page overflow");
+          // Normal scrolling is preferable to shrinking content underneath
+          // the next section at intermediate heights or increased zoom.
+          if (
+            root.scrollHeight > innerHeight + 1 &&
+            /hidden|clip/.test(getComputedStyle(root).overflowY)
+          )
+            issues.push("overflowing lobby cannot scroll");
           for (const portrait of document.querySelectorAll(".mini-portrait")) {
             const p = portrait.getBoundingClientRect(),
               card = portrait.parentElement.getBoundingClientRect();
@@ -101,6 +115,20 @@ try {
       assert.deepEqual(issues, [], `${hero} sanctuary at ${width}x${height}`);
     }
     await page.evaluate(() => __rift.selectHero("cinder"));
+    await page.locator(".talent-preview").scrollIntoViewIfNeeded();
+    assert.ok(
+      await page.evaluate(() =>
+        [...document.querySelectorAll(".talent-chip")].every((chip) => {
+          const r = chip.getBoundingClientRect();
+          const hit = document.elementFromPoint(
+            r.x + r.width / 2,
+            r.y + r.height / 2,
+          );
+          return hit?.closest(".talent-chip") === chip;
+        }),
+      ),
+      `all talent paths are unobscured at normal zoom at ${width}x${height}`,
+    );
     assert.match(
       await page.locator("#hero-desc").textContent(),
       /exiled firekeeper/,

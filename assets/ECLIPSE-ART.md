@@ -4,7 +4,7 @@ The Eclipse presentation uses an original rift observatory illustration, generat
 
 The same scene supplies the lobby backdrop and Canvas character showcase. Existing hero sprites, transformations, animations and foot anchors are preserved. The WebP is embedded by Vite for offline play, including `file://` builds. Existing `sanctuary.png` remains available as the previous artwork.
 
-`src/client/styles/eclipse.css` defines the indigo, violet and antique gold theme for the sanctuary, progression, collections and combat HUD. Outfit is bundled locally; display titles use the system Georgia serif. Decorative motion follows both the game motion setting and the operating system preference. Phone layouts scroll as one page; desktop layouts fit the viewport. The arsenal and objectives share a flow container so an expanded arsenal cannot obscure a contract.
+`src/client/styles/eclipse.css` defines the indigo, violet and antique gold theme for the sanctuary, progression, collections and combat HUD. Outfit is bundled locally; display titles use the system Georgia serif. Decorative motion follows both the game motion setting and the operating system preference. The sanctuary uses the available screen space while respecting its content's minimum height; shorter windows and increased zoom can scroll the page without overlapping sections. Phone layouts scroll as one page. The arsenal and objectives share a flow container so an expanded arsenal cannot obscure a contract.
 
 ## Final prompt
 
@@ -12,4 +12,4 @@ Use case: stylized-concept. Asset type: background illustration for the characte
 
 ## Verification
 
-`npm run test:ui` checks twelve heroes across nine screen sizes, full arsenal/objective separation, and existing paged dialog layouts, help and focus behavior. `npm run test:client` verifies the production build offline on desktop and phone. The game simulation and save format are unchanged.
+`npm run test:ui` checks twelve heroes across seventeen screen sizes, including intermediate heights around the compact-layout breakpoint and viewports equivalent to increased browser zoom. It verifies that all talent paths can be brought into view without being covered, full arsenal/objective separation, and existing paged dialog layouts, help and focus behavior. `npm run test:client` verifies the production build offline on desktop and phone. The game simulation and save format are unchanged.
